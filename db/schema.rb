@@ -10,10 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_28_225722) do
+ActiveRecord::Schema.define(version: 2020_05_29_193008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "anbima_classes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "areas", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "funds", force: :cascade do |t|
+    t.string "name"
+    t.string "short_name"
+    t.integer "codigo_economatica"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "gestor_id"
+    t.bigint "anbima_class_id"
+    t.bigint "area_id"
+    t.index ["anbima_class_id"], name: "index_funds_on_anbima_class_id"
+    t.index ["area_id"], name: "index_funds_on_area_id"
+    t.index ["gestor_id"], name: "index_funds_on_gestor_id"
+  end
+
+  create_table "gestors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +59,7 @@ ActiveRecord::Schema.define(version: 2020_05_28_225722) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "funds", "anbima_classes"
+  add_foreign_key "funds", "areas"
+  add_foreign_key "funds", "gestors"
 end
