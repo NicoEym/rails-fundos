@@ -10,9 +10,13 @@
 require "date"
 require "csv"
 
+Share.delete_all
+Aum.delete_all
+Fund.delete_all
 Gestor.delete_all
 Area.delete_all
 AnbimaClass.delete_all
+Calendar.delete_all
 
 areas = ["FOFs", "Crédito Privado"]
 
@@ -37,7 +41,13 @@ anbima_classes.each do |anbima_class|
   puts "Create #{anbima_class}"
 end
 
-vitesse = Fund.create(name: "Ca Indosuez Vitesse FI RF Cred Priv", short_name: "Vitesse", codigo_economatica: "284211")
+vitesse_gestor = Gestor.find_by(name: "Ca Indosuez Wealth (Brazil) S.A. Dtvm")
+vitesse_area = Area.find_by(name: "Crédito Privado")
+vitesse_anbima = AnbimaClass.find_by(name: "Renda Fixa")
+
+
+vitesse = Fund.create(name: "Ca Indosuez Vitesse FI RF Cred Priv", short_name: "Vitesse", codigo_economatica: "284211", area_id: vitesse_area.id, gestor_id: vitesse_gestor.id, anbima_class_id: vitesse_anbima.id)
+puts vitesse
 
 csv_options = { col_sep: ';', quote_char: '"', headers: :first_row }
 filedata    = 'db/csv_repos/data_Vitesse.csv'
@@ -45,19 +55,25 @@ filedata    = 'db/csv_repos/data_Vitesse.csv'
 
 CSV.foreach(filedata, csv_options) do |row|
 
-  codigo = row['Codigo'].[0,5]
+  codigo = row['Codigo'][0,6].to_i
+  puts codigo
   fund = Fund.find_by(codigo_economatica: codigo)
+  puts fund
   #   Fund.create(codigo_economatica: codigo)
 
-  year = row["Date"].[0,3]
-  month = row["Date"].[5,6]
-  day = row["Date"].[8,9]
+  year = row["Date"][0,4].to_i
+  puts year
+  month = row["Date"][5,7].to_i
+  puts month
+  day = row["Date"][8,10].to_i
+  puts day
   date = Date.new(year, month, day)
   # end
-  date = Calendar.create(date: date)
+  date = Calendar.create(day: date)
+  puts date.day
 
-  Share.create(value: row['Cotas'], fund_id: fund.id, date_id: working_day.id)
-  Aum.create(value: row['PL'], fund_id: fund.id, date_id: calendar.id)
+  Share.create(value: row['Cota'], fund_id: fund.id, calendar_id: date.id)
+  Aum.create(value: row['PL'], fund_id: fund.id, calendar_id: date.id)
 
 
 end
