@@ -81,7 +81,10 @@ end
 
 
 # vitesse = Fund.create(name: "Ca Indosuez Vitesse FI RF Cred Priv", short_name: "Vitesse", codigo_economatica: "284211")
-agilite = Fund.create(name: "Ca Indosuez Agilite FI RF Cred Priv", short_name: "Agilite", codigo_economatica: "412171")
-infrafic = Fund.create(name: "Ca Indosuez Debent Inc Cred Priv Fc Mult", short_name: "Infrafic", codigo_economatica: "405469")
+agilite = Fund.create(name: "Ca Indosuez Agilite FI RF Cred Priv", short_name: "Agilite", codigo_economatica: "412171", area_id: vitesse_area.id, gestor_id: vitesse_gestor.id, anbima_class_id: vitesse_anbima.id)
+infrafic = Fund.create(name: "Ca Indosuez Debent Inc Cred Priv Fc Mult", short_name: "Infrafic", codigo_economatica: "405469", area_id: vitesse_area.id, gestor_id: vitesse_gestor.id, anbima_class_id: vitesse_anbima.id)
 
+
+beton = Fund.create(name: "Ca Indosuez Debent Inc Cred Priv Fc Mult", short_name: "Beton", codigo_economatica: "405469", area_id: vitesse_area.id, gestor_id: vitesse_gestor.id, anbima_class_id: vitesse_anbima.id)
+allocaction = Fund.create(name: "Ca Indosuez Debent Inc Cred Priv Fc Mult", short_name: "Allocaction", codigo_economatica: "405469", area_id: vitesse_area.id, gestor_id: vitesse_gestor.id, anbima_class_id: vitesse_anbima.id)
 

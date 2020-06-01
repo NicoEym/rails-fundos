@@ -12,14 +12,14 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <% if user_signed_in? %>
+          <% @areas = Area.all %>
+          <% @areas.each do |area|  %>
+            <li class="nav-item">
+                <%= link_to area.name, funds_path(:area => area), class: "font-white" %>
+            </li>
+          <%end %>
           <li class="nav-item">
-            <%= link_to("Crédito Privado", "#", class: "font-white") %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "FOFs", "#", class: "font-white" %>
-          </li>
-          <li class="nav-item">
-             <%= link_to raw('<i class="fas fa-sign-out-alt"></i> Se déconnecter'),   destroy_user_session_path, :method => :delete, class: "font-white" %>
+             <%= link_to raw('<i class="fas fa-sign-out-alt"></i>Log out'),   destroy_user_session_path, :method => :delete, class: "font-white" %>
           </li>
           <% else %>
             <li class="nav-item">

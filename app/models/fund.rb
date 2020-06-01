@@ -5,4 +5,6 @@ class Fund < ApplicationRecord
   belongs_to :gestor
   belongs_to :area
   belongs_to :anbima_class
+  has_many :aum
+  has_many :share
 end

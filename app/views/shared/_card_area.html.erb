@@ -1,0 +1,14 @@
+<!-- Loop that will display the cards for areas -->
+
+<% @areas.each do |area| %>
+  <div class="col-xs-12 col-md-4">
+    <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.unsplash.com/photo-1468322638156-074863f9362e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)">
+      <%= link_to("", funds_path(:area => area), class:"card-link")  %>
+       <div>
+        <h2 class="text-center"><%= area.name %> </h2>
+        <h6 class="text-center"><%= area.funds.count %> fundos</h6>
+      </div>
+    </div>
+  </div>
+<% end %>
+
