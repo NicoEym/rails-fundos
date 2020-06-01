@@ -5,9 +5,16 @@
 @import "color";
 @import "banner";
 @import "button";
+@import "card";
 
 
 
+.container {
+  height:100vh;
+  border-radius: 0.5em;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);;
+  padding: 1em;
+ }
 
 .container-home {
     height:100%;
@@ -30,4 +37,18 @@ a { color: inherit;
 .space_between {
   display: flex;
   justify-content: space-between;
+}
+
+
+.width100 {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.my-row{
+    display: flex;
+    flex-wrap: wrap;
 }
