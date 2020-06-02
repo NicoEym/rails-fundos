@@ -10,7 +10,7 @@
 
 
 .container {
-  height:100vh;
+  min-height:100vh;
   border-radius: 0.5em;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);;
   padding: 1em;
@@ -51,4 +51,12 @@ a { color: inherit;
 .my-row{
     display: flex;
     flex-wrap: wrap;
+}
+
+.padding1 {
+  padding: 1em;
+}
+
+.margin1 {
+  margin: 1em;
 }

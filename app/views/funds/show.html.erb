@@ -1,17 +1,18 @@
 <div class="container grey">
-  <p><%=@fund.short_name%></p>
-<p>Data: <%= @date%> </p>
+<h3 class="text-center"><%=@fund.short_name%></h3>
+<p class="text-center" ><%= @date%> </p>
 <p>PL: <%= number_with_delimiter(@aum.value, :delimiter => ',') %> </p>
 <p>Cota: <%= @share.value %> </p>
 
-  <div>
-  <%= line_chart @history_aum, colors: ["#CFB07B"], thousands: ",", title: "PL", ytitle: "$R" %>
-
+  <div class="padding1 my-row">
+    <div class="col-xs-12 col-md-12">
+  <%= line_chart @history_aum, colors: ["#CFB07B"], thousands: ",", title: "PL", ytitle: "$R Bi", width: "100%", height: "500px"%>
   </div>
 
+ <div class="col-xs-12 col-md-12">
+  <%= line_chart @history_share, colors: ["#CFB07B"], thousands: ",", title: "Cota", ytitle: "$R", width: "100%", height: "500px" %>
 
-  <%= line_chart @history_share, colors: ["#CFB07B"], thousands: ",", title: "Cota", ytitle: "$R" %>
-
+  </div>
   </div>
 </div>
 
