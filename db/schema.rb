@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_01_195828) do
+ActiveRecord::Schema.define(version: 2020_06_02_184714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,19 @@ ActiveRecord::Schema.define(version: 2020_06_01_195828) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "applications", force: :cascade do |t|
+    t.bigint "fund_id"
+    t.bigint "calendar_id"
+    t.float "weekly_net_value"
+    t.float "monthly_net_value"
+    t.float "quarterly_net_value"
+    t.float "yearly_net_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_id"], name: "index_applications_on_calendar_id"
+    t.index ["fund_id"], name: "index_applications_on_fund_id"
   end
 
   create_table "areas", force: :cascade do |t|
@@ -63,6 +76,20 @@ ActiveRecord::Schema.define(version: 2020_06_01_195828) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "returns", force: :cascade do |t|
+    t.bigint "fund_id"
+    t.bigint "calendar_id"
+    t.float "daily_value"
+    t.float "weekly_value"
+    t.float "monthly_value"
+    t.float "quarterly_value"
+    t.float "yearly_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_id"], name: "index_returns_on_calendar_id"
+    t.index ["fund_id"], name: "index_returns_on_fund_id"
+  end
+
   create_table "shares", force: :cascade do |t|
     t.float "value"
     t.bigint "fund_id"
@@ -85,11 +112,15 @@ ActiveRecord::Schema.define(version: 2020_06_01_195828) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "applications", "calendars"
+  add_foreign_key "applications", "funds"
   add_foreign_key "aums", "calendars"
   add_foreign_key "aums", "funds"
   add_foreign_key "funds", "anbima_classes"
   add_foreign_key "funds", "areas"
   add_foreign_key "funds", "gestors"
+  add_foreign_key "returns", "calendars"
+  add_foreign_key "returns", "funds"
   add_foreign_key "shares", "calendars"
   add_foreign_key "shares", "funds"
 end
