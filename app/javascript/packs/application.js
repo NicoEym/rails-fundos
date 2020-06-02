@@ -1,3 +1,4 @@
 import "bootstrap";
-//= require chartkick
-//= require Chart.bundle
+require("chartkick")
+require("chart.js")
+

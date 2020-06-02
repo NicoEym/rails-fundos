@@ -1,6 +1,18 @@
 <div class="container grey">
   <p><%=@fund.short_name%></p>
 <p>Data: <%= @date%> </p>
-<p>PL: <%= @aum.value %> </p>
+<p>PL: <%= number_with_delimiter(@aum.value, :delimiter => ',') %> </p>
 <p>Cota: <%= @share.value %> </p>
+
+  <div>
+  <%= line_chart @history_aum, colors: ["#CFB07B"], thousands: ",", title: "PL", ytitle: "$R" %>
+
+  </div>
+
+
+  <%= line_chart @history_share, colors: ["#CFB07B"], thousands: ",", title: "Cota", ytitle: "$R" %>
+
+  </div>
 </div>
+
+
