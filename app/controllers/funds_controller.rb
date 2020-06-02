@@ -1,11 +1,11 @@
 class FundsController < ApplicationController
+  require "date"
+
   def show
     @fund = Fund.find(params[:id])
-    @calendar = Calendar.last
-    @aum = Aum.find_by(calendar_id: @calendar.id, fund_id: @fund.id)
-    @share = Share.find_by(calendar_id: @calendar.id, fund_id: @fund.id)
-    @date = @calendar.day.to_formatted_s(:long_ordinal)
-
+    @aum = @fund.aum.last
+    @share = @fund.share.last
+    @date = @aum.calendar.day
 
     range_aum = Aum.where(fund_id: @fund.id)
     @history_aum = get_historical_data(range_aum, 1000000000)
