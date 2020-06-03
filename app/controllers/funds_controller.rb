@@ -3,8 +3,8 @@ class FundsController < ApplicationController
 
   def show
     @fund = Fund.find(params[:id])
-    @aum = @fund.aum.last
-    @share = @fund.share.last
+    @aum = @fund.aums.last
+    @share = @fund.shares.last
     @calendar = @aum.calendar
     @date = @calendar.day
 
@@ -16,7 +16,7 @@ class FundsController < ApplicationController
 
     @returns = Return.find_by(fund_id: @fund.id, calendar_id: @calendar)
     @applications = Application.find_by(fund_id: @fund.id, calendar_id: @calendar)
-
+    @competitors = Fund.where(competitor_group: @fund.short_name)
   end
 
   def index

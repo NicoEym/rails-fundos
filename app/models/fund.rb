@@ -1,10 +1,11 @@
 class Fund < ApplicationRecord
   validates :codigo_economatica, presence: true
   validates :name, presence: true
-  validates :short_name, presence: true
   belongs_to :gestor
-  belongs_to :area
+  has_one :area
   belongs_to :anbima_class
-  has_many :aum
-  has_many :share
+  has_many :aums, dependent: :destroy
+  has_many :shares, dependent: :destroy
+  has_many :applications, dependent: :destroy
+  has_many :returns, dependent: :destroy
 end

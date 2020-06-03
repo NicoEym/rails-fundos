@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_02_184714) do
+ActiveRecord::Schema.define(version: 2020_06_03_225624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2020_06_02_184714) do
     t.bigint "gestor_id"
     t.bigint "anbima_class_id"
     t.bigint "area_id"
+    t.string "competitor_group"
     t.index ["anbima_class_id"], name: "index_funds_on_anbima_class_id"
     t.index ["area_id"], name: "index_funds_on_area_id"
     t.index ["gestor_id"], name: "index_funds_on_gestor_id"

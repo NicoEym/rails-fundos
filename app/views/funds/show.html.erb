@@ -3,6 +3,9 @@
   <p class="text-center" ><%= @date.to_formatted_s(:long_ordinal)%> </p>
   <p>PL: <%= number_with_delimiter(@aum.value.round(0), :delimiter => ',') %> </p>
   <p>Cota: <%= @share.value.round(4) %> </p>
+    <%@competitors.each do |competitor| %>
+      <p><%= competitor.name %></p>
+   <% end %>
   <div class="my-row space_around col-xs-12">
     <table>
       <thead>

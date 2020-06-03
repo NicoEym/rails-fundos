@@ -12,107 +12,72 @@ require "csv"
 
 Application.delete_all
 Return.delete_all
-# Share.delete_all
-# Aum.delete_all
-# Fund.delete_all
-# Gestor.delete_all
-# Area.delete_all
-# AnbimaClass.delete_all
-# Calendar.delete_all
+Share.delete_all
+Aum.delete_all
+Fund.delete_all
+Gestor.delete_all
+Area.delete_all
+AnbimaClass.delete_all
+Calendar.delete_all
 
-# areas = ["FOFs", "Crédito Privado"]
+areas = ["FOFs", "Crédito Privado"]
 
-# gestors =["Ca Indosuez Wealth (Brazil) S.A. Dtvm", "Af Invest Administracao de Recursos", "ARX Investimentos Ltda", "Az Quest Investimentos", "Sparta", "Iridium Gestao de Recursos Ltda", "Quasar Asset Management"]
+gestors =["Ca Indosuez Wealth (Brazil) S.A. Dtvm", "Af Invest Administracao de Recursos", "ARX Investimentos Ltda", "Az Quest Investimentos", "Sparta", "Iridium Gestao de Recursos Ltda", "Quasar Asset Management"]
 
-# anbima_classes = ["Renda Fixa", "Multimercados", "Previdência", "FIP", "Ações"]
-
-
-# gestors.each do |gestor|
-#   Gestor.create(name: gestor)
-#   puts "Create #{gestor}"
-# end
-
-# areas.each do |area|
-#   Area.create(name: area)
-#   puts "Create #{area}"
-# end
+anbima_classes = ["Renda Fixa", "Multimercados", "Previdência", "FIP", "Ações"]
 
 
-# anbima_classes.each do |anbima_class|
-#   AnbimaClass.create(name: anbima_class)
-#   puts "Create #{anbima_class}"
-# end
+gestors.each do |gestor|
+  Gestor.create(name: gestor)
+  puts "Create #{gestor}"
+end
 
-# ca_gestor = Gestor.find_by(name: "Ca Indosuez Wealth (Brazil) S.A. Dtvm")
+areas.each do |area|
+  Area.create(name: area)
+  puts "Create #{area}"
+end
 
-# fof_area = Area.find_by(name: "FOFs")
-# cp_area = Area.find_by(name: "Crédito Privado")
 
-# rf_anbima = AnbimaClass.find_by(name: "Renda Fixa")
-# multi_anbima = AnbimaClass.find_by(name: "Multimercados")
-# acao_anbima = AnbimaClass.find_by(name: "Ações")
+anbima_classes.each do |anbima_class|
+  AnbimaClass.create(name: anbima_class)
+  puts "Create #{anbima_class}"
+end
 
-# vitesse = Fund.create(name: "Ca Indosuez Vitesse FI RF Cred Priv", short_name: "Vitesse", codigo_economatica: "284211", area_id: cp_area.id, gestor_id: ca_gestor.id, anbima_class_id: rf_anbima.id)
-# puts "created #{vitesse}"
+ca_gestor = Gestor.find_by(name: "Ca Indosuez Wealth (Brazil) S.A. Dtvm")
 
-# agilite = Fund.create(name: "Ca Indosuez Agilite FI RF Cred Priv", short_name: "Agilite", codigo_economatica: "412171", area_id: cp_area.id, gestor_id: ca_gestor.id, anbima_class_id: rf_anbima.id)
-# puts "created #{agilite}"
-# infrafic = Fund.create(name: "Ca Indosuez Debent Inc Cred Priv Fc Mult", short_name: "Infrafic", codigo_economatica: "405469", area_id: cp_area.id, gestor_id: ca_gestor.id, anbima_class_id: rf_anbima.id)
-# puts "created #{infrafic}"
-# beton = Fund.create(name: "Ca Indosuez Beton FICFI Mult", short_name: "Beton", codigo_economatica: "125970", area_id: fof_area.id, gestor_id: ca_gestor.id, anbima_class_id: multi_anbima.id)
-# puts "created #{beton}"
-# allocaction = Fund.create(name: "Ca Indosuez Alloc Action Fc FIA", short_name: "Allocaction", codigo_economatica: "372986", area_id: fof_area.id, gestor_id: ca_gestor.id, anbima_class_id: acao_anbima.id)
-# puts "created #{allocaction}"
+fof_area = Area.find_by(name: "FOFs")
+cp_area = Area.find_by(name: "Crédito Privado")
+
+rf_anbima = AnbimaClass.find_by(name: "Renda Fixa")
+multi_anbima = AnbimaClass.find_by(name: "Multimercados")
+acao_anbima = AnbimaClass.find_by(name: "Ações")
+
+vitesse = Fund.create(name: "Ca Indosuez Vitesse FI RF Cred Priv", short_name: "Vitesse", codigo_economatica: "284211", area_id: cp_area.id, gestor: ca_gestor, anbima_class: rf_anbima)
+puts "created #{vitesse}"
+
+agilite = Fund.create(name: "Ca Indosuez Agilite FI RF Cred Priv", short_name: "Agilite", codigo_economatica: "412171", area_id: cp_area.id, gestor: ca_gestor, anbima_class: rf_anbima)
+puts "created #{agilite}"
+infrafic = Fund.create(name: "Ca Indosuez Debent Inc Cred Priv Fc Mult", short_name: "Infrafic", codigo_economatica: "405469", area_id: cp_area.id, gestor: ca_gestor, anbima_class: rf_anbima)
+puts "created #{infrafic}"
+beton = Fund.create(name: "Ca Indosuez Beton FICFI Mult", short_name: "Beton", codigo_economatica: "125970", area_id: fof_area.id, gestor: ca_gestor, anbima_class: multi_anbima)
+puts "created #{beton}"
+allocaction = Fund.create(name: "Ca Indosuez Alloc Action Fc FIA", short_name: "Allocaction", codigo_economatica: "372986", area_id: fof_area.id, gestor: ca_gestor, anbima_class: acao_anbima)
+puts "created #{allocaction}"
 
 
 csv_options = { col_sep: ';', quote_char: '"', headers: :first_row }
 
-# path_vitesse  = 'db/csv_repos/data_Vitesse.csv'
-# path_agilite  = 'db/csv_repos/data agilite.csv'
-# path_beton  = 'db/csv_repos/data beton.csv'
-# path_infrafic  = 'db/csv_repos/data infrafic.csv'
-# path_action  = 'db/csv_repos/data allocaction.csv'
+path_vitesse  = 'db/csv_repos/data_Vitesse.csv'
+path_agilite  = 'db/csv_repos/data agilite.csv'
+path_beton  = 'db/csv_repos/data beton.csv'
+path_infrafic  = 'db/csv_repos/data infrafic.csv'
+path_action  = 'db/csv_repos/data allocaction.csv'
 
-# paths_array = [path_vitesse, path_agilite, path_beton, path_infrafic, path_action]
+paths_array = [path_vitesse, path_agilite, path_beton, path_infrafic, path_action]
 
-# paths_array.each do |path_array|
+paths_array.each do |path_array|
 
-#   CSV.foreach(path_array, csv_options) do |row|
-
-#     codigo = row['Codigo'][0,6].to_i
-#     puts codigo
-#     fund = Fund.find_by(codigo_economatica: codigo)
-#     puts fund.short_name
-#     #   Fund.create(codigo_economatica: codigo)
-
-#     year = row["Date"][0,4].to_i
-#     puts year
-#     month = row["Date"][5,7].to_i
-#     puts month
-#     day = row["Date"][8,10].to_i
-#     puts day
-#     date = Date.new(year, month, day)
-#     # end
-
-#       if Calendar.find_by(day: date).nil?
-#         date = Calendar.create(day: date)
-#       else
-#         date = Calendar.find_by(day: date)
-#       end
-
-#     puts date.day
-
-#     Share.create(value: row['Cota'], fund_id: fund.id, calendar_id: date.id)
-#     Aum.create(value: row['PL'], fund_id: fund.id, calendar_id: date.id)
-
-#   end
-
-# end
-
-path_daily_data  = 'db/csv_repos/Indosuez data.csv'
-
-
-CSV.foreach(path_daily_data, csv_options) do |row|
+  CSV.foreach(path_array, csv_options) do |row|
 
     codigo = row['Codigo'][0,6].to_i
     puts codigo
@@ -126,21 +91,60 @@ CSV.foreach(path_daily_data, csv_options) do |row|
     puts month
     day = row["Date"][8,10].to_i
     puts day
-    date = Date.new(year, month, day)
+    date_format_YMD = Date.new(year, month, day)
     # end
 
-
-    if Calendar.find_by(day: date).nil?
-      date = Calendar.create(day: date)
-    else
-      date = Calendar.find_by(day: date)
-    end
+       date = Calendar.find_by(day: date_format_YMD)
+   date = Calendar.create(day: date_format_YMD) if date.nil?
 
     puts date.day
 
-    Application.create(weekly_net_value: row['Weekly Net Captation'], monthly_net_value: row['Monthly Net Captation'], quarterly_net_value: row['Quarterly Net Captation'], yearly_net_value: row['Yearly Net Captation'], fund_id: fund.id, calendar_id: date.id)
-    Return.create(daily_value: row['Daily return'],weekly_value: row['Weekly return'], monthly_value: row['Monthly return'], quarterly_value: row['Quarterly return'], yearly_value: row['Yearly return'], fund_id: fund.id, calendar_id: date.id)
-    # Share.create(value: row['Cota'], fund_id: fund.id, calendar_id: date.id) if Share.find_by(fund_id: fund.id, calendar_id: date.id).nil?
-    # Aum.create(value: row['PL'], fund_id: fund.id, calendar_id: date.id) if Aum.find_by(fund_id: fund.id, calendar_id: date.id).nil?
+    Share.create(value: row['Cota'], fund: fund, calendar: date)
+    Aum.create(value: row['PL'], fund: fund, calendar: date)
+
+  end
+
+end
+
+path_daily_data  = 'db/csv_repos/Indosuez data.csv'
+
+
+CSV.foreach(path_daily_data, csv_options) do |row|
+
+    gestor = Gestor.find_by(name: row['Gestor'])
+    gestor = Gestor.create(name: row['Gestor']) if gestor.nil?
+    puts gestor.name
+
+    anbima_class = AnbimaClass.find_by(name: row['Classe Anbima'])
+    anbima_class = AnbimaClass.create(name: row['Classe Anbima']) if anbima_class.nil?
+    puts anbima_class.name
+
+    codigo = row['Ativo'][0,6].to_i
+    fund = Fund.find_by(codigo_economatica: codigo)
+    puts fund
+    puts codigo
+
+    fund = Fund.create(codigo_economatica: codigo, name: row['Nome'], anbima_class: anbima_class, gestor: gestor, competitor_group: row['Competitor group']) if fund.nil?
+
+    #   Fund.create(codigo_economatica: codigo)
+
+    year = row["Date"][0,4].to_i
+    puts year
+    month = row["Date"][5,7].to_i
+    puts month
+    day = row["Date"][8,10].to_i
+    puts day
+    date_format_YMD = Date.new(year, month, day)
+    # end
+
+    date = Calendar.find_by(day: date_format_YMD)
+    date = Calendar.create(day: date_format_YMD) if date.nil?
+
+    puts date.day
+
+    Application.create(weekly_net_value: row['Weekly Net Captation'], monthly_net_value: row['Monthly Net Captation'], quarterly_net_value: row['Quarterly Net Captation'], yearly_net_value: row['Yearly Net Captation'], fund: fund, calendar: date)
+    Return.create(daily_value: row['Daily return'],weekly_value: row['Weekly return'], monthly_value: row['Monthly return'], quarterly_value: row['Quarterly return'], yearly_value: row['Yearly return'], fund: fund, calendar: date)
+    Share.create(value: row['Cota'], fund: fund, calendar: date) if Share.find_by(fund: fund, calendar: date).nil?
+    Aum.create(value: row['PL'], fund: fund, calendar: date) if Aum.find_by(fund: fund, calendar: date).nil?
 
   end
