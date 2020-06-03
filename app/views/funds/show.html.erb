@@ -1,18 +1,49 @@
 <div class="container grey">
-<h3 class="text-center"><%=@fund.short_name%></h3>
-<p class="text-center" ><%= @date.to_formatted_s(:long_ordinal)%> </p>
-<p>PL: <%= number_with_delimiter(@aum.value, :delimiter => ',') %> </p>
-<p>Cota: <%= @share.value %> </p>
-
-  <div class="padding1 my-row">
-    <div class="col-xs-12 col-md-12">
-  <%= line_chart @history_aum, colors: ["#CFB07B"], thousands: ",", title: "PL", ytitle: "$R Bi", width: "100%", height: "500px"%>
+  <h3 class="text-center"><%=@fund.short_name%></h3>
+  <p class="text-center" ><%= @date.to_formatted_s(:long_ordinal)%> </p>
+  <p>PL: <%= number_with_delimiter(@aum.value.round(0), :delimiter => ',') %> </p>
+  <p>Cota: <%= @share.value.round(4) %> </p>
+  <div class="my-row space_around col-xs-12">
+    <table>
+      <thead>
+          <tr>
+              <th colspan="1">Dado</th>
+              <th colspan="1">Diario</th>
+              <th colspan="1">Semanal</th>
+              <th colspan="1">Mensal</th>
+              <th colspan="1">Trimestral</th>
+              <th colspan="1">Annual</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>Retorno</td>
+              <td><%= @returns.daily_value.round(2)%>%</td>
+              <td><%= @returns.weekly_value.round(2)%>%</td>
+              <td><%= @returns.monthly_value.round(2)%>%</td>
+              <td><%= @returns.quarterly_value.round(2)%>%</td>
+              <td><%= @returns.yearly_value.round(2)%>%</td>
+          </tr>
+           <tr>
+              <td>Capt Liq</td>
+              <td> - </td>
+              <td><%= number_with_delimiter(@applications.weekly_net_value.round(0), :delimiter => ',') %></td>
+              <td><%= number_with_delimiter(@applications.monthly_net_value.round(0), :delimiter => ',') %></td>
+              <td><%= number_with_delimiter(@applications.quarterly_net_value.round(0), :delimiter => ',') %></td>
+              <td><%= number_with_delimiter(@applications.yearly_net_value.round(0), :delimiter => ',') %></td>
+          </tr>
+      </tbody>
+    </table>
   </div>
+    <div class="padding1 my-row">
+      <div class="col-xs-12 col-md-12">
+      <%= line_chart @history_aum, colors: ["#CFB07B"], thousands: ",", title: "PL", ytitle: "$R Bi", width: "100%", height: "500px"%>
+      </div>
 
- <div class="col-xs-12 col-md-12">
-  <%= line_chart @history_share, colors: ["#CFB07B"], thousands: ",", title: "Cota", ytitle: "$R", width: "100%", height: "500px" %>
+      <div class="col-xs-12 col-md-12">
+       <%= line_chart @history_share, colors: ["#CFB07B"], thousands: ",", title: "Cota", ytitle: "$R", width: "100%", height: "500px" %>
 
-  </div>
+    </div>
   </div>
 </div>
 
