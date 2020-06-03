@@ -5,13 +5,18 @@ class FundsController < ApplicationController
     @fund = Fund.find(params[:id])
     @aum = @fund.aum.last
     @share = @fund.share.last
-    @date = @aum.calendar.day
+    @calendar = @aum.calendar
+    @date = @calendar.day
 
     range_aum = Aum.where(fund_id: @fund.id)
     @history_aum = get_historical_data(range_aum, 1000000000)
 
     range_share = Share.where(fund_id: @fund.id)
     @history_share = get_historical_data(range_share)
+
+    @returns = Return.find_by(fund_id: @fund.id, calendar_id: @calendar)
+    @applications = Application.find_by(fund_id: @fund.id, calendar_id: @calendar)
+
   end
 
   def index

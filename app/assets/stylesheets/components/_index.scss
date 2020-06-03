@@ -6,6 +6,8 @@
 @import "banner";
 @import "button";
 @import "card";
+@import "table";
+@import "form";
 
 
 
@@ -39,6 +41,9 @@ a { color: inherit;
   justify-content: space-between;
 }
 
+.space_around {
+  justify-content: space-around;
+}
 
 .width100 {
   width: 100%;
