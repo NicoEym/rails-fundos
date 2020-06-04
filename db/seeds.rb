@@ -1,14 +1,19 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-
 require "date"
 require "csv"
+require "open-uri"
+
+
+# url = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/SSYsXqRVyg4eZ0RTZb4TMAcAy2pTDfCr74SDBWqQYZGtCESTa3bm5QPwlEmFd%2FO81EPj2TYYCFAZ4kSj7RybSv1Ekk85NE4ymAwKSPLUQyNsO81DKGmt9UTauUCWAQkpRsGo%2FthHCMP0gf78bpn41sFHvmaKvspZT2VpfumUf72fGgkwoNya9lkwzSAqMp7EXc4pcpyA5b07z0X0NMb2VmMbdmuauqMmihAAbInkw3NW5ONp9pOVlpjdVj%2F6TSu4BIyUhClY3xeL0qTzAHoETfRYLYgqFf215v%2BV03pJB86KhyKcjjL3pZyN2MObDMRHiOYm5zpKzqrd0gxzdMZQEA%3D%3D'
+# download = open(url)
+# IO.copy_stream(download, 'test2.csv')
+# CSV.new(download).each do |l|
+#    puts l
+# end
+# path_action  = 'test2.csv'
+# csv_options = { col_sep: '","', quote_char: '"', headers: :first_row }
+# CSV.foreach(path_action, csv_options) do |row|
+#    puts row['Nome']
+# end
 
 Application.delete_all
 Return.delete_all

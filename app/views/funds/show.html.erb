@@ -3,13 +3,11 @@
   <p class="text-center" ><%= @date.to_formatted_s(:long_ordinal)%> </p>
   <p>PL: <%= number_with_delimiter(@aum.value.round(0), :delimiter => ',') %> </p>
   <p>Cota: <%= @share.value.round(4) %> </p>
-    <%@competitors.each do |competitor| %>
-      <p><%= competitor.name %></p>
-   <% end %>
-  <div class="my-row space_around col-xs-12">
-    <table>
+
+  <div class="table-responsive">
+    <table class="table table-hover">
       <thead>
-          <tr>
+          <tr class="text-center black font-white">
               <th colspan="1">Dado</th>
               <th colspan="1">Diario</th>
               <th colspan="1">Semanal</th>
@@ -35,8 +33,33 @@
               <td><%= number_with_delimiter(@applications.quarterly_net_value.round(0), :delimiter => ',') %></td>
               <td><%= number_with_delimiter(@applications.yearly_net_value.round(0), :delimiter => ',') %></td>
           </tr>
+          <%@competitors.each do |competitor| %>
+
+           <tr class="hidden competitor-row">
+              <td colspan="6" class="text-center black font-white"><%= competitor.name %></td>
+          </tr>
+            <tr class="hidden competitor-row">
+              <td>Retorno</td>
+              <td><%= competitor.returns.last.daily_value.round(2)%>%</td>
+              <td><%= competitor.returns.last.weekly_value.round(2)%>%</td>
+              <td><%= competitor.returns.last.monthly_value.round(2)%>%</td>
+              <td><%= competitor.returns.last.quarterly_value.round(2)%>%</td>
+              <td><%= competitor.returns.last.yearly_value.round(2)%>%</td>
+          </tr>
+           <tr class="hidden competitor-row">
+              <td>Capt Liq</td>
+              <td> - </td>
+              <td><%= number_with_delimiter(competitor.applications.last.weekly_net_value.round(0), :delimiter => ',') %></td>
+              <td><%= number_with_delimiter(competitor.applications.last.monthly_net_value.round(0), :delimiter => ',') %></td>
+              <td><%= number_with_delimiter(competitor.applications.last.quarterly_net_value.round(0), :delimiter => ',') %></td>
+              <td><%= number_with_delimiter(competitor.applications.last.yearly_net_value.round(0), :delimiter => ',') %></td>
+          </tr>
+
+          <% end %>
       </tbody>
     </table>
+
+    <button id="show-competitors">See competitors</button>
   </div>
     <div class="padding1 my-row">
       <div class="col-xs-12 col-md-12">
