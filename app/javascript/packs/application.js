@@ -1,4 +1,8 @@
 import "bootstrap";
-require("chartkick")
-require("chart.js")
 
+
+
+import { show } from '../components/show_competitors';
+
+
+show();
