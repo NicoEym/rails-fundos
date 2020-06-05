@@ -19,7 +19,8 @@ class FundsController < ApplicationController
     @returns = Return.find_by(fund_id: @fund.id, calendar_id: @calendar)
     @applications = Application.find_by(fund_id: @fund.id, calendar_id: @calendar)
 
-    @competitors =get_competitors(@fund)
+    @competitors = get_competitors(@fund)
+    @chart_returns = get_returns_data(@competitors, @fund)
   end
 
   def index
@@ -53,5 +54,14 @@ class FundsController < ApplicationController
     else
       fund_name = fund.short_name
     end
+  end
+
+  def get_returns_data(competitors, fund)
+    data = []
+
+    competitors.each do |competitor|
+      data << [competitor.name, competitor.returns.last.monthly_value]
+    end
+    data << [fund.name, fund.returns.last.monthly_value]
   end
 end
