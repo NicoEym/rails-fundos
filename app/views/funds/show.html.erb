@@ -19,11 +19,11 @@
       <tbody>
           <tr>
               <td>Retorno</td>
-              <td><%= @returns.daily_value.round(2)%>%</td>
-              <td><%= @returns.weekly_value.round(2)%>%</td>
-              <td><%= @returns.monthly_value.round(2)%>%</td>
-              <td><%= @returns.quarterly_value.round(2)%>%</td>
-              <td><%= @returns.yearly_value.round(2)%>%</td>
+              <td><%= sprintf("%+.2f", @returns.daily_value.round(2))%>%</td>
+              <td><%= sprintf("%+.2f", @returns.weekly_value.round(2))%>%</td>
+              <td><%= sprintf("%+.2f", @returns.monthly_value.round(2))%>%</td>
+              <td><%= sprintf("%+.2f", @returns.quarterly_value.round(2))%>%</td>
+              <td><%= sprintf("%+.2f", @returns.yearly_value.round(2))%>%</td>
           </tr>
            <tr>
               <td>Capt Liq</td>
@@ -40,11 +40,11 @@
           </tr>
             <tr class="hidden competitor-row">
               <td>Retorno</td>
-              <td><%= competitor.returns.last.daily_value.round(2)%>%</td>
-              <td><%= competitor.returns.last.weekly_value.round(2)%>%</td>
-              <td><%= competitor.returns.last.monthly_value.round(2)%>%</td>
-              <td><%= competitor.returns.last.quarterly_value.round(2)%>%</td>
-              <td><%= competitor.returns.last.yearly_value.round(2)%>%</td>
+              <td><%= sprintf("%+.2f", competitor.returns.last.daily_value.round(2))%>%</td>
+              <td><%= sprintf("%+.2f", competitor.returns.last.weekly_value.round(2))%>%</td>
+              <td><%= sprintf("%+.2f", competitor.returns.last.monthly_value.round(2))%>%</td>
+              <td><%= sprintf("%+.2f", competitor.returns.last.quarterly_value.round(2))%>%</td>
+              <td><%= sprintf("%+.2f", competitor.returns.last.yearly_value.round(2))%>%</td>
           </tr>
            <tr class="hidden competitor-row">
               <td>Capt Liq</td>
