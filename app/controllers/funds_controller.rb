@@ -5,6 +5,7 @@ class FundsController < ApplicationController
     @fund = Fund.find(params[:id])
     @aum = @fund.aums.last
     @share = @fund.shares.last
+    @indicators = @fund.indicators.last
     @calendar = @aum.calendar
     @date = @calendar.day
     @name = get_name(@fund)

@@ -162,5 +162,6 @@ csv.each do |row|
     Return.create(daily_value: row['Daily return'],weekly_value: row['Weekly return'], monthly_value: row['Monthly return'], quarterly_value: row['Quarterly return'], yearly_value: row['Yearly return'], fund: fund, calendar: date) if Return.find_by(fund: fund, calendar: date).nil?
     Share.create(value: row['Cota'], fund: fund, calendar: date) if Share.find_by(fund: fund, calendar: date).nil?
     Aum.create(value: row['PL'], fund: fund, calendar: date) if Aum.find_by(fund: fund, calendar: date).nil?
+    Indicator.create(volatility: row['Vol EWMA 97%'], sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'], fund: fund, calendar: date) if Indicator.find_by(fund: fund, calendar: date).nil?
 end
 #   end

@@ -7,9 +7,9 @@
 
     <p>PL: <%= number_with_delimiter(@aum.value.round(0), :delimiter => ',') %> </p>
     <p>Cota: <%= @share.value.round(4) %> </p>
-    <p>Volatilidade:</p>
-    <p>Sharpe ratio:</p>
-    <p>Tracking error:</p>
+    <p>Volatilidade: <%= sprintf("%+.2f", @indicators.volatility.round(2))%>%</p>
+    <p>Sharpe ratio: <%= @indicators.sharpe_ratio.round(2)%></p>
+    <p>Tracking error:<%= sprintf("%+.2f", @indicators.tracking_error.round(2))%>%</p>
   </div>
   <div class="table-responsive">
     <table class="table table-hover">

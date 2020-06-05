@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_03_225624) do
+ActiveRecord::Schema.define(version: 2020_06_05_194246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,18 @@ ActiveRecord::Schema.define(version: 2020_06_03_225624) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "indicators", force: :cascade do |t|
+    t.bigint "fund_id"
+    t.bigint "calendar_id"
+    t.float "volatility"
+    t.float "tracking_error"
+    t.float "sharpe_ratio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_id"], name: "index_indicators_on_calendar_id"
+    t.index ["fund_id"], name: "index_indicators_on_fund_id"
+  end
+
   create_table "returns", force: :cascade do |t|
     t.bigint "fund_id"
     t.bigint "calendar_id"
@@ -120,6 +132,8 @@ ActiveRecord::Schema.define(version: 2020_06_03_225624) do
   add_foreign_key "funds", "anbima_classes"
   add_foreign_key "funds", "areas"
   add_foreign_key "funds", "gestors"
+  add_foreign_key "indicators", "calendars"
+  add_foreign_key "indicators", "funds"
   add_foreign_key "returns", "calendars"
   add_foreign_key "returns", "funds"
   add_foreign_key "shares", "calendars"
