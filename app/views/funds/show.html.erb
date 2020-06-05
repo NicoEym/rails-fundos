@@ -1,9 +1,16 @@
+<br>
+<br>
 <div class="container grey">
-  <h3 class="text-center"><%=@fund.short_name%></h3>
-  <p class="text-center" ><%= @date.to_formatted_s(:long_ordinal)%> </p>
-  <p>PL: <%= number_with_delimiter(@aum.value.round(0), :delimiter => ',') %> </p>
-  <p>Cota: <%= @share.value.round(4) %> </p>
+  <div class="padding1 border-radius05 shadow-boxing marginb">
+    <h3 class="text-center"><%=@name%></h3>
+    <p class="text-center" ><%= @date.to_formatted_s(:long_ordinal)%> </p>
 
+    <p>PL: <%= number_with_delimiter(@aum.value.round(0), :delimiter => ',') %> </p>
+    <p>Cota: <%= @share.value.round(4) %> </p>
+    <p>Volatilidade:</p>
+    <p>Sharpe ratio:</p>
+    <p>Tracking error:</p>
+  </div>
   <div class="table-responsive">
     <table class="table table-hover">
       <thead>
@@ -36,7 +43,7 @@
           <%@competitors.each do |competitor| %>
 
            <tr class="hidden competitor-row">
-              <td colspan="6" class="text-center black font-white"><%= competitor.name %></td>
+              <td colspan="6" class="text-center black font-white"> <%= link_to(competitor.name, fund_path(competitor.id))  %></td>
           </tr>
             <tr class="hidden competitor-row">
               <td>Retorno</td>
@@ -60,19 +67,27 @@
     </table>
    </div>
 
-    <div class="my-row space_around">
-      <a href="#" id="show-competitors" class="btn-outline col-xs-12 col-md-4">Concorentes</a>
-    </div>
+    <% if @competitors.size ==1 %>
+      <div class="my-row space_around">
+        <a href="#" id="show-competitors" class="btn-outline col-xs-12 col-md-4"><%= @competitors[0].short_name %></a>
+      </div>
+    <% else %>
+      <div class="my-row space_around">
+        <a href="#" id="show-competitors" class="btn-outline col-xs-12 col-md-4">Concorrentes</a>
+      </div>
+    <% end %>
 
     <div class="padding1 my-row">
-      <div class="chart-container">
-      <%= line_chart @history_aum, colors: ["#CFB07B"], thousands: ",", title: "PL", ytitle: "$R Bi", width: "100%", height: "500px"%>
-      </div>
-
-      <div class="chart-container">
-       <%= line_chart @history_share, colors: ["#CFB07B"], thousands: ",", title: "Cota", ytitle: "$R", width: "100%", height: "500px" %>
-      </div>
-
+      <% if !@history_aum.nil? %>
+        <div class="chart-container">
+        <%= line_chart @history_aum, colors: ["#CFB07B"], thousands: ",", title: "PL", ytitle: "$R Bi", width: "100%", height: "500px"%>
+        </div>
+      <% end %>
+      <% if !@history_share.nil? %>
+        <div class="chart-container">
+         <%= line_chart @history_share, colors: ["#CFB07B"], thousands: ",", title: "Cota", ytitle: "$R", width: "100%", height: "500px" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

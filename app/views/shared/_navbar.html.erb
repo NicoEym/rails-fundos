@@ -13,6 +13,7 @@
         <ul class="navbar-nav mr-auto">
           <% if user_signed_in? %>
           <% @areas = Area.all %>
+
           <% @areas.each do |area|  %>
             <li class="nav-item">
                 <%= link_to area.name, funds_path(:area => area), class: "font-white" %>

@@ -14,7 +14,7 @@
 .container {
   min-height:100vh;
   border-radius: 0.5em;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
   padding: 1em;
  }
 
@@ -70,4 +70,16 @@ a { color: inherit;
 
 .margin1 {
   margin: 1em;
+}
+
+.shadow-boxing {
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.border-radius05 {
+  border-radius: 0.5em;
+}
+
+.marginb {
+  margin-bottom: 1em;
 }
