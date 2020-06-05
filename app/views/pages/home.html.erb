@@ -3,14 +3,28 @@
     <div id="landing-page-form" class="col-xs-9 col-md-6">
       <h1>Fundos</h1>
       <p >Todos os dados sobre os fundos...</p>
-      <div>
-        <div class="button-box">
-          <%= link_to("Log in", new_user_session_path, class:"btn-outline")  %>
-        </div >
-        <div class="button-box">
-          <%= link_to("Sign up", new_user_registration_path, class:"btn-outline")  %>
-        </div>
+      <% if user_signed_in? %>
+
+        <div>
+          <% @areas.each do |area|  %>
+            <div class="button-box">
+              <%= link_to area.name, funds_path(:area => area), class:"btn-outline" %>
+            </div >
+        <% end %>
       </div>
+
+      <% else %>
+
+        <div>
+          <div class="button-box">
+            <%= link_to("Log in", new_user_session_path, class:"btn-outline")  %>
+          </div >
+          <div class="button-box">
+            <%= link_to("Sign up", new_user_registration_path, class:"btn-outline")  %>
+          </div>
+        </div>
+
+      <% end %>
     </div>
   </div>
 </div>
