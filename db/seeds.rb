@@ -1,20 +1,23 @@
 require "date"
 require "csv"
 require "open-uri"
+require 'stringio'
 
 
-# url = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/SSYsXqRVyg4eZ0RTZb4TMAcAy2pTDfCr74SDBWqQYZGtCESTa3bm5QPwlEmFd%2FO81EPj2TYYCFAZ4kSj7RybSv1Ekk85NE4ymAwKSPLUQyNsO81DKGmt9UTauUCWAQkpRsGo%2FthHCMP0gf78bpn41sFHvmaKvspZT2VpfumUf72fGgkwoNya9lkwzSAqMp7EXc4pcpyA5b07z0X0NMb2VmMbdmuauqMmihAAbInkw3NW5ONp9pOVlpjdVj%2F6TSu4BIyUhClY3xeL0qTzAHoETfRYLYgqFf215v%2BV03pJB86KhyKcjjL3pZyN2MObDMRHiOYm5zpKzqrd0gxzdMZQEA%3D%3D'
-# download = open(url)
-# path = 'db/csv_repos/Indosuez data.csv'
-# #IO.copy_stream(download, path)
+url = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/SSYsXqRVyg4eZ0RTZb4TMAcAy2pTDfCr74SDBWqQYZGtCESTa3bm5QPwlEmFd%2FO81EPj2TYYCFAZ4kSj7RybSv1Ekk85NE4ymAwKSPLUQyNsO81DKGmt9UTauUCWAQkpRsGo%2FthHCMP0gf78bpn41sFHvmaKvspZT2VpfumUf72fGgkwoNya9lkwzSAqMp7EXc4pcpyA5b07z0X0NMb2VmMbdmuauqMmihAAbInkw3NW5ONp9pOVlpjdVj%2F6TSu4BIyUhClY3xeL0qTzAHoETfRYLYgqFf215v%2BV03pJB86KhyKcjjL3pZyN2MObDMRHiOYm5zpKzqrd0gxzdMZQEA%3D%3D'
+download = open(url)
 
-# csv_options = { col_sep:  "/\",", quote_char: '"', headers: :first_row }
-# csv = CSV.parse(download, :headers=>true)
+puts download
+path = 'db/csv_repos/Indosuez data.csv'
+#IO.copy_stream(download, path)
+
+#csv_options = { col_sep:  "/\",", quote_char: '"', headers: :first_row }
+csv = CSV.parse(download, encoding:'utf-8',:headers=>true)
 
 
 
 # csv.each do |row|
-#   puts row["Classe Anbima"].encode("UTF-8", "ASCII-8BIT")
+#   puts row["Date"]
 # end
 
 # IO.copy_stream(
@@ -121,18 +124,18 @@ csv_options = { col_sep:  ";", quote_char: '"', headers: :first_row }
 
 # end
 
-path_daily_data  = 'db/csv_repos/Indosuez data.csv'
+# path_daily_data  = 'db/csv_repos/Indosuez data.csv'
 
 
-CSV.foreach(path_daily_data, csv_options) do |row|
-# csv.each do |row|
-    gestor = Gestor.find_by(name: row['Gestor'])
-    gestor = Gestor.create(name: row['Gestor']) if gestor.nil?
-    puts gestor.name
+# CSV.foreach(path_daily_data, csv_options) do |row|
+csv.each do |row|
+#     gestor = Gestor.find_by(name: row['Gestor'])
+#     gestor = Gestor.create(name: row['Gestor']) if gestor.nil?
+#     puts gestor.name
 
-    # anbima_class = AnbimaClass.find_by(name: row['Classe Anbima'])
-    # anbima_class = AnbimaClass.create(name: row['Classe Anbima']) if anbima_class.nil?
-    # puts anbima_class.name
+#     # anbima_class = AnbimaClass.find_by(name: row['Classe Anbima'])
+#     # anbima_class = AnbimaClass.create(name: row['Classe Anbima']) if anbima_class.nil?
+#     # puts anbima_class.name
 
     codigo = row['Ativo'][0,6].to_i
     fund = Fund.find_by(codigo_economatica: codigo)
@@ -159,5 +162,5 @@ CSV.foreach(path_daily_data, csv_options) do |row|
     Return.create(daily_value: row['Daily return'],weekly_value: row['Weekly return'], monthly_value: row['Monthly return'], quarterly_value: row['Quarterly return'], yearly_value: row['Yearly return'], fund: fund, calendar: date) if Return.find_by(fund: fund, calendar: date).nil?
     Share.create(value: row['Cota'], fund: fund, calendar: date) if Share.find_by(fund: fund, calendar: date).nil?
     Aum.create(value: row['PL'], fund: fund, calendar: date) if Aum.find_by(fund: fund, calendar: date).nil?
-# end
-  end
+end
+#   end
