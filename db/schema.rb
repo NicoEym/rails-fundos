@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_194246) do
+ActiveRecord::Schema.define(version: 2020_06_05_221229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_06_05_194246) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "photo_url"
   end
 
   create_table "aums", force: :cascade do |t|
@@ -66,6 +67,7 @@ ActiveRecord::Schema.define(version: 2020_06_05_194246) do
     t.bigint "anbima_class_id"
     t.bigint "area_id"
     t.string "competitor_group"
+    t.string "photo_url"
     t.index ["anbima_class_id"], name: "index_funds_on_anbima_class_id"
     t.index ["area_id"], name: "index_funds_on_area_id"
     t.index ["gestor_id"], name: "index_funds_on_gestor_id"

@@ -55,6 +55,8 @@ csv = CSV.parse(download, encoding:'utf-8',:headers=>true)
 #   puts "Create #{area}"
 # end
 
+Area.create(name: "FOFs", photo_url: "https://images.unsplash.com/photo-1478088702756-f16754aaf0c4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+Area.create(name: "Crédito Privado", photo_url: "https://images.unsplash.com/photo-1512089425728-b012186ab3cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
 
 # anbima_classes.each do |anbima_class|
 #   AnbimaClass.create(name: anbima_class)
@@ -70,16 +72,16 @@ csv = CSV.parse(download, encoding:'utf-8',:headers=>true)
 # multi_anbima = AnbimaClass.find_by(name: "Multimercados")
 # acao_anbima = AnbimaClass.find_by(name: "Ações")
 
-# vitesse = Fund.create(name: "Ca Indosuez Vitesse FI RF Cred Priv", short_name: "Vitesse", codigo_economatica: "284211", area_id: cp_area.id, gestor: ca_gestor, anbima_class: rf_anbima)
+# vitesse = Fund.create(name: "Ca Indosuez Vitesse FI RF Cred Priv", short_name: "Vitesse", codigo_economatica: "284211", area_id: cp_area.id, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1509099652299-30938b0aeb63?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
 # puts "created #{vitesse}"
 
-# agilite = Fund.create(name: "Ca Indosuez Agilite FI RF Cred Priv", short_name: "Agilite", codigo_economatica: "412171", area_id: cp_area.id, gestor: ca_gestor, anbima_class: rf_anbima)
+# agilite = Fund.create(name: "Ca Indosuez Agilite FI RF Cred Priv", short_name: "Agilite", codigo_economatica: "412171", area_id: cp_area.id, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1520787054628-794a6d7a822d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
 # puts "created #{agilite}"
-# infrafic = Fund.create(name: "Ca Indosuez Debent Inc Cred Priv Fc Mult", short_name: "Infrafic", codigo_economatica: "405469", area_id: cp_area.id, gestor: ca_gestor, anbima_class: rf_anbima)
+# infrafic = Fund.create(name: "Ca Indosuez Debent Inc Cred Priv Fc Mult", short_name: "Infrafic", codigo_economatica: "405469", area_id: cp_area.id, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1515674744565-0d7112cd179a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
 # puts "created #{infrafic}"
-# beton = Fund.create(name: "Ca Indosuez Beton FICFI Mult", short_name: "Beton", codigo_economatica: "125970", area_id: fof_area.id, gestor: ca_gestor, anbima_class: multi_anbima)
+# beton = Fund.create(name: "Ca Indosuez Beton FICFI Mult", short_name: "Beton", codigo_economatica: "125970", area_id: fof_area.id, gestor: ca_gestor, anbima_class: multi_anbima, photo_url: "https://images.unsplash.com/photo-1566937169390-7be4c63b8a0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
 # puts "created #{beton}"
-# allocaction = Fund.create(name: "Ca Indosuez Alloc Action Fc FIA", short_name: "Allocaction", codigo_economatica: "372986", area_id: fof_area.id, gestor: ca_gestor, anbima_class: acao_anbima)
+# allocaction = Fund.create(name: "Ca Indosuez Alloc Action Fc FIA", short_name: "Allocaction", codigo_economatica: "372986", area_id: fof_area.id, gestor: ca_gestor, anbima_class: acao_anbima, photo_url: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
 # puts "created #{allocaction}"
 
 
