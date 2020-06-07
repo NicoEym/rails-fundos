@@ -72,12 +72,12 @@
 
       <% if @competitors.size ==1 %>
         <div class="my-row space_around">
-          <a href="#" id="show-competitors" class="btn-outline col-xs-12 col-md-4"><%= @competitors[0].short_name %></a>
+          <a id="show-competitors" class="btn-outline col-xs-12 col-md-4"><%= @competitors[0].short_name %></a>
         </div>
 
       <% else %>
         <div class="my-row space_around">
-          <a href="#" id="show-competitors" class="btn-outline col-xs-12 col-md-4">Concorrentes</a>
+          <a id="show-competitors" class="btn-outline col-xs-12 col-md-4">Concorrentes</a>
         </div>
       <% end %>
     </div>
