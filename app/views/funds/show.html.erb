@@ -4,12 +4,13 @@
   <div class="padding1 border-radius05 shadow-boxing marginb">
     <h3 class="text-center"><%=@name%></h3>
     <p class="text-center" ><%= @date.to_formatted_s(:long_ordinal)%> </p>
-
-    <p><i class="fas fa-dollar-sign"></i> PL: <%= number_with_delimiter(@aum.value.round(0), :delimiter => ',') %> </p>
-    <p>Cota: <%= @share.value.round(4) %> </p>
-    <p>Volatilidade: <%= sprintf("%+.2f", @indicators.volatility.round(2))%>%</p>
-    <p>Sharpe ratio: <%= @indicators.sharpe_ratio.round(2)%></p>
-    <p>Tracking error:<%= sprintf("%+.2f", @indicators.tracking_error.round(2))%>%</p>
+    <p><b>Gestor:</b> <%= @fund.gestor.name %> </p>
+    <p><b>Classe Anbima:</b> <%= @fund.anbima_class.name %> </p>
+    <p><b>PL:</b> <%= number_with_delimiter(@aum.value.round(0), :delimiter => ',') %> </p>
+    <p><b>Cota:</b> <%= @share.value.round(4) %> </p>
+    <p><b>Volatilidade:</b> <%= sprintf("%+.2f", @indicators.volatility.round(2))%>%</p>
+    <p><b>Sharpe ratio:</b> <%= @indicators.sharpe_ratio.round(2)%></p>
+    <p><b>Tracking error:</b><%= sprintf("%+.2f", @indicators.tracking_error.round(2))%>%</p>
   </div>
   <div class="padding1 border-radius05 shadow-boxing marginb">
     <div class="table-responsive">
@@ -73,7 +74,7 @@
         <div class="my-row space_around">
           <a href="#" id="show-competitors" class="btn-outline col-xs-12 col-md-4"><%= @competitors[0].short_name %></a>
         </div>
-        br
+
       <% else %>
         <div class="my-row space_around">
           <a href="#" id="show-competitors" class="btn-outline col-xs-12 col-md-4">Concorrentes</a>
@@ -91,11 +92,13 @@
         <div class="chart-container">
          <%= line_chart @history_share, colors: ["#CFB07B"], backgroundColor: "#eee",thousands: ",", title: "Cota", ytitle: "$R"%>
         </div>
+        <br>
       <% end %>
         <% if !@chart_returns.nil? %>
         <div class="chart-container">
          <%= column_chart @chart_returns, colors: ["#CFB07B"], thousands: ",", title: "Retorno mensal", ytitle: "%"%>
         </div>
+        <br>
       <% end %>
     </div>
   </div>
