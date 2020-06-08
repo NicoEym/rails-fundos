@@ -6,11 +6,11 @@
     <p class="text-center" ><%= @date.to_formatted_s(:long_ordinal)%> </p>
     <p><b>Gestor:</b> <%= @fund.gestor.name %> </p>
     <p><b>Classe Anbima:</b> <%= @fund.anbima_class.name %> </p>
-    <p><b>PL:</b> <%= number_with_delimiter(@aum.value.round(0), :delimiter => ',') %> </p>
-    <p><b>Cota:</b> <%= @share.value.round(4) %> </p>
-    <p><b>Volatilidade:</b> <%= sprintf("%+.2f", @indicators.volatility.round(2))%>%</p>
-    <p><b>Sharpe ratio:</b> <%= @indicators.sharpe_ratio.round(2)%></p>
-    <p><b>Tracking error:</b><%= sprintf("%+.2f", @indicators.tracking_error.round(2))%>%</p>
+    <p><b>PL:</b> <%= number_with_delimiter(@datas.aum.round(0), :delimiter => ',') %> </p>
+    <p><b>Cota:</b> <%= @datas.share_price.round(4) %> </p>
+    <p><b>Volatilidade:</b> <%= sprintf("%+.2f", @datas.volatility.round(2))%>%</p>
+    <p><b>Sharpe ratio:</b> <%= @datas.sharpe_ratio.round(2)%></p>
+    <p><b>Tracking error:</b><%= sprintf("%+.2f", @datas.tracking_error.round(2))%>%</p>
   </div>
   <div class="padding1 border-radius05 shadow-boxing marginb">
     <div class="table-responsive">
@@ -28,40 +28,40 @@
         <tbody>
             <tr>
                 <td>Retorno</td>
-                <td><%= sprintf("%+.2f", @returns.daily_value.round(2))%>%</td>
-                <td><%= sprintf("%+.2f", @returns.weekly_value.round(2))%>%</td>
-                <td><%= sprintf("%+.2f", @returns.monthly_value.round(2))%>%</td>
-                <td><%= sprintf("%+.2f", @returns.quarterly_value.round(2))%>%</td>
-                <td><%= sprintf("%+.2f", @returns.yearly_value.round(2))%>%</td>
+                <td><%= sprintf("%+.2f", @datas.return_daily_value.round(2))%>%</td>
+                <td><%= sprintf("%+.2f", @datas.return_weekly_value.round(2))%>%</td>
+                <td><%= sprintf("%+.2f", @datas.return_monthly_value.round(2))%>%</td>
+                <td><%= sprintf("%+.2f", @datas.return_quarterly_value.round(2))%>%</td>
+                <td><%= sprintf("%+.2f", @datas.return_annual_value.round(2))%>%</td>
             </tr>
              <tr>
                 <td>Capt Liq</td>
                 <td> - </td>
-                <td><%= number_with_delimiter(@applications.weekly_net_value.round(0), :delimiter => ',') %></td>
-                <td><%= number_with_delimiter(@applications.monthly_net_value.round(0), :delimiter => ',') %></td>
-                <td><%= number_with_delimiter(@applications.quarterly_net_value.round(0), :delimiter => ',') %></td>
-                <td><%= number_with_delimiter(@applications.yearly_net_value.round(0), :delimiter => ',') %></td>
+                <td><%= number_with_delimiter(@datas.application_weekly_net_value.round(0), :delimiter => ',') %></td>
+                <td><%= number_with_delimiter(@datas.application_monthly_net_value.round(0), :delimiter => ',') %></td>
+                <td><%= number_with_delimiter(@datas.application_quarterly_net_value.round(0), :delimiter => ',') %></td>
+                <td><%= number_with_delimiter(@datas.application_annual_net_value.round(0), :delimiter => ',') %></td>
             </tr>
-            <%@competitors.each do |competitor| %>
+            <% @competitors.each do |competitor| %>
 
              <tr class="hidden competitor-row">
                 <td colspan="6" class="text-center black font-white"> <%= link_to(competitor.name, fund_path(competitor.id))  %></td>
             </tr>
               <tr class="hidden competitor-row">
                 <td>Retorno</td>
-                <td><%= sprintf("%+.2f", competitor.returns.last.daily_value.round(2))%>%</td>
-                <td><%= sprintf("%+.2f", competitor.returns.last.weekly_value.round(2))%>%</td>
-                <td><%= sprintf("%+.2f", competitor.returns.last.monthly_value.round(2))%>%</td>
-                <td><%= sprintf("%+.2f", competitor.returns.last.quarterly_value.round(2))%>%</td>
-                <td><%= sprintf("%+.2f", competitor.returns.last.yearly_value.round(2))%>%</td>
+                <td><%= sprintf("%+.2f", competitor.daily_data.last.return_daily_value.round(2))%>%</td>
+                <td><%= sprintf("%+.2f", competitor.daily_data.last.return_weekly_value.round(2))%>%</td>
+                <td><%= sprintf("%+.2f", competitor.daily_data.last.return_monthly_value.round(2))%>%</td>
+                <td><%= sprintf("%+.2f", competitor.daily_data.last.return_quarterly_value.round(2))%>%</td>
+                <td><%= sprintf("%+.2f", competitor.daily_data.last.return_annual_value.round(2))%>%</td>
             </tr>
              <tr class="hidden competitor-row">
                 <td>Capt Liq</td>
                 <td> - </td>
-                <td><%= number_with_delimiter(competitor.applications.last.weekly_net_value.round(0), :delimiter => ',') %></td>
-                <td><%= number_with_delimiter(competitor.applications.last.monthly_net_value.round(0), :delimiter => ',') %></td>
-                <td><%= number_with_delimiter(competitor.applications.last.quarterly_net_value.round(0), :delimiter => ',') %></td>
-                <td><%= number_with_delimiter(competitor.applications.last.yearly_net_value.round(0), :delimiter => ',') %></td>
+                <td><%= number_with_delimiter(competitor.daily_data.last.application_weekly_net_value.round(0), :delimiter => ',') %></td>
+                <td><%= number_with_delimiter(competitor.daily_data.last.application_monthly_net_value.round(0), :delimiter => ',') %></td>
+                <td><%= number_with_delimiter(competitor.daily_data.last.application_quarterly_net_value.round(0), :delimiter => ',') %></td>
+                <td><%= number_with_delimiter(competitor.daily_data.last.application_annual_net_value.round(0), :delimiter => ',') %></td>
             </tr>
 
             <% end %>
