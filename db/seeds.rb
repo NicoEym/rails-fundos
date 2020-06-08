@@ -3,11 +3,11 @@ require "csv"
 require "open-uri"
 require 'stringio'
 
-Indicator.delete_all
-Application.delete_all
-Return.delete_all
-Share.delete_all
-Aum.delete_all
+# Indicator.delete_all
+# Application.delete_all
+# Return.delete_all
+# Share.delete_all
+# Aum.delete_all
 DailyDatum.delete_all
 # Fund.delete_all
 # Gestor.delete_all
@@ -99,8 +99,11 @@ DailyDatum.delete_all
 
       puts date.day
 
-      DailyDatum.create(share_price: row['Cota'], aum: row['PL'], fund: fund, calendar: date)
-
+      data = DailyDatum.create(share_price: row['Cota'], aum: row['PL'], fund: fund, calendar: date)
+      puts data.share_price
+      puts data.aum
+      puts data.calendar.day
+      puts data.fund.name
     end
   end
 
@@ -149,10 +152,14 @@ csv.each do |row|
   datas = DailyDatum.find_by(fund: fund, calendar: date)
 
   if datas.nil?
+    puts "nil"
     DailyDatum.create(aum: row['PL'], share_price:row['Cota'], return_daily_value: row['Daily return'], return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'], return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'], volatility: row['Vol EWMA 97%'], sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'], application_weekly_net_value: row['Weekly Net Captation'], application_monthly_net_value: row['Monthly Net Captation'], application_quarterly_net_value: row['Quarterly Net Captation'], application_annual_net_value: row['Yearly Net Captation'],fund: fund, calendar: date)
   else
-    DailyDatum.update(aum: row['PL'], share_price:row['Cota'], return_daily_value: row['Daily return'], return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'], return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'], volatility: row['Vol EWMA 97%'], sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'], application_weekly_net_value: row['Weekly Net Captation'], application_monthly_net_value: row['Monthly Net Captation'], application_quarterly_net_value: row['Quarterly Net Captation'], application_annual_net_value: row['Yearly Net Captation'],fund: fund, calendar: date)
+    puts datas.fund.name
+    puts datas.calendar.day
+    datas.update(aum: row['PL'], share_price:row['Cota'], return_daily_value: row['Daily return'], return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'], return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'], volatility: row['Vol EWMA 97%'], sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'], application_weekly_net_value: row['Weekly Net Captation'], application_monthly_net_value: row['Monthly Net Captation'], application_quarterly_net_value: row['Quarterly Net Captation'], application_annual_net_value: row['Yearly Net Captation'],fund: fund, calendar: date)
   end
+
 
 end
 
