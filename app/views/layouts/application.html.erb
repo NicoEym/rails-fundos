@@ -25,9 +25,12 @@
       <%= render 'shared/navbar' %>
     <% end %>
     <%= render 'shared/flashes' %>
-    <%= render 'shared/footer' %>
+
     <%= yield %>
 
+    <% unless current_page?(root_path) %>
+      <%= render 'shared/footer' %>
+    <% end %>
      <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
 
