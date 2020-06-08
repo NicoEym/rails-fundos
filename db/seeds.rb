@@ -3,12 +3,12 @@ require "csv"
 require "open-uri"
 require 'stringio'
 
-# Indicator.delete_all
-# Application.delete_all
-# Return.delete_all
-# Share.delete_all
-# Aum.delete_all
-DailyDatum.delete_all
+Indicator.delete_all
+Application.delete_all
+Return.delete_all
+Share.delete_all
+Aum.delete_all
+# DailyDatum.delete_all
 # Fund.delete_all
 # Gestor.delete_all
 # Area.delete_all
