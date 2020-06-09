@@ -17,6 +17,7 @@ class FundsController < ApplicationController
 
     @competitors = get_competitors(@fund)
     @chart_returns = get_returns_data(@competitors, @fund)
+    @chart_risk_returns = get_risk_returns_data(@competitors, @fund)
   end
 
   def index
@@ -68,4 +69,14 @@ class FundsController < ApplicationController
     end
     data << [fund.name, fund.daily_data.last.return_monthly_value]
   end
+
+   def get_risk_returns_data(competitors, fund)
+    data = []
+
+    competitors.each do |competitor|
+      data << {name: competitor.best_name, data: { competitor.daily_data.last.volatility => competitor.daily_data.last.return_annual_value}}
+    end
+    data << {name: fund.best_name, data: { fund.daily_data.last.volatility => fund.daily_data.last.return_annual_value}}
+  end
+
 end
