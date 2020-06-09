@@ -11,19 +11,19 @@ require 'algoliasearch'
 # AnbimaClass.delete_all
 # Calendar.delete_all
 
-client = Algolia::Client.new(application_id: ENV['ALGOLIASEARCH_APPLICATION_ID'], api_key: ENV['ALGOLIASEARCH_ADMIN_API_KEY'])
-index = client.init_index('dev_Fund')
+# client = Algolia::Client.new(application_id: ENV['ALGOLIASEARCH_APPLICATION_ID'], api_key: ENV['ALGOLIASEARCH_ADMIN_API_KEY'])
+# index = client.init_index('dev_Fund')
 
 
-funds =Fund.all
-funds_array = []
-funds.each do |fund|
-  image = fund.photo_url
-  image = "https://images.unsplash.com/photo-1532444458054-01a7dd3e9fca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" if image.nil?
-  funds_hash = {name: fund.best_name, id: fund.id, photo_url: image, gestor: fund.gestor }
-  funds_array << funds_hash
-end
-index.add_objects(funds_array)
+# funds =Fund.all
+# funds_array = []
+# funds.each do |fund|
+#   image = fund.photo_url
+#   image = "https://images.unsplash.com/photo-1532444458054-01a7dd3e9fca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" if image.nil?
+#   funds_hash = {name: fund.best_name, id: fund.id, photo_url: image, gestor: fund.gestor }
+#   funds_array << funds_hash
+# end
+# index.add_objects(funds_array)
 
 # if Fund.all.empty?
 
@@ -120,58 +120,58 @@ index.add_objects(funds_array)
 # end
 
 
-# url = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/SSYsXqRVyg4eZ0RTZb4TMAcAy2pTDfCr74SDBWqQYZGtCESTa3bm5QPwlEmFd%2FO81EPj2TYYCFAZ4kSj7RybSv1Ekk85NE4ymAwKSPLUQyNsO81DKGmt9UTauUCWAQkpRsGo%2FthHCMP0gf78bpn41sFHvmaKvspZT2VpfumUf72fGgkwoNya9lkwzSAqMp7EXc4pcpyA5b07z0X0NMb2VmMbdmuauqMmihAAbInkw3NW5ONp9pOVlpjdVj%2F6TSu4BIyUhClY3xeL0qTzAHoETfRYLYgqFf215v%2BV03pJB86KhyKcjjL3pZyN2MObDMRHiOYm5zpKzqrd0gxzdMZQEA%3D%3D'
-# download = open(url)
+url = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/SSYsXqRVyg4eZ0RTZb4TMAcAy2pTDfCr74SDBWqQYZGtCESTa3bm5QPwlEmFd%2FO81EPj2TYYCFAZ4kSj7RybSv1Ekk85NE4ymAwKSPLUQyNsO81DKGmt9UTauUCWAQkpRsGo%2FthHCMP0gf78bpn41sFHvmaKvspZT2VpfumUf72fGgkwoNya9lkwzSAqMp7EXc4pcpyA5b07z0X0NMb2VmMbdmuauqMmihAAbInkw3NW5ONp9pOVlpjdVj%2F6TSu4BIyUhClY3xeL0qTzAHoETfRYLYgqFf215v%2BV03pJB86KhyKcjjL3pZyN2MObDMRHiOYm5zpKzqrd0gxzdMZQEA%3D%3D'
+download = open(url)
 
-# puts download
-# path = 'db/csv_repos/Indosuez data.csv'
-# #IO.copy_stream(download, path)
+puts download
+path = 'db/csv_repos/Indosuez data.csv'
+#IO.copy_stream(download, path)
 
-# #csv_options = { col_sep:  "/\",", quote_char: '"', headers: :first_row }
-# csv = CSV.parse(download, encoding:'utf-8',:headers=>true)
+#csv_options = { col_sep:  "/\",", quote_char: '"', headers: :first_row }
+csv = CSV.parse(download, encoding:'utf-8',:headers=>true)
 
-# csv.each do |row|
-#   # gestor = Gestor.find_by(name: row['Gestor'])
-#   # gestor = Gestor.create(name: row['Gestor']) if gestor.nil?
-#   # puts gestor.name
+csv.each do |row|
+  # gestor = Gestor.find_by(name: row['Gestor'])
+  # gestor = Gestor.create(name: row['Gestor']) if gestor.nil?
+  # puts gestor.name
 
-#   # anbima_class = AnbimaClass.find_by(name: row['Classe Anbima'])
-#   # anbima_class = AnbimaClass.create(name: row['Classe Anbima']) if anbima_class.nil?
-#   # puts anbima_class.name
+  # anbima_class = AnbimaClass.find_by(name: row['Classe Anbima'])
+  # anbima_class = AnbimaClass.create(name: row['Classe Anbima']) if anbima_class.nil?
+  # puts anbima_class.name
 
-#   codigo = row['Ativo'][0,6].to_i
-#   fund = Fund.find_by(codigo_economatica: codigo)
-#   puts fund
-#   puts codigo
+  codigo = row['Ativo'][0,6].to_i
+  fund = Fund.find_by(codigo_economatica: codigo)
+  puts fund
+  puts codigo
 
-#   # fund = Fund.create(codigo_economatica: codigo, name: row['Nome'], anbima_class: anbima_class, gestor: gestor, competitor_group: row['Competitor group']) if fund.nil?
+  # fund = Fund.create(codigo_economatica: codigo, name: row['Nome'], anbima_class: anbima_class, gestor: gestor, competitor_group: row['Competitor group']) if fund.nil?
 
-#   year = row["Date"][0,4].to_i
-#   puts year
-#   month = row["Date"][5,7].to_i
-#   puts month
-#   day = row["Date"][8,10].to_i
-#   puts day
-#   date_format_YMD = Date.new(year, month, day)
+  year = row["Date"][0,4].to_i
+  puts year
+  month = row["Date"][5,7].to_i
+  puts month
+  day = row["Date"][8,10].to_i
+  puts day
+  date_format_YMD = Date.new(year, month, day)
 
-#   date = Calendar.find_by(day: date_format_YMD)
-#   date = Calendar.create(day: date_format_YMD) if date.nil?
+  date = Calendar.find_by(day: date_format_YMD)
+  date = Calendar.create(day: date_format_YMD) if date.nil?
 
-#   puts date.day
+  puts date.day
 
-#   datas = DailyDatum.find_by(fund: fund, calendar: date)
+  datas = DailyDatum.find_by(fund: fund, calendar: date)
 
-#   if datas.nil?
-#     puts "nil"
-#     DailyDatum.create(aum: row['PL'], share_price:row['Cota'], return_daily_value: row['Daily return'], return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'], return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'], volatility: row['Vol EWMA 97%'], sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'], application_weekly_net_value: row['Weekly Net Captation'], application_monthly_net_value: row['Monthly Net Captation'], application_quarterly_net_value: row['Quarterly Net Captation'], application_annual_net_value: row['Yearly Net Captation'],fund: fund, calendar: date)
-#   else
-#     puts datas.fund.name
-#     puts datas.calendar.day
-#     datas.update(aum: row['PL'], share_price:row['Cota'], return_daily_value: row['Daily return'], return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'], return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'], volatility: row['Vol EWMA 97%'], sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'], application_weekly_net_value: row['Weekly Net Captation'], application_monthly_net_value: row['Monthly Net Captation'], application_quarterly_net_value: row['Quarterly Net Captation'], application_annual_net_value: row['Yearly Net Captation'],fund: fund, calendar: date)
-#   end
+  if datas.nil?
+    puts "nil"
+    DailyDatum.create(aum: row['PL'], share_price:row['Cota'], return_daily_value: row['Daily return'], return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'], return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'], volatility: row['Vol EWMA 97%'], sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'], application_weekly_net_value: row['Weekly Net Captation'], application_monthly_net_value: row['Monthly Net Captation'], application_quarterly_net_value: row['Quarterly Net Captation'], application_annual_net_value: row['Yearly Net Captation'],fund: fund, calendar: date)
+  else
+    puts datas.fund.name
+    puts datas.calendar.day
+    datas.update(aum: row['PL'], share_price:row['Cota'], return_daily_value: row['Daily return'], return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'], return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'], volatility: row['Vol EWMA 97%'], sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'], application_weekly_net_value: row['Weekly Net Captation'], application_monthly_net_value: row['Monthly Net Captation'], application_quarterly_net_value: row['Quarterly Net Captation'], application_annual_net_value: row['Yearly Net Captation'],fund: fund, calendar: date)
+  end
 
 
-# end
+end
 
 
 
