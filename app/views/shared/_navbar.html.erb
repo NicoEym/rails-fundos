@@ -14,12 +14,15 @@
           <% if user_signed_in? %>
           <% @areas = Area.all %>
           <li class="nav-item">
+                <%= link_to "Dados do dia", daily_data_path, class: "font-white" %>
+            </li> -
+          <li class="nav-item">
                 <%= link_to "Todos fundos", funds_path, class: "font-white" %>
-            </li>
+            </li> -
           <% @areas.each do |area|  %>
             <li class="nav-item">
                 <%= link_to area.name, funds_path(:area => area), class: "font-white" %>
-            </li>
+            </li> -
           <%end %>
           <li class="nav-item">
              <%= link_to raw('<i class="fas fa-sign-out-alt"></i>Log out'),   destroy_user_session_path, :method => :delete, class: "font-white" %>

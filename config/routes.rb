@@ -6,4 +6,5 @@ Rails.application.routes.draw do
 
   resources :areas, only: [:index, :show]
   resources :funds, only: [:index, :show]
+  resources :daily_data, only: [:index]
 end
