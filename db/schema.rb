@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_225900) do
+ActiveRecord::Schema.define(version: 2020_06_09_211638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,12 @@ ActiveRecord::Schema.define(version: 2020_06_08_225900) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "photo_url"
+  end
+
+  create_table "bench_marks", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "calendars", force: :cascade do |t|
@@ -47,11 +53,11 @@ ActiveRecord::Schema.define(version: 2020_06_08_225900) do
     t.float "application_monthly_net_value"
     t.float "application_quarterly_net_value"
     t.float "application_annual_net_value"
-    t.float "return_over_CDI_daily_value"
-    t.float "return_over_CDI_weekly_value"
-    t.float "return_over_CDI_monthly_value"
-    t.float "return_over_CDI_quarterly_value"
-    t.float "return_over_CDI_annual_value"
+    t.float "return_over_benchmark_daily_value"
+    t.float "return_over_benchmark_weekly_value"
+    t.float "return_over_benchmark_monthly_value"
+    t.float "return_over_benchmark_quarterly_value"
+    t.float "return_over_benchmark_annual_value"
     t.float "volatility"
     t.float "tracking_error"
     t.float "sharpe_ratio"
@@ -74,8 +80,10 @@ ActiveRecord::Schema.define(version: 2020_06_08_225900) do
     t.bigint "area_id"
     t.string "competitor_group"
     t.string "photo_url"
+    t.bigint "bench_mark_id"
     t.index ["anbima_class_id"], name: "index_funds_on_anbima_class_id"
     t.index ["area_id"], name: "index_funds_on_area_id"
+    t.index ["bench_mark_id"], name: "index_funds_on_bench_mark_id"
     t.index ["gestor_id"], name: "index_funds_on_gestor_id"
   end
 
@@ -101,5 +109,6 @@ ActiveRecord::Schema.define(version: 2020_06_08_225900) do
   add_foreign_key "daily_data", "funds"
   add_foreign_key "funds", "anbima_classes"
   add_foreign_key "funds", "areas"
+  add_foreign_key "funds", "bench_marks"
   add_foreign_key "funds", "gestors"
 end
