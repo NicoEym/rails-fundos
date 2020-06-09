@@ -2,7 +2,7 @@
 <br>
 <div class="container grey">
   <div class="padding1 border-radius05 shadow-boxing marginb">
-    <h3 class="text-center"><%=@name%></h3>
+    <h3 class="text-center"><%=@fund.best_name%></h3>
     <p class="text-center" ><%= @date.to_formatted_s(:long_ordinal)%> </p>
     <p><b>Gestor:</b> <%= @fund.gestor.name %> </p>
     <p><b>Classe Anbima:</b> <%= @fund.anbima_class.name %> </p>

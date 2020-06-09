@@ -7,7 +7,7 @@ class FundsController < ApplicationController
 
     @calendar = @datas.calendar
     @date = @calendar.day
-    @name = get_name(@fund)
+
 
     range_data = DailyDatum.where(fund_id: @fund.id)
     @history_aum = get_historical_aum(range_data, 1000000000)
@@ -20,7 +20,13 @@ class FundsController < ApplicationController
   end
 
   def index
-    @funds = Fund.where(area_id: params[:area])
+    params_area = params[:area]
+
+    if params_area.nil?
+      @funds = Fund.all
+    else
+      @funds = Fund.where(area_id: params[:area])
+    end
   end
 
   def get_historical_aum(datas, divide = 1)
@@ -53,13 +59,6 @@ class FundsController < ApplicationController
 
   end
 
-  def get_name(fund)
-    if fund.short_name.nil?
-      fund_name = fund.name
-    else
-      fund_name = fund.short_name
-    end
-  end
 
   def get_returns_data(competitors, fund)
     data = []

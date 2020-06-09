@@ -9,3 +9,22 @@
     justify-content: center;
     align-items: center;
 }
+
+.search-form {
+  position: relative;
+}
+
+
+.inline-absolute {
+  position: absolute;
+  top: 0px;
+  right: 1em;
+}
+
+.header-form {
+  margin-bottom: 2em;
+  background-color: #F1EEEC;
+  padding: 1em;
+  border-radius: 0.2em;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+}
