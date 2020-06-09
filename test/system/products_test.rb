@@ -15,11 +15,11 @@ class ProductsTest < ApplicationSystemTestCase
   end
 
 
-   #test "lets a signed in user and check if he can see the funds" do
-    #login_as users(:george)
-   # visit "/funds/"
+  test "lets a signed in user and check if he can see the funds" do
+    login_as users(:george)
+    visit funds_path
 
-  #  assert_selector ".card", count: Fund.count,
- # end
+    assert_selector ".card", count: Fund.count
+  end
 
 end
