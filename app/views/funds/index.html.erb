@@ -1,4 +1,15 @@
 <div class="container grey">
+   <div class="header-form">
+
+
+    <%= simple_form_for :search, url: fund_path(:id), method: "GET", input_html: { class: "form-inline" } do |f| %>
+            <%= f.input :name, input_html: {value: "", id: "funds_input", class: "search-form"}, placeholder: "Procure um fundo", label: false %>
+            <%= button_tag type: 'submit', class: "btn btn-search-form-banner inline-absolute" do %>
+            <% end %>
+      <% end %>
+  <img src="https://res.cloudinary.com/hilnmyskv/image/upload/q_auto/v1589967327/Algolia_com_Website_assets/images/shared/algolia_logo/search-by-algolia-light-background.png" alt="">
+  </div>
+
   <div class="my-row width100">
 
     <%= render 'shared/card_fund', fund: @funds %>
