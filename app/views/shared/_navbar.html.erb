@@ -21,7 +21,7 @@
             </li> -
           <% @areas.each do |area|  %>
             <li class="nav-item">
-                <%= link_to area.name, funds_path(:area => area), class: "font-white" %>
+                <%= link_to area.name, funds_path(:area_name => area.name), class: "font-white" %>
             </li> -
           <%end %>
           <li class="nav-item">
