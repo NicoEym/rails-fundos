@@ -1,15 +1,15 @@
-Ativo;Nome;Gestor;Classe Anbima;Competitor group
-216658<BraNa>;Af Invest FI RF Cred Priv Geraes;Af Invest Administracao de Recursos;Renda Fixa;Agilite
-478210<BraNa>;BNP Paribas Premium Equities Fc FIA;BNP Paribas Asset;Ações;Allocaction
-143529<BraNa>;BNP Paribas Targus Fc FI RF Cred Priv;BNP Paribas Asset;Renda Fixa;Agilite
-432016<BraNa>;Bnpp Fdo Inc de Inv Infra Deb Inc RF;BNP Paribas Asset;Renda Fixa;Infrafic
-259624<BraNa>;Daycoval Classic Firf Cred. Priv.;Daycoval Asset Management Adm Rec Ltda;Renda Fixa;Agilite
-431923<BraNa>;Daycoval Deb. Inc Cred Priv FI Mult;Daycoval Asset Management Adm Rec Ltda;Multimercados;Infrafic
-495182<BraNa>;Devant Magna FI RF Cred Priv LP;Devant Asset Investimentos Ltda;Renda Fixa;Vitesse
-471704<BraNa>;Gama Top FICFI RF Cred Priv LP;Gama Investimentos Ltda;Renda Fixa;Vitesse
-325007<BraNa>;Itau Selecao Multifundos Plus Mult Fc;Itau Dtvm;Multimercados;Beton
-130818<BraNa>;Opportunity Allocation Fc FI Mult;Opp Gestora de Recursos Ltda;Multimercados;Beton
-359051<BraNa>;Santander Acoes Fundo de Fundos Lb FI;Santander Brasil Gestao de Recursos Ltda;Ações;Allocaction
-423912<BraNa>;Xpa Acoes Fc de FIA;Xp Advisory Gestao de Recursos;Ações;Allocaction
-389870<BraNa>;Xp Debent Incent Cred Priv Fc FI Mult;Xp Vista Asset Management Ltda;Multimercados;Infrafic
-236853<BraNa>;Xp Investor FI RF Cred Priv LP;Xp Vista Asset Management Ltda;Renda Fixa;Vitesse
+Ativo;Nome;Gestor;Classe Anbima;Competitor group;Benchmark
+216658<BraNa>;Af Invest FI RF Cred Priv Geraes;Af Invest Administracao de Recursos;Renda Fixa;Agilite;CDI
+478210<BraNa>;BNP Paribas Premium Equities Fc FIA;BNP Paribas Asset;Ações;Allocaction;Ibovespa
+143529<BraNa>;BNP Paribas Targus Fc FI RF Cred Priv;BNP Paribas Asset;Renda Fixa;Agilite;CDI
+432016<BraNa>;Bnpp Fdo Inc de Inv Infra Deb Inc RF;BNP Paribas Asset;Renda Fixa;Infrafic;IMA B5
+259624<BraNa>;Daycoval Classic Firf Cred. Priv.;Daycoval Asset Management Adm Rec Ltda;Renda Fixa;Agilite;CDI
+431923<BraNa>;Daycoval Deb. Inc Cred Priv FI Mult;Daycoval Asset Management Adm Rec Ltda;Multimercados;Infrafic;IMA B5
+495182<BraNa>;Devant Magna FI RF Cred Priv LP;Devant Asset Investimentos Ltda;Renda Fixa;Vitesse;CDI
+471704<BraNa>;Gama Top FICFI RF Cred Priv LP;Gama Investimentos Ltda;Renda Fixa;Vitesse;CDI
+325007<BraNa>;Itau Selecao Multifundos Plus Mult Fc;Itau Dtvm;Multimercados;Beton;CDI
+130818<BraNa>;Opportunity Allocation Fc FI Mult;Opp Gestora de Recursos Ltda;Multimercados;Beton;CDI
+359051<BraNa>;Santander Acoes Fundo de Fundos Lb FI;Santander Brasil Gestao de Recursos Ltda;Ações;Allocaction;Ibovespa
+423912<BraNa>;Xpa Acoes Fc de FIA;Xp Advisory Gestao de Recursos;Ações;Allocaction;Ibovespa
+389870<BraNa>;Xp Debent Incent Cred Priv Fc FI Mult;Xp Vista Asset Management Ltda;Multimercados;Infrafic;IMA B5
+236853<BraNa>;Xp Investor FI RF Cred Priv LP;Xp Vista Asset Management Ltda;Renda Fixa;Vitesse;CDI

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_09_211638) do
+ActiveRecord::Schema.define(version: 2020_06_10_151132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,12 +77,11 @@ ActiveRecord::Schema.define(version: 2020_06_09_211638) do
     t.datetime "updated_at", null: false
     t.bigint "gestor_id"
     t.bigint "anbima_class_id"
-    t.bigint "area_id"
     t.string "competitor_group"
     t.string "photo_url"
     t.bigint "bench_mark_id"
+    t.string "area_name"
     t.index ["anbima_class_id"], name: "index_funds_on_anbima_class_id"
-    t.index ["area_id"], name: "index_funds_on_area_id"
     t.index ["bench_mark_id"], name: "index_funds_on_bench_mark_id"
     t.index ["gestor_id"], name: "index_funds_on_gestor_id"
   end
@@ -108,7 +107,6 @@ ActiveRecord::Schema.define(version: 2020_06_09_211638) do
   add_foreign_key "daily_data", "calendars"
   add_foreign_key "daily_data", "funds"
   add_foreign_key "funds", "anbima_classes"
-  add_foreign_key "funds", "areas"
   add_foreign_key "funds", "bench_marks"
   add_foreign_key "funds", "gestors"
 end
