@@ -30,13 +30,14 @@ class FundsController < ApplicationController
 
   def index
     #if no area params is settled...
-    params_area = params[:area_name]
+    @area = params[:area_name]
     #... we list all the funds present in the DB
-    if params_area.nil?
+    if @area.nil?
       @funds = Fund.all
     else
       #... we show only the funds that match the area
       @funds = Fund.where(area_name: params[:area_name])
+
     end
   end
 

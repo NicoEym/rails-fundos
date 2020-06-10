@@ -2,7 +2,7 @@ const instantSearchFunds = () => {
   var client = algoliasearch(process.env.ALGOLIASEARCH_APPLICATION_ID, process.env.ALGOLIASEARCH_API_KEY);
   var index = client.initIndex('Fund');
   const algoliaSearch = document.querySelector("#funds_input");
-
+  var pageName = "FOFs";
 
   if (algoliaSearch === null) {return}
   algoliaSearch.addEventListener('keyup', (event) => {
@@ -10,7 +10,7 @@ const instantSearchFunds = () => {
     // grid.innerHTML = "";
     var keyword = event.currentTarget.value;
     drop.innerHTML = "";
-    index.search(keyword, { filters: 'area_name:FOFs', hitsPerPage: 5, page: 0 })
+    index.search(keyword, { filters: `area_name:${pageName}`, hitsPerPage: 5, page: 0 })
     .then(function searchDone(content) {
       content.hits.forEach((hit) => {
         console.log(addFundCard(hit));
