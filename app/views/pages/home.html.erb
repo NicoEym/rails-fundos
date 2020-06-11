@@ -8,7 +8,7 @@
         <div>
           <% @areas.each do |area|  %>
             <div class="button-box">
-              <%= link_to area.name, funds_path(:area => area), class:"btn-outline" %>
+              <%= link_to area.name, funds_path(:area_name => area.name), class:"btn-outline" %>
             </div >
         <% end %>
       </div>
