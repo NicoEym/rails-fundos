@@ -1,60 +1,6 @@
 <div class="container grey">
-  <h1 class="text-center"><%= @date.to_formatted_s(:long_ordinal)%></h1>
-  <% @funds.each do |fund| %>
-  <div class="padding1 border-radius05 shadow-boxing marginb">
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-              <tr class="text-center black font-white">
-                  <th colspan="6"><%= link_to(fund.best_name, fund_path(fund.id))  %></th>
-              </tr>
-          </thead>
-          <tbody>
-               <tr class="text-center black font-white">
-                  <td colspan="1">Cota</td>
-                  <td colspan="1">PL</td>
-                  <td colspan="1">Ultimo retorno diario</td>
-                  <td colspan="1">Volatilidade EWMA 94%</td>
-                  <td colspan="1">Sharpe ratio</td>
-                  <td colspan="1">Tracking error</td>
-              </tr>
-              <tr>
-                  <td><%= sprintf("%+.2f", fund.daily_data.last.share_price.round(4))%></td>
-                  <td><%= number_with_delimiter(fund.daily_data.last.aum.round(0), :delimiter => ',')%></td>
-                  <td><%= sprintf("%+.2f", fund.daily_data.last.return_daily_value.round(2))%>%</td>
-                  <td><%= sprintf("%+.2f", fund.daily_data.last.volatility.round(2))%>%</td>
-                  <td><%= sprintf("%+.2f", fund.daily_data.last.sharpe_ratio.round(2))%></td>
-                  <td><%= sprintf("%+.2f", fund.daily_data.last.tracking_error.round(2))%>%</td>
-              </tr>
-
-
-                <tr class="text-center black font-white">
-                  <td colspan="1">Dado</td>
-                  <td colspan="1">Diario</td>
-                  <td colspan="1">Semanal</td>
-                  <td colspan="1">Mensal</td>
-                  <td colspan="1">Trimestral</td>
-                  <td colspan="1">Annual</td>
-              </tr>
-              <tr>
-                  <td>Retorno</td>
-                  <td><%= sprintf("%+.2f", fund.daily_data.last.return_daily_value.round(2))%>%</td>
-                  <td><%= sprintf("%+.2f", fund.daily_data.last.return_weekly_value.round(2))%>%</td>
-                  <td><%= sprintf("%+.2f", fund.daily_data.last.return_monthly_value.round(2))%>%</td>
-                  <td><%= sprintf("%+.2f", fund.daily_data.last.return_quarterly_value.round(2))%>%</td>
-                  <td><%= sprintf("%+.2f", fund.daily_data.last.return_annual_value.round(2))%>%</td>
-              </tr>
-               <tr>
-                  <td>Capt Liq</td>
-                  <td> - </td>
-                  <td><%= number_with_delimiter(fund.daily_data.last.application_weekly_net_value.round(0), :delimiter => ',') %></td>
-                  <td><%= number_with_delimiter(fund.daily_data.last.application_monthly_net_value.round(0), :delimiter => ',') %></td>
-                  <td><%= number_with_delimiter(fund.daily_data.last.application_quarterly_net_value.round(0), :delimiter => ',') %></td>
-                  <td><%= number_with_delimiter(fund.daily_data.last.application_annual_net_value.round(0), :delimiter => ',') %></td>
-              </tr>
-          </tbody>
-        </table>
-       </div>
-      </div>
-      <% end %>
+  <h1 class="text-center"><%= @date.day.to_formatted_s(:long_ordinal)%></h1>
+  <% @datas.each do |data| %>
+    <%= render 'shared/table_fund', data: data %>
+ <% end %>
 </div>
