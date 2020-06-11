@@ -4,13 +4,13 @@ require "open-uri"
 require 'stringio'
 require 'algoliasearch'
 
-DailyDatum.delete_all
-Fund.delete_all
-Gestor.delete_all
-Area.delete_all
-AnbimaClass.delete_all
-Calendar.delete_all
-BenchMark.delete_all
+# DailyDatum.delete_all
+# Fund.delete_all
+# Gestor.delete_all
+# Area.delete_all
+# AnbimaClass.delete_all
+# Calendar.delete_all
+# BenchMark.delete_all
 
 #client = Algolia::Client.new(application_id: ENV['ALGOLIASEARCH_APPLICATION_ID'], api_key: ENV['ALGOLIASEARCH_ADMIN_API_KEY'])
 # index = client.init_index('dev_Fund')
@@ -26,7 +26,7 @@ BenchMark.delete_all
 # end
 # index.add_objects(funds_array)
 
-# if Fund.all.empty?
+if Fund.all.empty?
 
   fof_area = Area.create(name: "FOFs", photo_url: "https://images.unsplash.com/photo-1478088702756-f16754aaf0c4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   cp_area = Area.create(name: "Crédito Privado", photo_url: "https://images.unsplash.com/photo-1512089425728-b012186ab3cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
@@ -128,7 +128,7 @@ BenchMark.delete_all
     end
   end
 
-# end
+end
 
 
 url = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/SSYsXqRVyg4eZ0RTZb4TMAcAy2pTDfCr74SDBWqQYZGtCESTa3bm5QPwlEmFd%2FO81EPj2TYYCFAZ4kSj7RybSv1Ekk85NE4ymAwKSPLUQyNsO81DKGmt9UTauUCWAQkpRsGo%2FthHCMP0gf78bpn41sFHvmaKvspZT2VpfumUf72fGgkwoNya9lkwzSAqMp7EXc4pcpyA5b07z0X0NMb2VmMbdmuauqMmihAAbInkw3NW5ONp9pOVlpjdVj%2F6TSu4BIyUhClY3xeL0qTzAHoETfRYLYgqFf215v%2BV03pJB86KhyKcjjL3pZyN2MObDMRHiOYm5zpKzqrd0gxzdMZQEA%3D%3D'

@@ -1,6 +1,6 @@
 const show = () => {
   const showButton = document.getElementById('show-competitors');
-  const competitorRows = document.querySelectorAll('.competitor-row');
+  const competitorRows = document.querySelectorAll('.competitor-data');
   if (showButton) {
     showButton.addEventListener('click', (e) => {
       competitorRows.forEach((competitorRow) => {
@@ -9,8 +9,5 @@ const show = () => {
     });
   }
 }
-
-
-
 
 export { show };
