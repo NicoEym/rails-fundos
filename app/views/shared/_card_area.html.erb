@@ -3,10 +3,10 @@
 <% @areas.each do |area| %>
   <div class="col-xs-12 col-md-4">
     <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= area.photo_url %>);">
-      <%= link_to("", funds_path(:area => area), class:"card-link")  %>
+      <%= link_to("", funds_path(:area_name => area.name), class:"card-link")  %>
        <div>
         <h2 class="text-center"><%= area.name %> </h2>
-        <h6 class="text-center"><%= area.funds.count %> fundos</h6>
+
       </div>
     </div>
   </div>

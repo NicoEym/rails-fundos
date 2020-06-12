@@ -2,16 +2,17 @@
   <div class="container-home">
     <div id="landing-page-form" class="col-xs-9 col-md-6">
       <h1>Fundos</h1>
-      <p >A plataforma digital de monitoramento da industria de fundos da Indosuez DTVM</p>
+      <p >A plataforma digital de monitoramento da industria de fundos da Indosuez DTVM, alimentada por Economatica</p>
       <% if user_signed_in? %>
 
         <div>
-          <% @areas.each do |area|  %>
             <div class="button-box">
-              <%= link_to area.name, funds_path(:area_name => area.name), class:"btn-outline" %>
+              <%= link_to "Todos Fundos", areas_path, class:"btn-outline" %>
             </div >
-        <% end %>
-      </div>
+            <div class="button-box">
+              <%= link_to "Dados do dia", daily_data_path, class:"btn-outline" %>
+            </div >
+        </div>
 
       <% else %>
 
