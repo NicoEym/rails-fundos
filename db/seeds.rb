@@ -131,78 +131,137 @@ if Fund.all.empty?
 end
 
 
-url = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/SSYsXqRVyg4eZ0RTZb4TMAcAy2pTDfCr74SDBWqQYZGtCESTa3bm5QPwlEmFd%2FO81EPj2TYYCFAZ4kSj7RybSv1Ekk85NE4ymAwKSPLUQyNsO81DKGmt9UTauUCWAQkpRsGo%2FthHCMP0gf78bpn41sFHvmaKvspZT2VpfumUf72fGgkwoNya9lkwzSAqMp7EXc4pcpyA5b07z0X0NMb2VmMbdmuauqMmihAAbInkw3NW5ONp9pOVlpjdVj%2F6TSu4BIyUhClY3xeL0qTzAHoETfRYLYgqFf215v%2BV03pJB86KhyKcjjL3pZyN2MObDMRHiOYm5zpKzqrd0gxzdMZQEA%3D%3D'
-download = open(url)
-
-puts download
-path = 'db/csv_repos/Indosuez data.csv'
-#IO.copy_stream(download, path)
-
-#csv_options = { col_sep:  "/\",", quote_char: '"', headers: :first_row }
-csv = CSV.parse(download, encoding:'utf-8',:headers=>true)
-
-csv.each do |row|
-  # gestor = Gestor.find_by(name: row['Gestor'])
-  # gestor = Gestor.create(name: row['Gestor']) if gestor.nil?
-  # puts gestor.name
-
-  # anbima_class = AnbimaClass.find_by(name: row['Classe Anbima'])
-  # anbima_class = AnbimaClass.create(name: row['Classe Anbima']) if anbima_class.nil?
-  # puts anbima_class.name
-
-  codigo = row['Ativo'][0,6].to_i
-  fund = Fund.find_by(codigo_economatica: codigo)
-  puts fund
-  puts codigo
-
-  # fund = Fund.create(codigo_economatica: codigo, name: row['Nome'], anbima_class: anbima_class, gestor: gestor, competitor_group: row['Competitor group']) if fund.nil?
-
-  year = row["Date"][0,4].to_i
-  puts year
-  month = row["Date"][5,7].to_i
-  puts month
-  day = row["Date"][8,10].to_i
-  puts day
-  date_format_YMD = Date.new(year, month, day)
-
-  date = Calendar.find_by(day: date_format_YMD)
-  date = Calendar.create(day: date_format_YMD) if date.nil?
-
-  puts date.day
-
-  datas = DailyDatum.find_by(fund: fund, calendar: date)
-
-  if datas.nil?
-    puts "nil"
-    DailyDatum.create(aum: row['PL'], share_price:row['Cota'], return_daily_value: row['Daily return'], return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'], return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'], volatility: row['Vol EWMA 97%'], sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'], application_weekly_net_value: row['Weekly Net Captation'], application_monthly_net_value: row['Monthly Net Captation'], application_quarterly_net_value: row['Quarterly Net Captation'], application_annual_net_value: row['Yearly Net Captation'],fund: fund, calendar: date)
-  else
-    puts datas.fund.name
-    puts datas.calendar.day
-    datas.update(aum: row['PL'], share_price:row['Cota'], return_daily_value: row['Daily return'], return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'], return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'], volatility: row['Vol EWMA 97%'], sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'], application_weekly_net_value: row['Weekly Net Captation'], application_monthly_net_value: row['Monthly Net Captation'], application_quarterly_net_value: row['Quarterly Net Captation'], application_annual_net_value: row['Yearly Net Captation'],fund: fund, calendar: date)
-  end
+# url = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/SSYsXqRVyg4eZ0RTZb4TMAcAy2pTDfCr74SDBWqQYZGtCESTa3bm5QPwlEmFd%2FO81EPj2TYYCFAZ4kSj7RybSv1Ekk85NE4ymAwKSPLUQyNsO81DKGmt9UTauUCWAQkpRsGo%2FthHCMP0gf78bpn41sFHvmaKvspZT2VpfumUf72fGgkwoNya9lkwzSAqMp7EXc4pcpyA5b07z0X0NMb2VmMbdmuauqMmihAAbInkw3NW5ONp9pOVlpjdVj%2F6TSu4BIyUhClY3xeL0qTzAHoETfRYLYgqFf215v%2BV03pJB86KhyKcjjL3pZyN2MObDMRHiOYm5zpKzqrd0gxzdMZQEA%3D%3D'
+# download = open(url)
 
 
-end
-
-
-
+# csv = CSV.parse(download, encoding:'utf-8',:headers=>true)
 
 # csv.each do |row|
-#   puts row["Date"]
+#   # gestor = Gestor.find_by(name: row['Gestor'])
+#   # gestor = Gestor.create(name: row['Gestor']) if gestor.nil?
+#   # puts gestor.name
+
+#   # anbima_class = AnbimaClass.find_by(name: row['Classe Anbima'])
+#   # anbima_class = AnbimaClass.create(name: row['Classe Anbima']) if anbima_class.nil?
+#   # puts anbima_class.name
+
+#   codigo = row['Ativo'][0,6].to_i
+#   fund = Fund.find_by(codigo_economatica: codigo)
+#   puts fund
+#   puts codigo
+
+#   # fund = Fund.create(codigo_economatica: codigo, name: row['Nome'], anbima_class: anbima_class, gestor: gestor, competitor_group: row['Competitor group']) if fund.nil?
+
+#   year = row["Date"][0,4].to_i
+#   puts year
+#   month = row["Date"][5,7].to_i
+#   puts month
+#   day = row["Date"][8,10].to_i
+#   puts day
+#   date_format_YMD = Date.new(year, month, day)
+
+#   date = Calendar.find_by(day: date_format_YMD)
+#   date = Calendar.create(day: date_format_YMD) if date.nil?
+
+#   puts date.day
+
+#   datas = DailyDatum.find_by(fund: fund, calendar: date)
+
+#   if datas.nil?
+#     puts "nil"
+#     DailyDatum.create(aum: row['PL'], share_price:row['Cota'], return_daily_value: row['Daily return'], return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'], return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'], volatility: row['Vol EWMA 97%'], sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'], application_weekly_net_value: row['Weekly Net Captation'], application_monthly_net_value: row['Monthly Net Captation'], application_quarterly_net_value: row['Quarterly Net Captation'], application_annual_net_value: row['Yearly Net Captation'],fund: fund, calendar: date)
+#   else
+#     puts datas.fund.name
+#     puts datas.calendar.day
+#     datas.update(aum: row['PL'], share_price:row['Cota'], return_daily_value: row['Daily return'], return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'], return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'], volatility: row['Vol EWMA 97%'], sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'], application_weekly_net_value: row['Weekly Net Captation'], application_monthly_net_value: row['Monthly Net Captation'], application_quarterly_net_value: row['Quarterly Net Captation'], application_annual_net_value: row['Yearly Net Captation'],fund: fund, calendar: date)
+#   end
+
+
 # end
 
-# IO.copy_stream(
-#   open(
-#     url,
-#     ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
-#   ),
-#   path
-# )
 
 
 
 
 
+urlCDI = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/j9ScUlOFDYYsEOihvscfgPe8qHolC%2FqwVKR5cDK3HBkiPMrVtIT7uj3uP7JKxcZ0Xc5BU%2FJ7gwMns0rbucgaWGYy2RMtS9xEQtSqvF5wM4C8mGbog2dZW4bydAuisQo%2BKTS0TJ%2Fyfg7C6JScf7qZK2SbS0IBJsB1hcbYce%2BHBtTsNag9Wy%2F3FBUUXPUqWIDTPq1bDk6g2qDsDXnAPiqdmtGan6qGke3pNcJ0jaHR%2BSObNqcfoMtcD3%2FFEBSaopLLc87nCZGTeBVT1ifg5MPO1Dsa4yXNJSL%2BIEsgWsS69ywtXf7P34A5hm1VmzQRzb3N2XXbIXwQgYujka7NS%2BWUHg%3D%3D'
+urlIbov = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/rGm9Zy17%2BNapl9t81EXK6TrtRuA0IkEAvcW7YVoajp7%2BjYODvTiszYO54mdy9mllCKf2IY%2Fje1vu7oQokV5%2F5Yc1U3%2FrYTfBZrSfzP2%2FRPp7%2BC5yVsFCidYaNp5n3BXM8aBX%2FCaMJ%2BaPg9LVDgndX0zxGgnuSHShapZAb4PTpLzYnte7cVru61DehhBpG2qEh%2F9moARwWa%2FjeiPSjBqbbZVzIo4CbS2uG7s5YEUeCq%2F9i4cCry0TaE3uTZKacX2ULRF5nyy11jWLSe28mZ58g%2BzXnrZ9dKWLcO2RWgQMHuDSas1aJYul8hQXaxA%2FYGaZk5SI15szsLj6s2gvARp5wA%3D%3D'
+
+urls = [urlCDI, urlIbov]
+urls.each do |url|
+
+  download = open(url)
+
+  csv = CSV.parse(download, encoding:'utf-8',:headers=>true)
+
+  csv.each do |row|
+    # gestor = Gestor.find_by(name: row['Gestor'])
+    # gestor = Gestor.create(name: row['Gestor']) if gestor.nil?
+    # puts gestor.name
+
+    # anbima_class = AnbimaClass.find_by(name: row['Classe Anbima'])
+    # anbima_class = AnbimaClass.create(name: row['Classe Anbima']) if anbima_class.nil?
+    # puts anbima_class.name
+
+    codigo = row['Ativo'][0,6].to_i
+    fund = Fund.find_by(codigo_economatica: codigo)
+    puts fund
+    puts codigo
+
+    # fund = Fund.create(codigo_economatica: codigo, name: row['Nome'], anbima_class: anbima_class, gestor: gestor, competitor_group: row['Competitor group']) if fund.nil?
+
+    year = row["Date"][0,4].to_i
+    puts year
+    month = row["Date"][5,7].to_i
+    puts month
+    day = row["Date"][8,10].to_i
+    puts day
+    date_format_YMD = Date.new(year, month, day)
+
+    date = Calendar.find_by(day: date_format_YMD)
+    date = Calendar.create(day: date_format_YMD) if date.nil?
+
+    puts date.day
+
+    datas = DailyDatum.find_by(fund: fund, calendar: date)
+
+    puts row['Spread Bench daily return']
+    puts row['Spread Bench weekly return']
+    puts row['Spread Bench monthly return']
+    puts row['Spread Bench quarterly return']
+    puts row['Spread Bench annual return']
+
+    if datas.nil?
+      puts "nil"
+      DailyDatum.create(aum: row['PL'], share_price:row['Cota'], return_daily_value: row['Daily return'],
+                        return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'],
+                        return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'],
+                        return_over_benchmark_daily_value: row['Spread Bench daily return'], return_over_benchmark_weekly_value: row['Spread Bench weekly return'],
+                        return_over_benchmark_monthly_value: row['Spread Bench monthly return'], return_over_benchmark_quarterly_value: row['Spread Bench quarterly return'],
+                        return_over_benchmark_annual_value: row['Spread Bench annual return'], volatility: row['Vol EWMA 97%'],
+                        sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'],
+                        application_weekly_net_value: row['Weekly Net Captation'],
+                        application_monthly_net_value: row['Monthly Net Captation'],
+                        application_quarterly_net_value: row['Quarterly Net Captation'],
+                        application_annual_net_value: row['Yearly Net Captation'],fund: fund, calendar: date)
+    else
+      puts datas.fund.name
+      puts datas.calendar.day
+      datas.update(aum: row['PL'], share_price:row['Cota'], return_daily_value: row['Daily return'],
+                        return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'],
+                        return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'],
+                        return_over_benchmark_daily_value: row['Spread Bench daily return'], return_over_benchmark_weekly_value: row['Spread Bench weekly return'],
+                        return_over_benchmark_monthly_value: row['Spread Bench monthly return'], return_over_benchmark_quarterly_value: row['Spread Bench quarterly return'],
+                        return_over_benchmark_annual_value: row['Spread Bench annual return'], volatility: row['Vol EWMA 97%'],
+                        sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'],
+                        application_weekly_net_value: row['Weekly Net Captation'],
+                        application_monthly_net_value: row['Monthly Net Captation'],
+                        application_quarterly_net_value: row['Quarterly Net Captation'],
+                        application_annual_net_value: row['Yearly Net Captation'],fund: fund, calendar: date)
+    end
+  end
+end
 
 
 

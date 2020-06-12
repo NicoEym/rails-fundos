@@ -44,8 +44,12 @@
                   <td><%= sprintf("%+.2f", data["return_annual_value"].round(2))%>%</td>
               </tr>
               <tr>
-                  <td>Ret ov bench</td>
-
+                  <td>Ret/bench</td>
+                  <td><%= sprintf("%+.2f", data["return_over_benchmark_daily_value"].round(2))%>%</td>
+                  <td><%= sprintf("%+.2f", data["return_over_benchmark_weekly_value"].round(2))%>%</td>
+                  <td><%= sprintf("%+.2f", data["return_over_benchmark_monthly_value"].round(2))%>%</td>
+                  <td><%= sprintf("%+.2f", data["return_over_benchmark_quarterly_value"].round(2))%>%</td>
+                  <td><%= sprintf("%+.2f", data["return_over_benchmark_annual_value"].round(2))%>%</td>
               </tr>
                <tr>
                   <td>Capt Liq</td>
