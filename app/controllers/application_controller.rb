@@ -1,5 +1,12 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :navbar
+
+  def navbar
+    @areas = []
+    @areas << Area.find_by(name: "Crédito Privado")
+    @areas << Area.find_by(name: "FOFs")
+  end
 
   def after_sign_up_path_for(resource)
     "/areas/"# <- Path you want to redirect the user to.

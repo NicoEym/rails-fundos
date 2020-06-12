@@ -12,21 +12,18 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <% if user_signed_in? %>
-          <% @areas = Area.all %>
           <li class="nav-item">
                 <%= link_to "Dados do dia", daily_data_path, class: "font-white" %>
-            </li> -
-          <li class="nav-item">
+            </li>
+          _<li class="nav-item">
                 <%= link_to "Todos fundos", funds_path, class: "font-white" %>
-            </li> -
-          <% @areas.each do |area|  %>
+            _</li>
             <li class="nav-item">
-                <%= link_to area.name, funds_path(:area_name => area.name), class: "font-white" %>
-            </li> -
-          <%end %>
+                <%= link_to "Areas", areas_path, class: "font-white" %>
+            _</li>
           <li class="nav-item">
              <%= link_to raw('<i class="fas fa-sign-out-alt"></i>Log out'),   destroy_user_session_path, :method => :delete, class: "font-white" %>
-          </li>
+          _</li>
           <% else %>
             <li class="nav-item">
               <%= link_to("Log in", new_user_session_path, class:"font-white")  %>
