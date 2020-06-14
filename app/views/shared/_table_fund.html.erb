@@ -11,7 +11,7 @@
                <tr class="text-center black font-white">
                   <td colspan="1">Cota</td>
                   <td colspan="1">PL</td>
-                  <td colspan="1">Ultimo retorno diario</td>
+                  <td colspan="1">Retorno diário</td>
                   <td colspan="1">Volatilidade EWMA 94%</td>
                   <td colspan="1">Sharpe ratio</td>
                   <td colspan="1">Tracking error</td>
@@ -43,14 +43,7 @@
                   <td><%= sprintf("%+.2f", data["return_quarterly_value"].round(2))%>%</td>
                   <td><%= sprintf("%+.2f", data["return_annual_value"].round(2))%>%</td>
               </tr>
-              <tr>
-                  <td>Ret/bench</td>
-                  <td><%= sprintf("%+.2f", data["return_over_benchmark_daily_value"].round(2))%>%</td>
-                  <td><%= sprintf("%+.2f", data["return_over_benchmark_weekly_value"].round(2))%>%</td>
-                  <td><%= sprintf("%+.2f", data["return_over_benchmark_monthly_value"].round(2))%>%</td>
-                  <td><%= sprintf("%+.2f", data["return_over_benchmark_quarterly_value"].round(2))%>%</td>
-                  <td><%= sprintf("%+.2f", data["return_over_benchmark_annual_value"].round(2))%>%</td>
-              </tr>
+
                <tr>
                   <td>Capt Liq</td>
                   <td> - </td>
