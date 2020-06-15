@@ -49,6 +49,14 @@
         </div>
         <br>
       <% end %>
+
+      <% if !@chart_monthly_captation.nil? %>
+        <div class="chart-container">
+         <%= column_chart @chart_monthly_captation, colors: ["#CFB07B"], title: "Captação mensal", ytitle: "$R Mi"%>
+        </div>
+        <br>
+      <% end %>
+
         <% if !@chart_returns.nil? %>
         <div class="chart-container">
          <%= column_chart @chart_returns, colors: ["#CFB07B"], thousands: ",", title: "Retorno mensal", ytitle: "%"%>

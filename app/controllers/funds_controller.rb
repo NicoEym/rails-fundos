@@ -6,8 +6,7 @@ class FundsController < ApplicationController
     @fund = Fund.find(params[:id])
 
     # we get the last date
-    data = DailyDatum.where(fund_id: @fund.id).last
-    @date = data.calendar
+    @date = get_last_date(@fund)
 
     # we will get the lastest registered data
     @this_fund_data = DailyDatum.find_by(fund_id: @fund.id, calendar_id: @date.id)
@@ -35,6 +34,8 @@ class FundsController < ApplicationController
     @chart_returns = get_returns_data(@competitors, @fund, @date)
     # then we use the function to get the risk/return relation of the competitors and the fund
     @chart_risk_returns = get_risk_returns_data(@competitors, @fund, @date)
+    @chart_monthly_captation = get_monthly_captation(range_data)
+
   end
 
   def index
@@ -55,7 +56,7 @@ class FundsController < ApplicationController
     # Doing so we have our historical serie of data for the AUM
     historical_array = []
     datas.each do |data|
-      historical_array << [data.calendar.day, data.aum / divide]
+      historical_array << [data.calendar.day, data.aum / divide] if !data.aum.nil?
     end
 
     historical_array
@@ -66,7 +67,7 @@ class FundsController < ApplicationController
     # Doing so we have our historical serie of data for the share price
     historical_array = []
     datas.each do |data|
-      historical_array << [data.calendar.day, data.share_price]
+      historical_array << [data.calendar.day, data.share_price] if !data.share_price.nil?
     end
 
     historical_array
@@ -104,5 +105,16 @@ class FundsController < ApplicationController
     # eventually we do the same for the our Indosuez fund
     fund_data = DailyDatum.find_by(fund_id: fund.id, calendar_id: date.id)
     data << { name: fund.best_name, data: { fund_data.volatility => fund_data.return_annual_value } }
+  end
+
+  def get_monthly_captation(datas)
+    # for all the daily data, we get the date and the share price value for the fund.
+    # Doing so we have our historical serie of data for the share price
+
+    historical_array = []
+    datas.each do |data|
+      historical_array << [data.calendar.day.strftime("%Y-%m"), data.application_monthly_net_value / 1_000_000] if data.calendar.last_day_of_month?
+    end
+    historical_array.sort
   end
 end
