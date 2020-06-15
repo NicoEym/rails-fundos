@@ -5,8 +5,9 @@ class FundsController < ApplicationController
     # funds is the fund given by the params
     @fund = Fund.find(params[:id])
 
-    # we get the last commo, date
-    @date = get_last_date
+    # we get the last date
+    data = DailyDatum.where(fund_id: @fund.id).last
+    @date = data.calendar
 
     # we will get the lastest registered data
     @this_fund_data = DailyDatum.find_by(fund_id: @fund.id, calendar_id: @date.id)
@@ -31,9 +32,9 @@ class FundsController < ApplicationController
     @competitors_datas_hash = get_all_daily_data(@competitors, @date)
 
     # then we use the function to get the returns of the competitors
-    @chart_returns = get_returns_data(@competitors, @fund)
+    @chart_returns = get_returns_data(@competitors, @fund, @date)
     # then we use the function to get the risk/return relation of the competitors and the fund
-    @chart_risk_returns = get_risk_returns_data(@competitors, @fund)
+    @chart_risk_returns = get_risk_returns_data(@competitors, @fund, @date)
   end
 
   def index
@@ -81,25 +82,27 @@ class FundsController < ApplicationController
     end
   end
 
-  def get_returns_data(competitors, fund)
+  def get_returns_data(competitors, fund, date)
     data = []
     # for each competitor we store the name and the value of the monthly return
     competitors.each do |competitor|
-      data << [competitor.best_name, competitor.daily_data.last.return_monthly_value]
+      competitor_data = DailyDatum.find_by(fund_id: competitor.id, calendar_id: date.id)
+      data << [competitor.best_name, competitor_data.return_monthly_value]
     end
     # Eventually we do the same for our Indosuez fund
-    data << [fund.best_name, fund.daily_data.last.return_monthly_value]
+    fund_data = DailyDatum.find_by(fund_id: fund.id, calendar_id: date.id)
+    data << [fund.best_name, fund_data.return_monthly_value]
   end
 
-  def get_risk_returns_data(competitors, fund)
+  def get_risk_returns_data(competitors, fund, date)
     data = []
     # for each competitor we store the name and the couple volatility (x axis) / return (y axis)
     competitors.each do |competitor|
-      data << { name: competitor.best_name, data: { competitor.daily_data.last.volatility => competitor.daily_data.last.return_annual_value}}
+      competitor_data = DailyDatum.find_by(fund_id: competitor.id, calendar_id: date.id)
+      data << { name: competitor.best_name, data: { competitor_data.volatility => competitor_data.return_annual_value } }
     end
     # eventually we do the same for the our Indosuez fund
-    data << { name: fund.best_name, data: { fund.daily_data.last.volatility => fund.daily_data.last.return_annual_value}}
+    fund_data = DailyDatum.find_by(fund_id: fund.id, calendar_id: date.id)
+    data << { name: fund.best_name, data: { fund_data.volatility => fund_data.return_annual_value } }
   end
-
-
 end

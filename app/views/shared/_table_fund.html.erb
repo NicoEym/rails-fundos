@@ -4,7 +4,7 @@
         <table class="table">
           <thead>
               <tr class="text-center black font-white">
-                  <th colspan="6"><%= link_to(data["fund"].best_name, fund_path(data["fund"].id))  %></th>
+                  <th colspan="6"><%= link_to(data["fund"].best_name + " " + data["date"].to_formatted_s(:long_ordinal), fund_path(data["fund"].id))  %></th>
               </tr>
           </thead>
           <tbody>
@@ -43,7 +43,14 @@
                   <td><%= sprintf("%+.2f", data["return_quarterly_value"].round(2))%>%</td>
                   <td><%= sprintf("%+.2f", data["return_annual_value"].round(2))%>%</td>
               </tr>
-
+                 <tr>
+                  <td>Ret/Bench</td>
+                  <td><%= sprintf("%+.2f", data["return_over_benchmark_daily_value"].round(2))%>%</td>
+                  <td><%= sprintf("%+.2f", data["return_over_benchmark_weekly_value"].round(2))%>%</td>
+                  <td><%= sprintf("%+.2f", data["return_over_benchmark_monthly_value"].round(2))%>%</td>
+                  <td><%= sprintf("%+.2f", data["return_over_benchmark_quarterly_value"].round(2))%>%</td>
+                  <td><%= sprintf("%+.2f", data["return_over_benchmark_annual_value"].round(2))%>%</td>
+              </tr>
                <tr>
                   <td>Capt Liq</td>
                   <td> - </td>
