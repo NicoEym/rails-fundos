@@ -16,17 +16,16 @@ class ApplicationController < ActionController::Base
     "/areas/"# <- Path you want to redirect the user to.
   end
 
-  def get_last_date
-    # the goal is the find the most recent date for which we have data for all the funds
+  def get_last_date(fund)
+    # the goal is the find the most recent date for which the fund has data
     # we choose the last five days in the data base
     last_dates = Calendar.last(5).reverse
-    # we count the number of funds
-    number_of_funds = Fund.count
-    # for each date we check if the number of funds for whoch we have data == the total number of funds
+
+    # for each date we check if the fund has data
     last_dates.each do |last_date|
-      number_of_fund_for_date = DailyDatum.where(calendar_id: last_date.id).count
+      data = DailyDatum.find_by(fund_id: fund, calendar_id: last_date.id)
       # when the number of DailyDatum for that date == the number of funds then we return the date
-      return last_date if number_of_fund_for_date == number_of_funds
+      return last_date if !data.nil?
     end
   end
 
