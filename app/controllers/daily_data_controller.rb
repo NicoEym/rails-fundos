@@ -5,8 +5,36 @@ class DailyDataController < ApplicationController
     @funds = Fund.where(gestor: gestor)
 
     @date = get_last_date
-    @datas = get_all_daily_data(@funds, @date)
+    @datas = get_last_daily_data(@funds)
   end
 
-
+  def get_last_daily_data(funds)
+    # we create an array
+    final_data = []
+    # for each fund we choose the dailydata that matches the funds
+    funds.each do |fund|
+      data = DailyDatum.where(fund_id: fund.id).last
+      # then we create a hash with the data we need
+      final_data << { "fund" => fund, "date" => data.calendar.day,
+                      "share_price" => data.share_price,
+                      "aum" => data.aum, "return_daily_value" => data.return_daily_value,
+                      "volatility" => data.volatility, "sharpe_ratio" => data.sharpe_ratio,
+                      "tracking_error" => data.tracking_error,
+                      "return_weekly_value" => data.return_weekly_value,
+                      "return_monthly_value" => data.return_monthly_value,
+                      "return_quarterly_value" => data.return_quarterly_value,
+                      "return_annual_value" => data.return_annual_value,
+                      "return_over_benchmark_daily_value" => data.return_over_benchmark_daily_value,
+                      "return_over_benchmark_weekly_value" => data.return_over_benchmark_weekly_value,
+                      "return_over_benchmark_monthly_value" => data.return_over_benchmark_monthly_value,
+                      "return_over_benchmark_quarterly_value" => data.return_over_benchmark_quarterly_value,
+                      "return_over_benchmark_annual_value" => data.return_over_benchmark_annual_value,
+                      "application_weekly_net_value" => data.application_weekly_net_value,
+                      "application_monthly_net_value" => data.application_monthly_net_value,
+                      "application_quarterly_net_value" => data.application_quarterly_net_value,
+                      "application_annual_net_value" => data.application_annual_net_value }
+    end
+    # then we send an array of hashes
+    final_data
+  end
 end

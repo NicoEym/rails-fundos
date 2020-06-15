@@ -12,6 +12,8 @@ require 'algoliasearch'
 # Calendar.delete_all
 # BenchMark.delete_all
 
+  csv_options = { col_sep:  ";", quote_char: '"', headers: :first_row }
+
 #client = Algolia::Client.new(application_id: ENV['ALGOLIASEARCH_APPLICATION_ID'], api_key: ENV['ALGOLIASEARCH_ADMIN_API_KEY'])
 # index = client.init_index('dev_Fund')
 
@@ -265,5 +267,38 @@ end
 
 
 
+# path_array = 'db/csv_repos/Monthly Net Captation.csv'
+# CSV.foreach(path_array, csv_options) do |row|
 
 
+#       codigo = row['Ativo'][0,6].to_i
+#       puts codigo
+#       fund = Fund.find_by(codigo_economatica: codigo)
+#       #   Fund.create(codigo_economatica: codigo)
+
+#       dates = ["2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
+#                 "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
+#       dates.each do |date|
+#         year = date[0,4].to_i
+#         puts year
+#          month = date[5,7].to_i
+#         puts month
+#         day = date[8,10].to_i
+#         puts day
+#         date_format_YMD = Date.new(year, month, day)
+#         # end
+
+#         date_calendar = Calendar.find_by(day: date_format_YMD)
+#         date_calendar = Calendar.create(day: date_format_YMD) if date_calendar.nil?
+
+#         puts date_calendar.day
+
+#         datas = DailyDatum.find_by(fund: fund, calendar: date_calendar)
+
+#         if datas.nil?
+#           DailyDatum.create(application_monthly_net_value: row[date], fund: fund, calendar: date_calendar)
+#         else
+#           datas.update(application_monthly_net_value: row[date])
+#         end
+#       end
+# end
