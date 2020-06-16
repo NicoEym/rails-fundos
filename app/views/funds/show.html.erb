@@ -57,15 +57,21 @@
         <br>
       <% end %>
 
-        <% if !@chart_returns.nil? %>
+        <% if !@chart_returns_vs_competitors.nil? %>
         <div class="chart-container">
-         <%= column_chart @chart_returns, colors: ["#CFB07B"], thousands: ",", title: "Retorno mensal", ytitle: "%"%>
+         <%= column_chart @chart_returns_vs_competitors, colors: ["#CFB07B"], thousands: ",", title: "Retorno mensal", ytitle: "%"%>
         </div>
         <br>
       <% end %>
       <% if !@chart_risk_returns.nil? %>
         <div class="chart-container">
          <%= scatter_chart @chart_risk_returns, colors: ["#CFB07B"], title: "Risco Retorno", ytitle: "Retorno anual (%)", xtitle: "Vol anual (%)"%>
+        </div>
+        <br>
+      <% end %>
+         <% if !@chart_returns_vs_benchmark.nil? %>
+        <div class="chart-container">
+         <%= column_chart @chart_returns_vs_benchmark, colors: ["#CFB07B"], title: "Retorno vs Benchmark", ytitle: "Retorno mensal (%)"%>
         </div>
         <br>
       <% end %>

@@ -20,6 +20,7 @@ class FundsController < ApplicationController
 
     # this function will get the competitors of the fund
     @competitors = get_competitors(@fund)
+    @filtered_competitors = filter(@competitors, @date)
 
     # we get an array of hash with the daily data for the fund
     array = []
@@ -28,14 +29,14 @@ class FundsController < ApplicationController
     @this_fund_data_hash = get_all_daily_data(array, @date)
 
     # we get an array of hash with the daily data for the fund's competitors
-    @competitors_datas_hash = get_all_daily_data(@competitors, @date)
+    @competitors_datas_hash = get_all_daily_data(@filtered_competitors, @date)
 
     # then we use the function to get the returns of the competitors
-    @chart_returns = get_returns_data(@competitors, @fund, @date)
+    @chart_returns_vs_competitors = get_returns_data(@filtered_competitors, @fund, @date)
     # then we use the function to get the risk/return relation of the competitors and the fund
-    @chart_risk_returns = get_risk_returns_data(@competitors, @fund, @date)
+    @chart_risk_returns = get_risk_returns_data(@filtered_competitors, @fund, @date)
     @chart_monthly_captation = get_monthly_captation(range_data)
-
+    @chart_returns_vs_benchmark = get_returns_vs_benchmark(range_data, @fund)
   end
 
   def index
@@ -83,6 +84,15 @@ class FundsController < ApplicationController
     end
   end
 
+  def filter(competitors, date)
+    # if we do not have a short name, the fund is not from Indosuez, then we display only the indosuez fund as a competitor.
+    filtered_competitors = []
+    competitors.each do |competitor|
+      filtered_competitors << competitor unless DailyDatum.find_by(fund: competitor, calendar: date).nil?
+    end
+    filtered_competitors
+  end
+
   def get_returns_data(competitors, fund, date)
     data = []
     # for each competitor we store the name and the value of the monthly return
@@ -116,5 +126,18 @@ class FundsController < ApplicationController
       historical_array << [data.calendar.day.strftime("%Y-%m"), data.application_monthly_net_value / 1_000_000] if data.calendar.last_day_of_month?
     end
     historical_array.sort
+  end
+
+  def get_returns_vs_benchmark(datas, fund)
+    historical_array = []
+    benchmark = fund.bench_mark
+    datas.each do |data|
+      if data.calendar.last_day_of_month?
+        historical_array << { name: fund.best_name, data:   data.return_monthly_value  }
+        benchmark_data = DataBenchmark.find_by(bench_mark: benchmark, calendar: data.calendar)
+        historical_array << { name: benchmark.name, data:  benchmark_data.return_monthly_value  } unless benchmark_data.nil?
+      end
+    end
+    historical_array
   end
 end
