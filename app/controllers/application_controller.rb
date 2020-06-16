@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  require 'date'
+
   before_action :authenticate_user!
   before_action :navbar
 
@@ -19,7 +21,13 @@ class ApplicationController < ActionController::Base
   def get_last_date(fund)
     # the goal is the find the most recent date for which the fund has data
     # we choose the last five days in the data base
-    last_dates = Calendar.last(5).reverse
+    today = Date.today
+    last_dates = []
+    (1..10).each do |d|
+      previous_day = today - d
+      existing_date = Calendar.find_by(day: previous_day)
+      last_dates << existing_date unless existing_date.nil?
+    end
 
     # for each date we check if the fund has data
     last_dates.each do |last_date|
