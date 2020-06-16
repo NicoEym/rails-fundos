@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_10_151132) do
+ActiveRecord::Schema.define(version: 2020_06_16_142655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,22 @@ ActiveRecord::Schema.define(version: 2020_06_10_151132) do
     t.index ["fund_id"], name: "index_daily_data_on_fund_id"
   end
 
+  create_table "data_benchmarks", force: :cascade do |t|
+    t.bigint "bench_mark_id"
+    t.bigint "calendar_id"
+    t.float "return_daily_value"
+    t.float "return_weekly_value"
+    t.float "return_monthly_value"
+    t.float "return_quarterly_value"
+    t.float "return_annual_value"
+    t.float "volatility"
+    t.float "daily_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bench_mark_id"], name: "index_data_benchmarks_on_bench_mark_id"
+    t.index ["calendar_id"], name: "index_data_benchmarks_on_calendar_id"
+  end
+
   create_table "funds", force: :cascade do |t|
     t.string "name"
     t.string "short_name"
@@ -106,6 +122,8 @@ ActiveRecord::Schema.define(version: 2020_06_10_151132) do
 
   add_foreign_key "daily_data", "calendars"
   add_foreign_key "daily_data", "funds"
+  add_foreign_key "data_benchmarks", "bench_marks"
+  add_foreign_key "data_benchmarks", "calendars"
   add_foreign_key "funds", "anbima_classes"
   add_foreign_key "funds", "bench_marks"
   add_foreign_key "funds", "gestors"
