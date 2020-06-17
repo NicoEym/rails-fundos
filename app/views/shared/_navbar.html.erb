@@ -15,15 +15,15 @@
           <li class="nav-item">
                 <%= link_to "Dados do dia", daily_data_path, class: "font-white" %>
             </li>
-          _<li class="nav-item">
+          <li class="nav-item">
                 <%= link_to "Todos fundos", funds_path, class: "font-white" %>
-            _</li>
+            </li>
             <li class="nav-item">
                 <%= link_to "Areas", areas_path, class: "font-white" %>
-            _</li>
+            </li>
           <li class="nav-item">
              <%= link_to raw('<i class="fas fa-sign-out-alt"></i>Log out'),   destroy_user_session_path, :method => :delete, class: "font-white" %>
-          _</li>
+          </li>
           <% else %>
             <li class="nav-item">
               <%= link_to("Log in", new_user_session_path, class:"font-white")  %>
