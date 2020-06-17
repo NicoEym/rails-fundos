@@ -77,10 +77,14 @@ def write_funds_historical_data(files, csv_options)
 
 
       if data.nil?
-        data = DailyDatum.create(share_price: row['Cota'], aum: row['PL'], fund: fund, calendar: date)
+        data = DailyDatum.create(share_price: row['Cota'], aum: row['PL'], application_daily_net_value: row['Capt Liq'],
+                                 return_daily_value: row['Daily Return'],return_monthly_value: row['Monthly Return'],
+                                 volatility: row['Vol EWMA 97%'], fund: fund, calendar: date)
         puts data.share_price
       else
-        data.update(share_price: row['Cota'], aum: row['PL'], fund: fund, calendar: date)
+        data.update(share_price: row['Cota'], aum: row['PL'], application_daily_net_value: row['Capt Liq'],
+                                 return_daily_value: row['Daily Return'],return_monthly_value: row['Monthly Return'],
+                                 volatility: row['Vol EWMA 97%'],fund: fund, calendar: date)
       end
 
     end
@@ -122,8 +126,7 @@ end
 
 
 
-
-# if BenchMark.all.empty?
+ if BenchMark.all.empty?
 
 
   cdi_bench = BenchMark.find_by(name:"CDI")
@@ -142,7 +145,7 @@ end
   paths_bench_array = [path_ibovespa, path_CDI, path_IMAB5]
 
   write_benchmark_historical_data(paths_bench_array, csv_options)
-# end
+end
 
 
 if Fund.all.empty?
@@ -339,6 +342,7 @@ def write_daily_data
   end
 end
 
+write_daily_data
 
 # path_array = 'db/csv_repos/Monthly Net Captation.csv'
 # CSV.foreach(path_array, csv_options) do |row|

@@ -11,7 +11,9 @@ class DailyDataController < ApplicationController
     final_data = []
     # for each fund we choose the dailydata that matches the funds
     funds.each do |fund|
-      data = DailyDatum.where(fund_id: fund.id).last
+      date = get_last_date(fund)
+      data = DailyDatum.find_by(fund: fund, calendar: date)
+
       # then we create a hash with the data we need
       final_data << { "fund" => fund, "date" => data.calendar.day,
                       "share_price" => data.share_price,

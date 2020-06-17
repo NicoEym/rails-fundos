@@ -4,16 +4,6 @@
   <div class="padding1 border-radius05 shadow-boxing marginb">
     <h3 class="text-center"><%=@fund.best_name%></h3>
     <p class="text-center" ><%= @date.day.to_formatted_s(:long_ordinal)%> </p>
-    <p><b>Gestor:</b> <%= @fund.gestor.name %> </p>
-    <p><b>Classe Anbima:</b> <%= @fund.anbima_class.name %> </p>
-    <p><b>PL:</b> <%= number_with_delimiter(@this_fund_data.aum.round(0), :delimiter => ',') %> </p>
-    <p><b>Cota:</b> <%= @this_fund_data.share_price.round(4) %> </p>
-    <p><b>Volatilidade:</b> <%= sprintf("%+.2f", @this_fund_data.volatility.round(2))%>%</p>
-    <p><b>Sharpe ratio:</b> <%= @this_fund_data.sharpe_ratio.round(2)%></p>
-    <p><b>Tracking error:</b><%= sprintf("%+.2f", @this_fund_data.tracking_error.round(2))%>%</p>
-  </div>
-
-  <div >
     <% @this_fund_data_hash.each do |data| %>
       <%= render 'shared/table_fund', data: data %>
     <% end %>
@@ -59,7 +49,7 @@
 
         <% if !@chart_returns_vs_competitors.nil? %>
         <div class="chart-container">
-         <%= column_chart @chart_returns_vs_competitors, colors: ["#CFB07B"], thousands: ",", title: "Retorno mensal", ytitle: "%"%>
+         <%= column_chart @chart_returns_vs_competitors, colors: ["#CFB07B"], thousands: ",", title: "Retorno mensal", ytitle: "%", label: "Value"%>
         </div>
         <br>
       <% end %>
@@ -71,7 +61,7 @@
       <% end %>
          <% if !@chart_returns_vs_benchmark.nil? %>
         <div class="chart-container">
-         <%= column_chart @chart_returns_vs_benchmark, colors: ["#CFB07B"], title: "Retorno vs Benchmark", ytitle: "Retorno mensal (%)"%>
+         <%= column_chart @chart_returns_vs_benchmark, colors: ["#CFB07B", "#1E2025"], title: "Retorno vs Benchmark", ytitle: "Retorno mensal (%)"%>
         </div>
         <br>
       <% end %>
