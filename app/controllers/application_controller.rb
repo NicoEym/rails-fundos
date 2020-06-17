@@ -66,4 +66,17 @@ class ApplicationController < ActionController::Base
     # then we send an array of hashes
     final_data
   end
+
+    def get_final_days_of_month
+    # we create an array
+    last_day_of_months = []
+    # for each fund we choose the dailydata that matches the date and the funds
+    dates = Calendar.order('day desc')
+
+    dates.each do |date|
+      last_day_of_months << date if date.last_day_of_month? && last_day_of_months.size < 12
+    end
+    # then we send an array of dates
+    last_day_of_months.sort
+  end
 end
