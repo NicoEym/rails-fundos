@@ -168,7 +168,7 @@ class FundsController < ApplicationController
       benchmark_data_array << benchmark_data unless benchmark_data.nil?
     end
     # then we create the hash to be isnerted in the final array for the graph
-    historical_array << { name: fund.best_name, data: fund_data_array.map{|t| [t.calendar.day.strftime("%Y-%m"), t.return_monthly_value] } }
+    historical_array << { name: fund.best_name, data: fund_data_array.map{|t| [t.calendar.day.strftime("%Y-%m"), t.return_monthly_value.round(2)] } }
     historical_array << { name: benchmark.name, data: benchmark_data_array.map{|t| [t.calendar.day.strftime("%Y-%m"), t.return_monthly_value.round(2)] } }
   end
 end

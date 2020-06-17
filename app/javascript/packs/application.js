@@ -3,7 +3,8 @@ import "bootstrap";
 
 import { instantSearchFunds } from '../plugins/instant_search_funds.js';
 import { show } from '../components/show_competitors';
-
+import { showTabs } from '../components/tabs';
 
 show();
 // instantSearchFunds();
+showTabs();
