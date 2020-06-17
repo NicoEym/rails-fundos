@@ -4,6 +4,23 @@
   <div class="padding1 border-radius05 shadow-boxing marginb">
     <h3 class="text-center"><%=@fund.best_name%></h3>
     <p class="text-center" ><%= @date.day.to_formatted_s(:long_ordinal)%> </p>
+
+  <ul class="list-inline tabs-underlined">
+  <li>
+    <a id="data_geral" class="tab-underlined active">Data geral</a>
+  </li>
+  <li>
+    <a id="return" class="tab-underlined">Retornos</a>
+  </li>
+   <li>
+    <a id="risk" class="tab-underlined">Risco</a>
+  </li>
+  <li>
+    <a id="liquidity" class="tab-underlined">Liquidez</a>
+  </li>
+</ul>
+
+
     <% @this_fund_data_hash.each do |data| %>
       <%= render 'shared/table_fund', data: data %>
     <% end %>
@@ -40,31 +57,38 @@
         <br>
       <% end %>
 
-      <% if !@chart_monthly_captation.nil? %>
-        <div class="chart-container">
+       <% unless @chart_returns_vs_benchmark.nil? %>
+        <div class="chart-container returns">
+         <%= column_chart @chart_returns_vs_benchmark, colors: ["#CFB07B", "#1E2025"], title: "Retorno vs Benchmark", ytitle: "Retorno mensal (%)"%>
+        </div>
+        <br>
+      <% end %>
+
+        <% unless @chart_returns_vs_competitors.nil? %>
+        <div class="chart-container returns">
+         <%= column_chart @chart_returns_vs_competitors, colors: ["#CFB07B"], thousands: ",", title: "Retorno mensal", ytitle: "%", label: "Value"%>
+        </div>
+        <br>
+      <% end %>
+      <% unless @chart_risk_returns.nil? %>
+        <div class="chart-container risk">
+         <%= scatter_chart @chart_risk_returns, colors: ["#CFB07B"], title: "Risco Retorno", ytitle: "Retorno anual (%)", xtitle: "Vol anual (%)"%>
+        </div>
+        <br>
+      <% end %>
+       <% unless @history_volatility.nil? %>
+        <div class="chart-container risk">
+         <%= line_chart @history_volatility, colors: ["#CFB07B"], backgroundColor: "#eee", title: "Volatility", ytitle: "%"%>
+        </div>
+        <br>
+      <% end %>
+       <% unless @chart_monthly_captation.nil? %>
+        <div class="chart-container liquidity">
          <%= column_chart @chart_monthly_captation, colors: ["#CFB07B"], title: "Captação mensal", ytitle: "$R Mi"%>
         </div>
         <br>
       <% end %>
 
-        <% if !@chart_returns_vs_competitors.nil? %>
-        <div class="chart-container">
-         <%= column_chart @chart_returns_vs_competitors, colors: ["#CFB07B"], thousands: ",", title: "Retorno mensal", ytitle: "%", label: "Value"%>
-        </div>
-        <br>
-      <% end %>
-      <% if !@chart_risk_returns.nil? %>
-        <div class="chart-container">
-         <%= scatter_chart @chart_risk_returns, colors: ["#CFB07B"], title: "Risco Retorno", ytitle: "Retorno anual (%)", xtitle: "Vol anual (%)"%>
-        </div>
-        <br>
-      <% end %>
-         <% if !@chart_returns_vs_benchmark.nil? %>
-        <div class="chart-container">
-         <%= column_chart @chart_returns_vs_benchmark, colors: ["#CFB07B", "#1E2025"], title: "Retorno vs Benchmark", ytitle: "Retorno mensal (%)"%>
-        </div>
-        <br>
-      <% end %>
     </div>
   </div>
 </div>

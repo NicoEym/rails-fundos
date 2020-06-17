@@ -17,6 +17,7 @@ class FundsController < ApplicationController
     # This function will get the history of AUM. The one the history of share price
     @history_aum = get_historical_aum(range_data, 1_000_000_000)
     @history_share = get_historical_share_price(range_data)
+    @history_volatility = get_historical_volatility(range_data)
 
     # this function will get the competitors of the fund
     @competitors = get_competitors(@fund)
@@ -36,9 +37,15 @@ class FundsController < ApplicationController
     # then we use the function to get the risk/return relation of the competitors and the fund
     @chart_risk_returns = get_risk_returns_data(@filtered_competitors, @fund, @date)
 
+    # we call a function in the application controller to get the last day of the last 12 months
     end_of_months_dates = get_final_days_of_month
-    puts end_of_months_dates
+
+    # for charts that requires end of the month data, we send as parameter the dates of the last 12 months and
+    # ... and the historical data for the fund
+    # We get the monthly captation
     @chart_monthly_captation = get_monthly_captation(range_data, end_of_months_dates)
+
+    # We get the monthly returns vs the benchmark
     @chart_returns_vs_benchmark = get_returns_vs_benchmark(range_data, @fund, end_of_months_dates)
   end
 
@@ -72,6 +79,17 @@ class FundsController < ApplicationController
     historical_array = []
     datas.each do |data|
       historical_array << [data.calendar.day, data.share_price] if !data.share_price.nil?
+    end
+
+    historical_array
+  end
+
+  def get_historical_volatility(datas)
+    # for all the daily data, we get the date and the AUM value for the fund.
+    # Doing so we have our historical serie of data for the AUM
+    historical_array = []
+    datas.each do |data|
+      historical_array << [data.calendar.day, data.volatility] unless data.volatility.nil?
     end
 
     historical_array
@@ -132,17 +150,25 @@ class FundsController < ApplicationController
   end
 
   def get_returns_vs_benchmark(datas, fund, dates)
+    # we create several arrays
     historical_array = []
     fund_data_array = []
     benchmark_data_array = []
+
+    # we get the benchmark
     benchmark = fund.bench_mark
+
+    # for each end of month date we insert in an array the corresponding DailyDatum
+    # we do this for the fund and the Benchmark
+
     dates.each do |date|
       fund_data = datas.find_by(calendar: date)
       fund_data_array << fund_data unless fund_data.nil?
       benchmark_data = DataBenchmark.find_by(bench_mark: benchmark, calendar: date)
       benchmark_data_array << benchmark_data unless benchmark_data.nil?
     end
-      historical_array << { name: fund.best_name, data: fund_data_array.map{|t| [t.calendar.day.strftime("%Y-%m"), t.return_monthly_value] } }
-      historical_array << { name: benchmark.name, data: benchmark_data_array.map{|t| [t.calendar.day.strftime("%Y-%m"), t.return_monthly_value.round(2)] } }
+    # then we create the hash to be isnerted in the final array for the graph
+    historical_array << { name: fund.best_name, data: fund_data_array.map{|t| [t.calendar.day.strftime("%Y-%m"), t.return_monthly_value] } }
+    historical_array << { name: benchmark.name, data: benchmark_data_array.map{|t| [t.calendar.day.strftime("%Y-%m"), t.return_monthly_value.round(2)] } }
   end
 end
