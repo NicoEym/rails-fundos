@@ -21,7 +21,12 @@ csv_options = { col_sep:  ";", quote_char: '"', headers: :first_row }
       puts month
       day = date[8,10].to_i
       puts day
-      Date.new(year, month, day)
+      date_format_YMD = Date.new(year, month, day)
+
+      date_calendar = Calendar.find_by(day: date_format_YMD)
+      date_calendar = Calendar.create(day: date_format_YMD) if date_calendar.nil?
+
+      date_calendar
   end
 
 def write_benchmark_historical_data(files, csv_options)
@@ -30,16 +35,11 @@ def write_benchmark_historical_data(files, csv_options)
 
       codigo = row['Ativo'][0,3]
       puts codigo
-      benchmark = BenchMark.find_by(codigo_economatica: codigo)
 
+      benchmark = BenchMark.find_by(codigo_economatica: codigo)
       puts benchmark
 
-      date_format_YMD = get_date(date)
-
-
-      date = Calendar.find_by(day: date_format_YMD)
-      date = Calendar.create(day: date_format_YMD) if date.nil?
-
+      date = get_date(row['Data'])
       puts date.day
 
       data = DataBenchmark.find_by(bench_mark_id: benchmark.id, calendar_id: date)
@@ -64,10 +64,7 @@ def write_funds_historical_data(files, csv_options)
       puts codigo
       fund = Fund.find_by(codigo_economatica: codigo)
 
-      date_format_YMD = get_date(date)
-
-      date = Calendar.find_by(day: date_format_YMD)
-      date = Calendar.create(day: date_format_YMD) if date.nil?
+      date = get_date(row['Data'])
 
       puts date.day
       data = DailyDatum.find_by(fund: fund, calendar_id: date)
@@ -130,10 +127,9 @@ def write_monthly_application(path, options, dates)
 
     dates.each do |date|
 
-      date_format_YMD = get_date(date)
+      date_format_YMD
 
-      date_calendar = Calendar.find_by(day: date_format_YMD)
-      date_calendar = Calendar.create(day: date_format_YMD) if date_calendar.nil?
+      date_calendar = get_date(date)
 
       puts date_calendar.day
 
@@ -158,11 +154,7 @@ def write_monthly_return(path, options, dates)
     fund = Fund.find_by(codigo_economatica: codigo)
 
     dates.each do |date|
-
-      date_format_YMD = get_date(date)
-
-      date_calendar = Calendar.find_by(day: date_format_YMD)
-      date_calendar = Calendar.create(day: date_format_YMD) if date_calendar.nil?
+      date_calendar = get_date(date)
 
       puts date_calendar.day
 
@@ -339,10 +331,7 @@ def write_daily_data_fund
       puts fund
       puts codigo
 
-       date_format_YMD = get_date(date)
-
-      date = Calendar.find_by(day: date_format_YMD)
-      date = Calendar.create(day: date_format_YMD) if date.nil?
+      date = get_date(row['Date'])
 
       puts date.day
 
@@ -387,7 +376,7 @@ def write_daily_data_fund
   end
 end
 
-# write_daily_data_fund
+write_daily_data_fund
 
 
 def write_daily_data_bench
@@ -401,15 +390,11 @@ def write_daily_data_bench
 
       codigo = row['Ativo'][0,3]
       puts codigo
-      benchmark = BenchMark.find_by(codigo_economatica: codigo)
 
+      benchmark = BenchMark.find_by(codigo_economatica: codigo)
       puts benchmark
 
-      date_format_YMD = get_date(date)
-
-      date = Calendar.find_by(day: date_format_YMD)
-      date = Calendar.create(day: date_format_YMD) if date.nil?
-
+      date = get_date(row['Date'])
       puts date.day
 
       data = DataBenchmark.find_by(bench_mark_id: benchmark.id, calendar_id: date)
@@ -425,18 +410,18 @@ def write_daily_data_bench
 end
 
 
-# write_daily_data_bench
+write_daily_data_bench
 
-dates = ["2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
-              "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
+# dates = ["2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
+#              "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
 
 # path_array = 'db/csv_repos/Monthly Net Captation.csv'
 
 # write_monthly_application(path_array, csv_options, dates)
 
-path_array = 'db/csv_repos/Monthly Return.csv'
+#path_array = 'db/csv_repos/Monthly Return.csv'
 
-write_monthly_return(path_array, csv_options, dates)
+#write_monthly_return(path_array, csv_options, dates)
 
 
 
