@@ -14,6 +14,7 @@ class FundsController < ApplicationController
     # now we will work to build the charts
     # We get the history of daily data for the fund we are interested in
     range_data = DailyDatum.where(fund_id: @fund.id)
+
     # This function will get the history of AUM. The one the history of share price
     @history_aum = get_historical_aum(range_data, 1_000_000_000)
     @history_share = get_historical_share_price(range_data)
@@ -47,6 +48,9 @@ class FundsController < ApplicationController
 
     # We get the monthly returns vs the benchmark
     @chart_returns_vs_benchmark = get_returns_vs_benchmark(range_data, @fund, end_of_months_dates)
+
+
+    @chart_incremental_returns = get_incremental_returns_data(@fund, @filtered_competitors, end_of_months_dates)
   end
 
   def index
@@ -130,7 +134,7 @@ class FundsController < ApplicationController
     data = []
     # for each competitor we store the name and the couple volatility (x axis) / return (y axis)
     competitors.each do |competitor|
-      competitor_data = DailyDatum.find_by(fund_id: competitor.id, calendar_id: date.id)
+      competitor_data = DailyDatum.find_by(fund: competitor, calendar: date)
       data << { name: competitor.best_name, data: { competitor_data.volatility.round(2) => competitor_data.return_annual_value.round(2) } }
     end
     # eventually we do the same for the our Indosuez fund
@@ -167,8 +171,64 @@ class FundsController < ApplicationController
       benchmark_data = DataBenchmark.find_by(bench_mark: benchmark, calendar: date)
       benchmark_data_array << benchmark_data unless benchmark_data.nil?
     end
-    # then we create the hash to be isnerted in the final array for the graph
+    # then we create the hash to be inserted in the final array for the graph
     historical_array << { name: fund.best_name, data: fund_data_array.map{|t| [t.calendar.day.strftime("%Y-%m"), t.return_monthly_value.round(2)] } }
     historical_array << { name: benchmark.name, data: benchmark_data_array.map{|t| [t.calendar.day.strftime("%Y-%m"), t.return_monthly_value.round(2)] } }
+  end
+
+  def get_incremental_returns_data(fund, competitors, dates_12_months)
+    # we create the array that will receive our final data
+    historical_array = []
+
+    # we get the benchmark
+    benchmark = fund.bench_mark
+
+    # we create an array with every object (funds and benchmark)
+    assets = [fund, benchmark]
+    competitors.each do |competitor|
+      assets << competitor
+    end
+
+    # we loop this assets
+    assets.each do |asset|
+      # we create the array where we will stock our data
+      asset_array = []
+      # we initiate the index to 100
+      indice = 100
+      # we put the starting month and the indice value in an hash that we store in an array
+      asset_array << { date: dates_12_months[0].day, data: indice }
+      # we take out the first date, we already used it
+      dates = dates_12_months.drop(1)
+
+      # we call a function that will run the calculation of the incremental return
+      final_asset_data_array = calculate_incremental_returns(dates, asset, indice, asset_array)
+
+      # we insert the data in the final array and we map the historical data for the chart
+      historical_array << { name: asset.name, data: final_asset_data_array.map { |t| [t[:date].strftime("%Y-%m"), t[:data]] } }
+    end
+
+    # we return the final array(of hashes, for each asset) with the historical data for every assets
+    historical_array
+  end
+
+  private
+
+  def calculate_incremental_returns(dates, asset, price, final_data_array)
+    # for each dates, we will check if the asset is a fund or a benchmark.
+    # Depending on this we look in the correct database table
+    dates.each do |date|
+      if Fund.find_by(id: asset.id).nil?
+        data_array = DataBenchmark.find_by(fund: asset, calendar: date)
+      else
+        data_array = DailyDatum.find_by(fund: asset, calendar: date)
+      end
+
+      # we increment our price with the monthly return
+      price = (1 + data_array.return_monthly_value / 100) * price
+      # we store the data in the array
+      final_data_array << { date: date.day, data: price } unless data_array.nil?
+    end
+    # we return the data for the asset
+    final_data_array
   end
 end

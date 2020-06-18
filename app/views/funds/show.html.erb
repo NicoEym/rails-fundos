@@ -75,6 +75,12 @@
         <%= column_chart @chart_returns_vs_competitors, colors: ["#CFB07B"], thousands: ",", title: "Retorno mensal", ytitle: "%", label: "Value"%>
         </div>
       <% end %>
+
+      <% unless @chart_incremental_returns.nil? %>
+        <div class="chart-container">
+        <%= line_chart @chart_incremental_returns, colors: ["#CFB07B", "#1E2025", "#89449C", "#8C332B", "#3A0CA3"], thousands: ",", title: "Retorno mensal", ytitle: "R", label: "Value", ymin: "65", ymax: "125" %>
+        </div>
+      <% end %>
     </div>
   </div>
 

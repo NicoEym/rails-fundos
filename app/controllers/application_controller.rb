@@ -31,6 +31,7 @@ class ApplicationController < ActionController::Base
 
     # for each date we check if the fund has data
     last_dates.each do |last_date|
+      puts last_date.day
       data = DailyDatum.find_by(fund_id: fund, calendar_id: last_date.id)
       # when the number of DailyDatum for that date == the number of funds then we return the date
       return last_date if !data.nil?
