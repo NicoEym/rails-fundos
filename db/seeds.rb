@@ -127,8 +127,6 @@ def write_monthly_application(path, options, dates)
 
     dates.each do |date|
 
-      date_format_YMD
-
       date_calendar = get_date(date)
 
       puts date_calendar.day
@@ -171,17 +169,17 @@ end
 
 
 
- if BenchMark.all.empty?
+ # if BenchMark.all.empty?
 
 
-  cdi_bench = BenchMark.find_by(name:"CDI")
-  ibov_bench= BenchMark.find_by(name:"Ibovespa")
-  ima_bench = BenchMark.find_by(name:"IMA B5")
+  # cdi_bench = BenchMark.find_by(name:"CDI")
+  # ibov_bench= BenchMark.find_by(name:"Ibovespa")
+  # ima_bench = BenchMark.find_by(name:"IMA B5")
 
 
-  cdi_bench.update(name:"CDI", codigo_economatica: "CDI" )
-  ibov_bench.update(name:"Ibovespa", codigo_economatica: "IBO" )
-  ima_bench.update(name:"IMA B5", codigo_economatica: "IMA" )
+  # cdi_bench.update(name:"CDI", codigo_economatica: "CDI" )
+  # ibov_bench.update(name:"Ibovespa", codigo_economatica: "IBO" )
+  # ima_bench.update(name:"IMA B5", codigo_economatica: "IMA" )
 
   path_ibovespa  = 'db/csv_repos/data ibovespa.csv'
   path_CDI  = 'db/csv_repos/data CDI.csv'
@@ -190,7 +188,7 @@ end
   paths_bench_array = [path_ibovespa, path_CDI, path_IMAB5]
 
   write_benchmark_historical_data(paths_bench_array, csv_options)
-end
+# end
 
 
 if Fund.all.empty?
@@ -222,6 +220,8 @@ if Fund.all.empty?
   puts "created #{beton}"
   allocaction = Fund.create(name: "Ca Indosuez Alloc Action Fc FIA", short_name: "Allocaction", codigo_economatica: "372986", bench_mark: ibov_bench, area_name: fof_area.name, gestor: ca_gestor, anbima_class: acao_anbima, photo_url: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{allocaction}"
+  private_pi = Fund.create(name: "Ca Indosuez Private Pi Fc de FI Mult", short_name: "Pi", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: fof_area.name, gestor: ca_gestor, anbima_class: multi_anbima, photo_url: "https://images.unsplash.com/photo-1453733190371-0a9bedd82893?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  puts "created #{private_pi}"
 
   path_vitesse  = 'db/csv_repos/data vitesse.csv'
   path_agilite  = 'db/csv_repos/data agilite.csv'
@@ -309,8 +309,6 @@ end
 # end
 
 
-
-
 def write_daily_data_fund
 
   urlCDI = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/j9ScUlOFDYYsEOihvscfgPe8qHolC%2FqwVKR5cDK3HBkiPMrVtIT7uj3uP7JKxcZ0Xc5BU%2FJ7gwMns0rbucgaWGYy2RMtS9xEQtSqvF5wM4C8mGbog2dZW4bydAuisQo%2BKTS0TJ%2Fyfg7C6JScf7qZK2SbS0IBJsB1hcbYce%2BHBtTsNag9Wy%2F3FBUUXPUqWIDTPq1bDk6g2qDsDXnAPiqdmtGan6qGke3pNcJ0jaHR%2BSObNqcfoMtcD3%2FFEBSaopLLc87nCZGTeBVT1ifg5MPO1Dsa4yXNJSL%2BIEsgWsS69ywtXf7P34A5hm1VmzQRzb3N2XXbIXwQgYujka7NS%2BWUHg%3D%3D'
@@ -321,7 +319,6 @@ def write_daily_data_fund
   urls.each do |url|
 
     download = open(url)
-
     csv = CSV.parse(download, encoding:'utf-8',:headers=>true)
 
     csv.each do |row|
@@ -329,10 +326,8 @@ def write_daily_data_fund
       codigo = row['Ativo'][0,6].to_i
       fund = Fund.find_by(codigo_economatica: codigo)
       puts fund
-      puts codigo
 
       date = get_date(row['Date'])
-
       puts date.day
 
       datas = DailyDatum.find_by(fund: fund, calendar: date)
@@ -376,7 +371,7 @@ def write_daily_data_fund
   end
 end
 
-write_daily_data_fund
+# write_daily_data_fund
 
 
 def write_daily_data_bench
@@ -410,7 +405,7 @@ def write_daily_data_bench
 end
 
 
-write_daily_data_bench
+# write_daily_data_bench
 
 # dates = ["2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
 #              "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
