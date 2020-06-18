@@ -1,113 +1,107 @@
-  <br>
-  <br>
-  <div class="container grey padding1 border-radius05 shadow-boxing marginb">
+<br>
+<br>
+<div class="container grey padding1 border-radius05 shadow-boxing marginb">
 
-      <h3 class="text-center"><%=@fund.best_name%></h3>
-      <p class="text-center" ><%= @date.day.to_formatted_s(:long_ordinal)%> </p>
+  <h3 class="text-center"><%=@fund.best_name%></h3>
+  <p class="text-center" ><%= @date.day.to_formatted_s(:long_ordinal)%> </p>
 
-      <ul class="list-inline tabs-underlined">
-        <li>
-          <a id="data_geral" class="tab-underlined active">Geral</a>
-        </li>
-        <li>
-          <a id="return" class="tab-underlined">Retorno</a>
-        </li>
-         <li>
-          <a id="risk" class="tab-underlined">Risco</a>
-        </li>
-        <li>
-          <a id="liquidity" class="tab-underlined">Liquidez</a>
-        </li>
-      </ul>
+  <ul class="list-inline tabs-underlined">
+    <li>
+      <a id="data_geral" class="tab-underlined active">Geral</a>
+    </li>
+    <li>
+      <a id="return" class="tab-underlined">Retorno</a>
+    </li>
+     <li>
+      <a id="risk" class="tab-underlined">Risco</a>
+    </li>
+    <li>
+      <a id="liquidity" class="tab-underlined">Liquidez</a>
+    </li>
+  </ul>
 
-      <div id="geral" class="hidable">
-      <% @this_fund_data_hash.each do |data| %>
+  <div id="geral" class="hidable">
+    <% @this_fund_data_hash.each do |data| %>
+      <%= render 'shared/table_fund', data: data %>
+    <% end %>
+
+    <div class= "hidden competitor-data">
+      <% @competitors_datas_hash.each do |data| %>
         <%= render 'shared/table_fund', data: data %>
       <% end %>
+    </div>
 
-      <div class= "hidden competitor-data">
-        <% @competitors_datas_hash.each do |data| %>
-          <%= render 'shared/table_fund', data: data %>
-        <% end %>
-      </div>
-
-       <p class="text-center"><i class="fas fa-arrow-circle-left"></i><i class="fas fa-arrow-circle-right"></i></p>
-
-        <% if @competitors.size ==1 %>
-            <div class="my-row space_around">
-              <a id="show-competitors" class="btn-outline col-xs-12 col-md-4"><%= @competitors[0].short_name %></a>
-            </div>
-
-        <% else %>
-
-            <div class="my-row space_around">
-              <a id="show-competitors" class="btn-outline col-xs-12 col-md-4">Concorrentes</a>
-            </div>
-        <% end %>
-
-
-        <div class="padding1 my-row border-radius05 shadow-boxing marginb">
-          <% if !@history_aum.nil? %>
-            <div class="chart-container">
-            <%= line_chart @history_aum, colors: ["#CFB07B"], thousands: ",", title: "PL", ytitle: "$R Bi"%>
-            </div>
-
-          <% end %>
-          <% if !@history_share.nil? %>
-            <div class="chart-container">
-             <%= line_chart @history_share, colors: ["#CFB07B"], backgroundColor: "#eee",thousands: ",", title: "Cota", ytitle: "$R"%>
-            </div>
-
-          <% end %>
-        </div>
-      </div>
-
-
-        <div id="retorno" class="hidable hidden">
-          <div class="padding1 my-row border-radius05 shadow-boxing marginb">
-           <% unless @chart_returns_vs_benchmark.nil? %>
-            <div class="chart-container">
-             <%= column_chart @chart_returns_vs_benchmark, colors: ["#CFB07B", "#1E2025"], title: "Retorno vs Benchmark", ytitle: "Retorno mensal (%)"%>
-            </div>
-            <br>
-          <% end %>
-
-            <% unless @chart_returns_vs_competitors.nil? %>
-            <div class="chart-container">
-             <%= column_chart @chart_returns_vs_competitors, colors: ["#CFB07B"], thousands: ",", title: "Retorno mensal", ytitle: "%", label: "Value"%>
-            </div>
-            <br>
-          <% end %>
-        </div>
-      </div>
-      <div id="risco"  class="hidable hidden">
-        <div class="padding1 my-row border-radius05 shadow-boxing marginb">
-        <% unless @chart_risk_returns.nil? %>
-          <div class="chart-container risco">
-           <%= scatter_chart @chart_risk_returns, colors: ["#CFB07B"], title: "Risco Retorno", ytitle: "Retorno anual (%)", xtitle: "Vol anual (%)"%>
-          </div>
-          <br>
-        <% end %>
-         <% unless @history_volatility.nil? %>
-          <div class="chart-container risco">
-           <%= line_chart @history_volatility, colors: ["#CFB07B"], backgroundColor: "#eee", title: "Volatility", ytitle: "%"%>
-          </div>
-          <br>
-            <% end %>
-          </div>
+    <% if @competitors.size ==1 %>
+        <div class="my-row space_around">
+          <a id="show-competitors" class="btn-outline col-xs-12 col-md-4"><%= @competitors[0].short_name %></a>
         </div>
 
-        <div id="liquidez" class="hidable hidden">
-          <div class="padding1 my-row border-radius05 shadow-boxing marginb">
-         <% unless @chart_monthly_captation.nil? %>
-          <div class="chart-container liquidez">
-           <%= column_chart @chart_monthly_captation, colors: ["#CFB07B"], title: "Captação mensal", ytitle: "$R Mi"%>
-          </div>
-          <br>
-        <% end %>
-        </div>
-        </div>
+    <% else %>
 
+        <div class="my-row space_around">
+          <a id="show-competitors" class="btn-outline col-xs-12 col-md-4">Concorrentes</a>
+        </div>
+    <% end %>
+
+    <div class="padding1 my-row border-radius05 shadow-boxing">
+      <% unless @history_aum.nil? %>
+
+        <div class="chart-container">
+        <%= line_chart @history_aum, colors: ["#CFB07B"], thousands: ",", title: "PL", ytitle: "$R Bi"%>
+        </div>
+      <% end %>
+
+      <% unless @history_share.nil? %>
+        <div class="chart-container">
+         <%= line_chart @history_share, colors: ["#CFB07B"], backgroundColor: "#eee",thousands: ",", title: "Cota", ytitle: "$R"%>
+        </div>
+      <% end %>
+    </div>
   </div>
+
+
+  <div id="retorno" class="hidable hidden">
+    <div class="padding1 my-row border-radius05 shadow-boxing">
+      <% unless @chart_returns_vs_benchmark.nil? %>
+        <div class="chart-container">
+
+         <%= column_chart @chart_returns_vs_benchmark, colors: ["#CFB07B", "#1E2025"], title: "Retorno vs Benchmark", ytitle: "Retorno mensal (%)"%>
+
+      </div>
+      <% end %>
+
+      <% unless @chart_returns_vs_competitors.nil? %>
+        <div class="chart-container">
+        <%= column_chart @chart_returns_vs_competitors, colors: ["#CFB07B"], thousands: ",", title: "Retorno mensal", ytitle: "%", label: "Value"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="risco"  class="hidable hidden">
+    <div class="padding1 my-row border-radius05 shadow-boxing">
+      <% unless @chart_risk_returns.nil? %>
+        <div class="chart-container risco">
+         <%= scatter_chart @chart_risk_returns, colors: ["#CFB07B"], title: "Risco Retorno", ytitle: "Retorno anual (%)", xtitle: "Vol anual (%)"%>
+        </div>
+      <% end %>
+      <% unless @history_volatility.nil? %>
+        <div class="chart-container risco">
+         <%= line_chart @history_volatility, colors: ["#CFB07B"], backgroundColor: "#eee", title: "Volatility", ytitle: "%"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="liquidez" class="hidable hidden">
+      <div class="padding1 my-row border-radius05 shadow-boxing">
+     <% unless @chart_monthly_captation.nil? %>
+        <div class="chart-container liquidez">
+         <%= column_chart @chart_monthly_captation, colors: ["#CFB07B"], title: "Captação mensal", ytitle: "$R Mi"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 
