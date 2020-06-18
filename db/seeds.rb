@@ -14,6 +14,16 @@ require 'algoliasearch'
 
 csv_options = { col_sep:  ";", quote_char: '"', headers: :first_row }
 
+  def get_date(date)
+      year = date[0,4].to_i
+      puts year
+       month = date[5,7].to_i
+      puts month
+      day = date[8,10].to_i
+      puts day
+      Date.new(year, month, day)
+  end
+
 def write_benchmark_historical_data(files, csv_options)
   files.each do |file|
     CSV.foreach(file, csv_options) do |row|
@@ -21,16 +31,11 @@ def write_benchmark_historical_data(files, csv_options)
       codigo = row['Ativo'][0,3]
       puts codigo
       benchmark = BenchMark.find_by(codigo_economatica: codigo)
-      #   Fund.create(codigo_economatica: codigo)
+
       puts benchmark
-      year = row["Data"][0,4].to_i
-      puts year
-      month = row["Data"][5,7].to_i
-      puts month
-      day = row["Data"][8,10].to_i
-      puts day
-      date_format_YMD = Date.new(year, month, day)
-      # end
+
+      date_format_YMD = get_date(date)
+
 
       date = Calendar.find_by(day: date_format_YMD)
       date = Calendar.create(day: date_format_YMD) if date.nil?
@@ -58,16 +63,8 @@ def write_funds_historical_data(files, csv_options)
       codigo = row['Ativo'][0,6].to_i
       puts codigo
       fund = Fund.find_by(codigo_economatica: codigo)
-      #   Fund.create(codigo_economatica: codigo)
 
-      year = row["Data"][0,4].to_i
-      puts year
-      month = row["Data"][5,7].to_i
-      puts month
-      day = row["Data"][8,10].to_i
-      puts day
-      date_format_YMD = Date.new(year, month, day)
-      # end
+      date_format_YMD = get_date(date)
 
       date = Calendar.find_by(day: date_format_YMD)
       date = Calendar.create(day: date_format_YMD) if date.nil?
@@ -101,8 +98,6 @@ def create_competitors (path, csv_options)
 
     comp_area = Area.find_by(name: "Competitors") if gestor.name != ca_gestor.name
 
-
-
     anbima_class = AnbimaClass.find_by(name: row['Classe Anbima'])
     anbima_class = AnbimaClass.create(name: row['Classe Anbima']) if anbima_class.nil?
     puts anbima_class.name
@@ -122,6 +117,64 @@ def create_competitors (path, csv_options)
     end
   end
 
+end
+
+
+
+def write_monthly_application(path, options, dates)
+
+  CSV.foreach(path, options) do |row|
+    codigo = row['Ativo'][0,6].to_i
+    puts codigo
+    fund = Fund.find_by(codigo_economatica: codigo)
+
+    dates.each do |date|
+
+      date_format_YMD = get_date(date)
+
+      date_calendar = Calendar.find_by(day: date_format_YMD)
+      date_calendar = Calendar.create(day: date_format_YMD) if date_calendar.nil?
+
+      puts date_calendar.day
+
+      datas = DailyDatum.find_by(fund: fund, calendar: date_calendar)
+
+      if datas.nil?
+        DailyDatum.create(application_monthly_net_value: row[date], fund: fund, calendar: date_calendar)
+      else
+        datas.update(application_monthly_net_value: row[date])
+      end
+    end
+  end
+end
+
+
+
+def write_monthly_return(path, options, dates)
+
+  CSV.foreach(path, options) do |row|
+    codigo = row['Ativo'][0,6].to_i
+    puts codigo
+    fund = Fund.find_by(codigo_economatica: codigo)
+
+    dates.each do |date|
+
+      date_format_YMD = get_date(date)
+
+      date_calendar = Calendar.find_by(day: date_format_YMD)
+      date_calendar = Calendar.create(day: date_format_YMD) if date_calendar.nil?
+
+      puts date_calendar.day
+
+      datas = DailyDatum.find_by(fund: fund, calendar: date_calendar)
+
+      if datas.nil?
+        DailyDatum.create(return_monthly_value: row[date], fund: fund, calendar: date_calendar)
+      else
+        datas.update(return_monthly_value: row[date])
+      end
+    end
+  end
 end
 
 
@@ -286,15 +339,7 @@ def write_daily_data_fund
       puts fund
       puts codigo
 
-      # fund = Fund.create(codigo_economatica: codigo, name: row['Nome'], anbima_class: anbima_class, gestor: gestor, competitor_group: row['Competitor group']) if fund.nil?
-
-      year = row["Date"][0,4].to_i
-      puts year
-      month = row["Date"][5,7].to_i
-      puts month
-      day = row["Date"][8,10].to_i
-      puts day
-      date_format_YMD = Date.new(year, month, day)
+       date_format_YMD = get_date(date)
 
       date = Calendar.find_by(day: date_format_YMD)
       date = Calendar.create(day: date_format_YMD) if date.nil?
@@ -342,7 +387,7 @@ def write_daily_data_fund
   end
 end
 
- write_daily_data_fund
+# write_daily_data_fund
 
 
 def write_daily_data_bench
@@ -357,16 +402,10 @@ def write_daily_data_bench
       codigo = row['Ativo'][0,3]
       puts codigo
       benchmark = BenchMark.find_by(codigo_economatica: codigo)
-      #   Fund.create(codigo_economatica: codigo)
+
       puts benchmark
-      year = row["Date"][0,4].to_i
-      puts year
-      month = row["Date"][5,7].to_i
-      puts month
-      day = row["Date"][8,10].to_i
-      puts day
-      date_format_YMD = Date.new(year, month, day)
-      # end
+
+      date_format_YMD = get_date(date)
 
       date = Calendar.find_by(day: date_format_YMD)
       date = Calendar.create(day: date_format_YMD) if date.nil?
@@ -386,39 +425,18 @@ def write_daily_data_bench
 end
 
 
-write_daily_data_bench
+# write_daily_data_bench
+
+dates = ["2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
+              "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
+
 # path_array = 'db/csv_repos/Monthly Net Captation.csv'
-# CSV.foreach(path_array, csv_options) do |row|
+
+# write_monthly_application(path_array, csv_options, dates)
+
+path_array = 'db/csv_repos/Monthly Return.csv'
+
+write_monthly_return(path_array, csv_options, dates)
 
 
-#       codigo = row['Ativo'][0,6].to_i
-#       puts codigo
-#       fund = Fund.find_by(codigo_economatica: codigo)
-#       #   Fund.create(codigo_economatica: codigo)
 
-#       dates = ["2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
-#                 "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
-#       dates.each do |date|
-#         year = date[0,4].to_i
-#         puts year
-#          month = date[5,7].to_i
-#         puts month
-#         day = date[8,10].to_i
-#         puts day
-#         date_format_YMD = Date.new(year, month, day)
-#         # end
-
-#         date_calendar = Calendar.find_by(day: date_format_YMD)
-#         date_calendar = Calendar.create(day: date_format_YMD) if date_calendar.nil?
-
-#         puts date_calendar.day
-
-#         datas = DailyDatum.find_by(fund: fund, calendar: date_calendar)
-
-#         if datas.nil?
-#           DailyDatum.create(application_monthly_net_value: row[date], fund: fund, calendar: date_calendar)
-#         else
-#           datas.update(application_monthly_net_value: row[date])
-#         end
-#       end
-# end
