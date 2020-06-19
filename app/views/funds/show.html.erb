@@ -78,7 +78,12 @@
 
       <% unless @chart_incremental_returns.nil? %>
         <div class="chart-container">
-        <%= line_chart @chart_incremental_returns, colors: ["#CFB07B", "#1E2025", "#89449C", "#8C332B", "#3A0CA3"], thousands: ",", title: "Retorno mensal", ytitle: "R", label: "Value", ymin: "65", ymax: "125" %>
+       <% if @fund.bench_mark.name == "Ibovespa" %>
+          <%= line_chart @chart_incremental_returns, colors: ["#CFB07B", "#1E2025", "#89449C", "#8C332B", "#3A0CA3"], thousands: ",", title: "Retorno accumulado", label: "Value", min: 75 %>
+         <% else %>
+          <%= line_chart @chart_incremental_returns, colors: ["#CFB07B", "#1E2025", "#89449C", "#8C332B", "#3A0CA3"], thousands: ",", title: "Retorno accumulado", label: "Value", min: 90 %>
+       <% end %>
+
         </div>
       <% end %>
     </div>

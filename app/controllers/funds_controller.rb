@@ -216,15 +216,21 @@ class FundsController < ApplicationController
   def calculate_incremental_returns(dates, asset, price, final_data_array)
     # for each dates, we will check if the asset is a fund or a benchmark.
     # Depending on this we look in the correct database table
-    dates.each do |date|
-      if Fund.find_by(id: asset.id).nil?
-        data_array = DataBenchmark.find_by(fund: asset, calendar: date)
-      else
-        data_array = DailyDatum.find_by(fund: asset, calendar: date)
-      end
 
+    if asset.is_a?(BenchMark)
+      asset_data = DataBenchmark.where(bench_mark: asset)
+    elsif asset.is_a?(Fund)
+      asset_data = DailyDatum.where(fund: asset)
+    end
+
+    dates.each do |date|
+      data_array = asset_data.find_by(calendar: date)
+      puts date.day
+      puts asset.name
+      puts data_array.return_monthly_value
       # we increment our price with the monthly return
       price = (1 + data_array.return_monthly_value / 100) * price
+      puts price
       # we store the data in the array
       final_data_array << { date: date.day, data: price } unless data_array.nil?
     end
