@@ -6,11 +6,13 @@ require 'stringio'
 
 DailyDatum.delete_all
 Fund.delete_all
+DataBenchmark.delete_all
+BenchMark.delete_all
 Gestor.delete_all
 Area.delete_all
 AnbimaClass.delete_all
 Calendar.delete_all
-BenchMark.delete_all
+
 
 csv_options = { col_sep:  ";", quote_char: '"', headers: :first_row }
 
