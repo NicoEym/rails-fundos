@@ -93,7 +93,7 @@ def create_competitors (path, csv_options)
     gestor = Gestor.create(name: row['Gestor']) if gestor.nil?
     puts gestor.name
 
-    comp_area = Area.find_by(name: "Competitors") if gestor.name != ca_gestor.name
+    comp_area = Area.find_by(name: "Competitors") if gestor.name != "Ca Indosuez Wealth (Brazil) S.A. Dtvm"
 
     anbima_class = AnbimaClass.find_by(name: row['Classe Anbima'])
     anbima_class = AnbimaClass.create(name: row['Classe Anbima']) if anbima_class.nil?
