@@ -186,7 +186,7 @@ if BenchMark.all.empty?
   path_CDI  = 'db/csv_repos/data CDI.csv'
   path_IMAB5  = 'db/csv_repos/data IMA B5.csv'
 
-  paths_bench_array = [path_ibovespa, path_CDI, path_IMAB5]
+  paths_bench_array = [path_CDI, path_ibovespa, path_IMAB5]
 
   write_benchmark_historical_data(paths_bench_array, csv_options)
 end
@@ -221,8 +221,8 @@ if Fund.all.empty?
   puts "created #{beton}"
   allocaction = Fund.create(name: "Ca Indosuez Alloc Action Fc FIA", short_name: "Allocaction", codigo_economatica: "372986", bench_mark: ibov_bench, area_name: fof_area.name, gestor: ca_gestor, anbima_class: acao_anbima, photo_url: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{allocaction}"
-  private_pi = Fund.create(name: "Ca Indosuez Private Pi Fc de FI Mult", short_name: "Pi", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: fof_area.name, gestor: ca_gestor, anbima_class: multi_anbima, photo_url: "https://images.unsplash.com/photo-1453733190371-0a9bedd82893?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
-  puts "created #{private_pi}"
+  # private_pi = Fund.create(name: "Ca Indosuez Private Pi Fc de FI Mult", short_name: "Pi", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: fof_area.name, gestor: ca_gestor, anbima_class: multi_anbima, photo_url: "https://images.unsplash.com/photo-1453733190371-0a9bedd82893?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  # puts "created #{private_pi}"
 
   path_vitesse  = 'db/csv_repos/data vitesse.csv'
   path_agilite  = 'db/csv_repos/data agilite.csv'

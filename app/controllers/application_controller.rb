@@ -75,7 +75,7 @@ class ApplicationController < ActionController::Base
     dates = Calendar.order('day desc')
 
     dates.each do |date|
-      last_day_of_months << date if date.last_day_of_month? && last_day_of_months.size < 12
+      last_day_of_months << date if date.last_day_of_month?
     end
     # then we send an array of dates
     last_day_of_months.sort
