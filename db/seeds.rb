@@ -4,14 +4,14 @@ require "open-uri"
 require 'stringio'
 # require 'algoliasearch'
 
-DailyDatum.delete_all
-Fund.delete_all
-DataBenchmark.delete_all
-BenchMark.delete_all
-Gestor.delete_all
-Area.delete_all
-AnbimaClass.delete_all
-Calendar.delete_all
+# DailyDatum.delete_all
+# Fund.delete_all
+# DataBenchmark.delete_all
+# BenchMark.delete_all
+# Gestor.delete_all
+# Area.delete_all
+# AnbimaClass.delete_all
+# Calendar.delete_all
 
 
 csv_options = { col_sep:  ";", quote_char: '"', headers: :first_row }
@@ -409,16 +409,16 @@ end
 
 write_daily_data_bench
 
-dates = ["2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
-             "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
+# dates = ["2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
+#              "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
 
-path_array = 'db/csv_repos/Monthly Net Captation.csv'
+# path_array = 'db/csv_repos/Monthly Net Captation.csv'
 
-write_monthly_application(path_array, csv_options, dates)
+# write_monthly_application(path_array, csv_options, dates)
 
-path_array = 'db/csv_repos/Monthly Return.csv'
+# path_array = 'db/csv_repos/Monthly Return.csv'
 
-write_monthly_return(path_array, csv_options, dates)
+# write_monthly_return(path_array, csv_options, dates)
 
 
 
