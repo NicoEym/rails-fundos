@@ -176,15 +176,9 @@ end
 
 if BenchMark.all.empty?
 
-
-  cdi_bench = BenchMark.find_by(name:"CDI")
-  ibov_bench= BenchMark.find_by(name:"Ibovespa")
-  ima_bench = BenchMark.find_by(name:"IMA B5")
-
-
-  cdi_bench.update(name:"CDI", codigo_economatica: "CDI" )
-  ibov_bench.update(name:"Ibovespa", codigo_economatica: "IBO" )
-  ima_bench.update(name:"IMA B5", codigo_economatica: "IMA" )
+  cdi_bench = BenchMark.create(name:"CDI", codigo_economatica: "CDI" )
+  ibov_bench = BenchMark.create(name:"Ibovespa", codigo_economatica: "IBO" )
+  ima_bench = BenchMark.create(name:"IMA B5", codigo_economatica: "IMA" )
 
   path_ibovespa  = 'db/csv_repos/data ibovespa.csv'
   path_CDI  = 'db/csv_repos/data CDI.csv'
