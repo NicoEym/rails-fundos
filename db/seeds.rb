@@ -169,17 +169,17 @@ end
 
 
 
- # if BenchMark.all.empty?
+if BenchMark.all.empty?
 
 
-  # cdi_bench = BenchMark.find_by(name:"CDI")
-  # ibov_bench= BenchMark.find_by(name:"Ibovespa")
-  # ima_bench = BenchMark.find_by(name:"IMA B5")
+  cdi_bench = BenchMark.find_by(name:"CDI")
+  ibov_bench= BenchMark.find_by(name:"Ibovespa")
+  ima_bench = BenchMark.find_by(name:"IMA B5")
 
 
-  # cdi_bench.update(name:"CDI", codigo_economatica: "CDI" )
-  # ibov_bench.update(name:"Ibovespa", codigo_economatica: "IBO" )
-  # ima_bench.update(name:"IMA B5", codigo_economatica: "IMA" )
+  cdi_bench.update(name:"CDI", codigo_economatica: "CDI" )
+  ibov_bench.update(name:"Ibovespa", codigo_economatica: "IBO" )
+  ima_bench.update(name:"IMA B5", codigo_economatica: "IMA" )
 
   path_ibovespa  = 'db/csv_repos/data ibovespa.csv'
   path_CDI  = 'db/csv_repos/data CDI.csv'
@@ -188,7 +188,7 @@ end
   paths_bench_array = [path_ibovespa, path_CDI, path_IMAB5]
 
   write_benchmark_historical_data(paths_bench_array, csv_options)
-# end
+end
 
 
 if Fund.all.empty?
@@ -407,16 +407,16 @@ end
 
 # write_daily_data_bench
 
-# dates = ["2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
-#              "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
+dates = ["2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
+             "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
 
-# path_array = 'db/csv_repos/Monthly Net Captation.csv'
+path_array = 'db/csv_repos/Monthly Net Captation.csv'
 
-# write_monthly_application(path_array, csv_options, dates)
+write_monthly_application(path_array, csv_options, dates)
 
-#path_array = 'db/csv_repos/Monthly Return.csv'
+path_array = 'db/csv_repos/Monthly Return.csv'
 
-#write_monthly_return(path_array, csv_options, dates)
+write_monthly_return(path_array, csv_options, dates)
 
 
 
