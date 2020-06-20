@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
     # we choose the last five days in the data base
     today = Date.today
     last_dates = []
-    (1..10).each do |d|
-      previous_day = today - d
+    (1..10).each do |number_of_day|
+      previous_day = today - number_of_day
       existing_date = Calendar.find_by(day: previous_day)
       last_dates << existing_date unless existing_date.nil?
     end
@@ -68,14 +68,17 @@ class ApplicationController < ActionController::Base
     final_data
   end
 
-    def get_final_days_of_month
+  def get_final_days_of_month
     # we create an array
     last_day_of_months = []
-    # for each fund we choose the dailydata that matches the date and the funds
+    # we get all the date rank from the most recent to the oldest in an array
     dates = Calendar.order('day desc')
-
-    dates.each do |date|
-      last_day_of_months << date if date.last_day_of_month?
+    # for each date in the array
+    (0..dates.size - 1 ).each do |rank|
+      # we check if the month of the current element is different from the month of the previous element in the array (the following date, remember we ranked our dates)
+      # if it the case, then the current date is the final date of the month
+      # as long as we do not have 12 dates representing the last day of the last 12 months, we continue.
+      last_day_of_months << dates[rank] if dates[rank].day.month != dates[rank - 1].day.month && last_day_of_months.size < 12
     end
     # then we send an array of dates
     last_day_of_months.sort
