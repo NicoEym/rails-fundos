@@ -99,6 +99,21 @@ class FundsController < ApplicationController
     historical_array
   end
 
+  def get_historical_data_for_charts(datas, data_type)
+  # for all the daily data, we get the date and the AUM value for the fund.
+  # Doing so we have our historical serie of data for the AUM
+  historical_array = []
+  case data_type
+    when "aum" then
+      historical_array << [data.calendar.day, data.aum / 1_000_000_000] unless data.aum.nil?
+    when "share_price" then
+      historical_array << [data.calendar.day, data.share_price] unless data.share_price.nil?
+    when "volatility" then
+      historical_array << [data.calendar.day, data.volatility] unless data.volatility.nil?
+  end
+  historical_array
+  end
+
   def get_competitors(fund)
     # if we do not have a short name, the fund is not from Indosuez, then we display only the indosuez fund as a competitor.
     if fund.short_name.nil?
