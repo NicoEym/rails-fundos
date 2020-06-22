@@ -4,7 +4,7 @@ class FundsController < ApplicationController
   def show
     # funds is the fund given by the params
     @fund = Fund.find(params[:id])
-
+    @benchmark = @fund.bench_mark
     # we get the last date
     @date = get_last_date(@fund)
 
@@ -23,19 +23,20 @@ class FundsController < ApplicationController
     # this function will get the competitors of the fund for which we have a data on that day
     @competitors = get_competitors(@fund, @date)
 
-    # we get an array of hash with the daily data for the fund
-    array = []
-    array << @fund
+    # we put our fund in an array
+    this_fund_array = [@fund]
     # we use a function that is in application controller
-    @this_fund_data_hash = get_all_daily_data(array, @date)
+    # we get an array of hash with the daily data for the fund
+    @this_fund_data_hash = get_all_daily_data(this_fund_array, @date)
 
+    # we use a function that is in application Controller
     # we get an array of hash with the daily data for the fund's competitors
     @competitors_datas_hash = get_all_daily_data(@competitors, @date)
 
     # then we use the function to get the returns of the competitors
-    @chart_returns_vs_competitors = get_returns_data(@competitors, @fund, @date)
+    @chart_returns_vs_competitors = get_returns_data(@competitors, @fund, @date, "monthly_return")
     # then we use the function to get the risk/return relation of the competitors and the fund
-    @chart_risk_returns = get_risk_returns_data(@competitors, @fund, @date)
+    @chart_risk_returns = get_returns_data(@competitors, @fund, @date, "risk/return")
 
     # we call a function in the application controller to get the last day of the last 12 months
     end_of_months_dates = get_final_days_of_month
@@ -46,52 +47,42 @@ class FundsController < ApplicationController
     @chart_monthly_captation = get_monthly_captation(range_data, end_of_months_dates)
 
     # We get the monthly returns vs the benchmark
-    @chart_returns_vs_benchmark = get_returns_vs_benchmark(range_data, @fund, end_of_months_dates)
+    @chart_returns_vs_benchmark = get_returns_vs_benchmark(range_data, @fund, @benchmark, end_of_months_dates)
 
-
-    @chart_incremental_returns = get_incremental_returns_data(@fund, @competitors, end_of_months_dates)
+    @chart_incremental_returns = get_incremental_returns_data(@fund, @competitors, @benchmark, end_of_months_dates)
   end
 
   def index
-    # if no area params is settled...
+    # we get the area params
     @area = params[:area_name]
+    # if no area params is settled
     # ... we list all the funds present in the DB
-    if @area.nil?
-      @funds = Fund.all
-    else
-      # ... we show only the funds that match the area
-      @funds = Fund.where(area_name: params[:area_name])
-
-    end
+    # ... we show only the funds that match the area
+    @area.nil? ? @funds = Fund.all : @funds = Fund.where(area_name: params[:area_name])
   end
 
   def get_historical_data_for_charts(datas, data_type)
-  # for all the daily data, we get the date and the AUM/share_price/volatility value for the fund.
-  # Doing so we have our historical serie of data for the AUM
-  historical_array = []
-  datas.each do |data|
-    case data_type
-      when "aum" then
-        historical_array << [data.calendar.day, data.aum / 1_000_000_000] unless data.aum.nil?
-      when "share_price" then
-        historical_array << [data.calendar.day, data.share_price] unless data.share_price.nil?
-      when "volatility" then
-        historical_array << [data.calendar.day, data.volatility] unless data.volatility.nil?
+    # for all the daily data, we get the date and the AUM/share_price/volatility value for the fund.
+    # Doing so we have our historical serie of data for the AUM
+    historical_array = []
+    datas.each do |data|
+      case data_type
+        when"aum" then
+          historical_array << [data.calendar.day, data.aum / 1_000_000_000] unless data.aum.nil?
+        when "share_price" then
+          historical_array << [data.calendar.day, data.share_price] unless data.share_price.nil?
+        when "volatility" then
+          historical_array << [data.calendar.day, data.volatility] unless data.volatility.nil?
+      end
     end
-  end
-  historical_array
+    historical_array
   end
 
   def get_competitors(fund, date)
     competitors = []
     # if we do not have a short name, the fund is not from Indosuez, then we display only the indosuez fund as a competitor.
-    if fund.short_name.nil?
-      competitors = Fund.where(short_name: fund.competitor_group)
-    else
     # if we have a shortname, the fund is from Indosuez and then we display all the fund that belongs to this group
-      competitors = Fund.where(competitor_group: fund.short_name)
-    end
-
+    fund.short_name.nil? ? competitors = Fund.where(short_name: fund.competitor_group) : competitors = Fund.where(competitor_group: fund.short_name)
     # then we will exclude the competitors that does not have data for the specific date
     filtered_competitors = []
     competitors.each do |competitor|
@@ -100,45 +91,44 @@ class FundsController < ApplicationController
     filtered_competitors
   end
 
-  def get_returns_data(competitors, fund, date, return_type)
-    data = []
-    # for each competitor we store the name and the value of the monthly return
-    competitors.each do |competitor|
-      competitor_data = DailyDatum.find_by(fund_id: competitor.id, calendar_id: date.id)
-      data << [competitor.best_name, competitor_data.return_monthly_value.round(2)]
-    end
-    # Eventually we do the same for our Indosuez fund
-    fund_data = DailyDatum.find_by(fund_id: fund.id, calendar_id: date.id)
-    data << [fund.best_name, fund_data.return_monthly_value.round(2)]
-  end
-
-  def get_risk_returns_data(competitors, fund, date)
-    data = []
-    # for each competitor we store the name and the couple volatility (x axis) / return (y axis)
-    competitors.each do |competitor|
-      competitor_data = DailyDatum.find_by(fund: competitor, calendar: date)
-      data << { name: competitor.best_name, data: { competitor_data.volatility.round(2) => competitor_data.return_annual_value.round(2) } }
-    end
-    # eventually we do the same for the our Indosuez fund
-    fund_data = DailyDatum.find_by(fund_id: fund.id, calendar: date)
-    data << { name: fund.best_name, data: { fund_data.volatility.round(2) => fund_data.return_annual_value.round(2) } }
-  end
-
-  def get_risk_returns_data(competitors, fund, date, data_type)
+  def get_returns_data(competitors, fund, date, data_type)
     historical_array = []
-    # for each competitor we store the name and the couple volatility (x axis) / return (y axis)
-    competitors.each do |competitor|
-      competitor_data = DailyDatum.find_by(fund: competitor, calendar: date)
-      historical_array << { name: competitor.best_name, data: { competitor_data.volatility.round(2) => competitor_data.return_annual_value.round(2) } }
+    # depending on the type of return specified we will send either the monthly return, either...
+    # ... either the couple risk/return
+    case data_type
+      when "monthly_return"
+        # we loop on each competitor to include their monthly return on the array
+        competitors.each do |competitor|
+          historical_array << get_monthly_return(competitor, date)
+        end
+        # then we include the monthly data of the fund
+        historical_array << get_monthly_return(fund, date)
+
+      when "risk/return"
+        # we loop on each competitor to include their couple risk/return on the array
+        competitors.each do |competitor|
+          historical_array << get_risk_return(competitor, date)
+        end
+        # then we include the couple risk/return of the fund
+        historical_array << get_risk_return(fund, date)
     end
-    # eventually we do the same for the our Indosuez fund
-    fund_data = DailyDatum.find_by(fund_id: fund.id, calendar: date)
-    historical_array << { name: fund.best_name, data: { fund_data.volatility.round(2) => fund_data.return_annual_value.round(2) } }
+    historical_array
+  end
+
+  # quick method to get the monthly return of a fund in an array ready to display on a chart
+  def get_monthly_return(fund, date)
+    fund_data = DailyDatum.find_by(fund: fund, calendar: date)
+    [fund.best_name, fund_data.return_monthly_value.round(2)] unless fund_data.nil?
+  end
+
+  # quick method to get the risk/return of a fund in a hash ready for the chart
+  def get_risk_return(fund, date)
+    fund_data = DailyDatum.find_by(fund: fund, calendar: date)
+    { name: fund.best_name, data: { fund_data.volatility.round(2) => fund_data.return_annual_value.round(2) } } unless fund_data.nil?
   end
 
   def get_monthly_captation(datas, dates)
     # for all the end of the month date we will get the monthly captation
-
     historical_array = []
     dates.each do |date|
       data = datas.find_by(calendar: date)
@@ -147,18 +137,14 @@ class FundsController < ApplicationController
     historical_array
   end
 
-  def get_returns_vs_benchmark(datas, fund, dates)
+  def get_returns_vs_benchmark(datas, fund, benchmark, dates)
     # we create several arrays
     historical_array = []
     fund_data_array = []
     benchmark_data_array = []
 
-    # we get the benchmark
-    benchmark = fund.bench_mark
-
     # for each end of month date we insert in an array the corresponding DailyDatum
     # we do this for the fund and the Benchmark
-
     dates.each do |date|
       fund_data = datas.find_by(calendar: date)
       fund_data_array << fund_data unless fund_data.nil?
@@ -166,16 +152,13 @@ class FundsController < ApplicationController
       benchmark_data_array << benchmark_data unless benchmark_data.nil?
     end
     # then we create the hash to be inserted in the final array for the graph
-    historical_array << { name: fund.best_name, data: fund_data_array.map{|t| [t.calendar.day.strftime("%Y-%m"), t.return_monthly_value.round(2)] } }
-    historical_array << { name: benchmark.name, data: benchmark_data_array.map{|t| [t.calendar.day.strftime("%Y-%m"), t.return_monthly_value.round(2)] } }
+    historical_array << { name: fund.best_name, data: fund_data_array.map {|t| [t.calendar.day.strftime("%Y-%m"), t.return_monthly_value.round(2)] } }
+    historical_array << { name: benchmark.name, data: benchmark_data_array.map {|t| [t.calendar.day.strftime("%Y-%m"), t.return_monthly_value.round(2)] } }
   end
 
-  def get_incremental_returns_data(fund, competitors, dates_12_months)
+  def get_incremental_returns_data(fund, competitors, benchmark, dates_12_months)
     # we create the array that will receive our final data
     historical_array = []
-
-    # we get the benchmark
-    benchmark = fund.bench_mark
 
     # we create an array with every object (funds and benchmark)
     assets = [fund, benchmark]
