@@ -16,13 +16,12 @@ class FundsController < ApplicationController
     range_data = DailyDatum.where(fund_id: @fund.id)
 
     # This function will get the history of AUM. The one the history of share price
-    @history_aum = get_historical_aum(range_data, 1_000_000_000)
-    @history_share = get_historical_share_price(range_data)
-    @history_volatility = get_historical_volatility(range_data)
+    @history_aum = get_historical_data_for_charts(range_data, "aum")
+    @history_share = get_historical_data_for_charts(range_data, "share_price")
+    @history_volatility = get_historical_data_for_charts(range_data, "volatility")
 
-    # this function will get the competitors of the fund
-    @competitors = get_competitors(@fund)
-    @filtered_competitors = filter(@competitors, @date)
+    # this function will get the competitors of the fund for which we have a data on that day
+    @competitors = get_competitors(@fund, @date)
 
     # we get an array of hash with the daily data for the fund
     array = []
@@ -31,12 +30,12 @@ class FundsController < ApplicationController
     @this_fund_data_hash = get_all_daily_data(array, @date)
 
     # we get an array of hash with the daily data for the fund's competitors
-    @competitors_datas_hash = get_all_daily_data(@filtered_competitors, @date)
+    @competitors_datas_hash = get_all_daily_data(@competitors, @date)
 
     # then we use the function to get the returns of the competitors
-    @chart_returns_vs_competitors = get_returns_data(@filtered_competitors, @fund, @date)
+    @chart_returns_vs_competitors = get_returns_data(@competitors, @fund, @date)
     # then we use the function to get the risk/return relation of the competitors and the fund
-    @chart_risk_returns = get_risk_returns_data(@filtered_competitors, @fund, @date)
+    @chart_risk_returns = get_risk_returns_data(@competitors, @fund, @date)
 
     # we call a function in the application controller to get the last day of the last 12 months
     end_of_months_dates = get_final_days_of_month
@@ -50,7 +49,7 @@ class FundsController < ApplicationController
     @chart_returns_vs_benchmark = get_returns_vs_benchmark(range_data, @fund, end_of_months_dates)
 
 
-    @chart_incremental_returns = get_incremental_returns_data(@fund, @filtered_competitors, end_of_months_dates)
+    @chart_incremental_returns = get_incremental_returns_data(@fund, @competitors, end_of_months_dates)
   end
 
   def index
@@ -66,66 +65,34 @@ class FundsController < ApplicationController
     end
   end
 
-  def get_historical_aum(datas, divide = 1)
-    # for all the daily data, we get the date and the AUM value for the fund.
-    # Doing so we have our historical serie of data for the AUM
-    historical_array = []
-    datas.each do |data|
-      historical_array << [data.calendar.day, data.aum / divide] if !data.aum.nil?
-    end
-
-    historical_array
-  end
-
-  def get_historical_share_price(datas)
-    # for all the daily data, we get the date and the share price value for the fund.
-    # Doing so we have our historical serie of data for the share price
-    historical_array = []
-    datas.each do |data|
-      historical_array << [data.calendar.day, data.share_price] if !data.share_price.nil?
-    end
-
-    historical_array
-  end
-
-  def get_historical_volatility(datas)
-    # for all the daily data, we get the date and the AUM value for the fund.
-    # Doing so we have our historical serie of data for the AUM
-    historical_array = []
-    datas.each do |data|
-      historical_array << [data.calendar.day, data.volatility] unless data.volatility.nil?
-    end
-
-    historical_array
-  end
-
   def get_historical_data_for_charts(datas, data_type)
-  # for all the daily data, we get the date and the AUM value for the fund.
+  # for all the daily data, we get the date and the AUM/share_price/volatility value for the fund.
   # Doing so we have our historical serie of data for the AUM
   historical_array = []
-  case data_type
-    when "aum" then
-      historical_array << [data.calendar.day, data.aum / 1_000_000_000] unless data.aum.nil?
-    when "share_price" then
-      historical_array << [data.calendar.day, data.share_price] unless data.share_price.nil?
-    when "volatility" then
-      historical_array << [data.calendar.day, data.volatility] unless data.volatility.nil?
+  datas.each do |data|
+    case data_type
+      when "aum" then
+        historical_array << [data.calendar.day, data.aum / 1_000_000_000] unless data.aum.nil?
+      when "share_price" then
+        historical_array << [data.calendar.day, data.share_price] unless data.share_price.nil?
+      when "volatility" then
+        historical_array << [data.calendar.day, data.volatility] unless data.volatility.nil?
+    end
   end
   historical_array
   end
 
-  def get_competitors(fund)
+  def get_competitors(fund, date)
+    competitors = []
     # if we do not have a short name, the fund is not from Indosuez, then we display only the indosuez fund as a competitor.
     if fund.short_name.nil?
-      Fund.where(short_name: fund.competitor_group)
+      competitors = Fund.where(short_name: fund.competitor_group)
     else
     # if we have a shortname, the fund is from Indosuez and then we display all the fund that belongs to this group
-      Fund.where(competitor_group: fund.short_name)
+      competitors = Fund.where(competitor_group: fund.short_name)
     end
-  end
 
-  def filter(competitors, date)
-    # if we do not have a short name, the fund is not from Indosuez, then we display only the indosuez fund as a competitor.
+    # then we will exclude the competitors that does not have data for the specific date
     filtered_competitors = []
     competitors.each do |competitor|
       filtered_competitors << competitor unless DailyDatum.find_by(fund: competitor, calendar: date).nil?
@@ -133,7 +100,7 @@ class FundsController < ApplicationController
     filtered_competitors
   end
 
-  def get_returns_data(competitors, fund, date)
+  def get_returns_data(competitors, fund, date, return_type)
     data = []
     # for each competitor we store the name and the value of the monthly return
     competitors.each do |competitor|
@@ -155,6 +122,18 @@ class FundsController < ApplicationController
     # eventually we do the same for the our Indosuez fund
     fund_data = DailyDatum.find_by(fund_id: fund.id, calendar: date)
     data << { name: fund.best_name, data: { fund_data.volatility.round(2) => fund_data.return_annual_value.round(2) } }
+  end
+
+  def get_risk_returns_data(competitors, fund, date, data_type)
+    historical_array = []
+    # for each competitor we store the name and the couple volatility (x axis) / return (y axis)
+    competitors.each do |competitor|
+      competitor_data = DailyDatum.find_by(fund: competitor, calendar: date)
+      historical_array << { name: competitor.best_name, data: { competitor_data.volatility.round(2) => competitor_data.return_annual_value.round(2) } }
+    end
+    # eventually we do the same for the our Indosuez fund
+    fund_data = DailyDatum.find_by(fund_id: fund.id, calendar: date)
+    historical_array << { name: fund.best_name, data: { fund_data.volatility.round(2) => fund_data.return_annual_value.round(2) } }
   end
 
   def get_monthly_captation(datas, dates)
