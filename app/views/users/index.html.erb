@@ -1,9 +1,28 @@
- <table>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.email %>
-        <td><%= user.approved %>
-        <td><%= link_to "Edit", edit_user_path(user) %>
+<br>
+<br>
+<div class="container">
+  <div class="table-responsive">
+    <table class="table">
+      <tr class="text-center black font-white">
+        <td colspan="1">Email</td>
+        <td colspan="1">Approved?</td>
+        <td colspan="1">Admin?</td>
+        <td colspan="1">Approve new user</td>
       </tr>
-    <% end %>
+
+      <% @users.each do |user| %>
+        <tr class="text-center">
+          <td><%= user.email %>
+          <td><%= user.approved %>
+          <td><%= user.admin %>
+          <% if  user.approved == false %>
+            <td><%= link_to "Edit", edit_user_path(user.id)  %>
+          <% end %>
+        </tr>
+      <% end %>
     </table>
+  </div>
+</div>
+<br>
+<br>
+

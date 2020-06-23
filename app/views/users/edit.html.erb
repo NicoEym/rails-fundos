@@ -1,0 +1,11 @@
+<br>
+<br>
+<div class="container">
+  <div class="log-form col-xs-12 col-md-4 text-center">
+    <h1 class="text-center"><%= @user.email%></h1>
+
+    <%= link_to raw('<p class="btn-outline col-xs-12 col-md-4">Approve this user </p>'), {:controller => "users", :action => "update", :user_id => @user.id} , :method=>:patch %>
+  </div>
+</div>
+<br>
+<br>
