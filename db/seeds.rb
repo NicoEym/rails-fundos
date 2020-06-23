@@ -13,6 +13,17 @@ require 'stringio'
 # AnbimaClass.delete_all
 # Calendar.delete_all
 
+modo = User.find_by(email: "nicolas.eymenier@ca-indosuez.com.br")
+modo.admin = true
+modo.approved = true
+modo.save
+
+users = User.all
+
+users.each do |user|
+  user.approved = true
+  user.save
+end
 
 csv_options = { col_sep:  ";", quote_char: '"', headers: :first_row }
 
