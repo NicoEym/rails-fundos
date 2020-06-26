@@ -9,7 +9,7 @@ class FundsController < ApplicationController
     @date = get_last_date(@fund)
 
     # we will get the lastest registered data
-    @this_fund_data = DailyDatum.find_by(fund_id: @fund.id, calendar_id: @date.id)
+    @this_fund_data = set_fund_data(@fund, @date)
 
     # now we will work to build the charts
     # We get the history of daily data for the fund we are interested in
@@ -86,7 +86,7 @@ class FundsController < ApplicationController
     # then we will exclude the competitors that does not have data for the specific date
     filtered_competitors = []
     competitors.each do |competitor|
-      filtered_competitors << competitor unless DailyDatum.find_by(fund: competitor, calendar: date).nil?
+      filtered_competitors << competitor unless set_fund_data(competitor, date).nil?
     end
     filtered_competitors
   end
@@ -117,13 +117,13 @@ class FundsController < ApplicationController
 
   # quick method to get the monthly return of a fund in an array ready to display on a chart
   def get_monthly_return(fund, date)
-    fund_data = DailyDatum.find_by(fund: fund, calendar: date)
+    fund_data = set_fund_data(fund, date)
     [fund.best_name, fund_data.return_monthly_value.round(2)] unless fund_data.nil?
   end
 
   # quick method to get the risk/return of a fund in a hash ready for the chart
   def get_risk_return(fund, date)
-    fund_data = DailyDatum.find_by(fund: fund, calendar: date)
+    fund_data = set_fund_data(fund, date)
     { name: fund.best_name, data: { fund_data.volatility.round(2) => fund_data.return_annual_value.round(2) } } unless fund_data.nil?
   end
 
@@ -188,8 +188,6 @@ class FundsController < ApplicationController
     historical_array
   end
 
-  private
-
   def calculate_incremental_returns(dates, asset, price, final_data_array)
     # for each dates, we will check if the asset is a fund or a benchmark.
     # Depending on this we look in the correct database table
@@ -211,4 +209,11 @@ class FundsController < ApplicationController
     # we return the data for the asset
     final_data_array
   end
+
+  private
+
+  def set_fund_data(fund, date)
+    DailyDatum.find_by(fund: fund, calendar: date)
+  end
+
 end

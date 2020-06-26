@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:edit, :update]
+
   def index
     if params[:approved] == "false"
       @users = User.where(approved: false)
@@ -8,14 +10,17 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:user_id])
     @user.approved = true
     @user.save
     redirect_to users_path
   end
 
+  private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
 end
