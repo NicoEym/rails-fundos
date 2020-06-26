@@ -23,7 +23,7 @@ users.each do |user|
   user.save
 end
 
-modo = User.find_by(email: "nicolas.eymenier@ca-indosuez.com.br")
+modo = User.find_by(email: "nicolas.eymenier@edhec.com")
 modo.admin = true
 modo.approved = true
 modo.save
