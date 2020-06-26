@@ -3,16 +3,17 @@ class DailyDataController < ApplicationController
     # we display data only for Indosuez funds
     gestor = Gestor.find_by(name: "Ca Indosuez Wealth (Brazil) S.A. Dtvm")
     @funds = Fund.where(gestor: gestor)
-    @datas = get_last_daily_data(@funds)
+    @daily_data = policy_scope(DailyDatum)
+    @datas = get_last_daily_data(@funds, @daily_data)
   end
 
-  def get_last_daily_data(funds)
+  def get_last_daily_data(funds, daily_data)
     # we create an array
     final_data = []
     # for each fund we choose the dailydata that matches the funds
     funds.each do |fund|
       date = get_last_date(fund)
-      data = DailyDatum.find_by(fund: fund, calendar: date)
+      data = daily_data.find_by(fund: fund, calendar: date)
 
       # then we create a hash with the data we need
       final_data << { "fund" => fund, "date" => data.calendar.day,
