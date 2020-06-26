@@ -4,6 +4,7 @@ class FundsController < ApplicationController
   def show
     # funds is the fund given by the params
     @fund = Fund.find(params[:id])
+    authorize @fund
     @benchmark = @fund.bench_mark
     # we get the last date
     @date = get_last_date(@fund)
@@ -56,9 +57,10 @@ class FundsController < ApplicationController
     # we get the area params
     @area = params[:area_name]
     # if no area params is settled
+    @funds = policy_scope(Fund)
     # ... we list all the funds present in the DB
     # ... we show only the funds that match the area
-    @area.nil? ? @funds = Fund.all : @funds = Fund.where(area_name: params[:area_name])
+    @area.nil? ? @funds = @funds.all : @funds = @funds.where(area_name: params[:area_name])
   end
 
   def get_historical_data_for_charts(datas, data_type)

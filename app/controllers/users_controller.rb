@@ -2,11 +2,14 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update]
 
   def index
-    if params[:approved] == "false"
-      @users = User.where(approved: false)
-    else
-      @users = User.all
-    end
+    @user = current_user
+    authorize @user
+    @users = policy_scope(User)
+    # if params[:approved] == "false"
+    #   @users = User.where(approved: false)
+    # else
+    #   @users = User.all
+    # end
   end
 
   def edit
@@ -22,5 +25,6 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+    authorize @user
   end
 end

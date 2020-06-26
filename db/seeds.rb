@@ -13,17 +13,20 @@ require 'stringio'
 # AnbimaClass.delete_all
 # Calendar.delete_all
 
-modo = User.find_by(email: "nicolas.eymenier@ca-indosuez.com.br")
-modo.admin = true
-modo.approved = true
-modo.save
+
 
 users = User.all
 
 users.each do |user|
-  user.approved = true
+  user.admin = false
+  user.approved = false
   user.save
 end
+
+modo = User.find_by(email: "nicolas.eymenier@ca-indosuez.com.br")
+modo.admin = true
+modo.approved = true
+modo.save
 
 csv_options = { col_sep:  ";", quote_char: '"', headers: :first_row }
 
@@ -384,7 +387,7 @@ def write_daily_data_fund
   end
 end
 
-write_daily_data_fund
+# write_daily_data_fund
 
 
 def write_daily_data_bench
@@ -418,7 +421,7 @@ def write_daily_data_bench
 end
 
 
-write_daily_data_bench
+# write_daily_data_bench
 
 # dates = ["2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
 #              "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
