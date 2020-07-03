@@ -86,14 +86,18 @@ class ApplicationController < ActionController::Base
     last_day_of_months = []
     # we get all the date rank from the most recent to the oldest in an array
     dates = Calendar.order('day desc')
-    # for each date in the array
-    (0..dates.size - 1 ).each do |rank|
+    # for the second date in the array to the last one (we exclude the first date to avoid comparing the first and the last date in the formula below dates[rank].day.month != dates[rank - 1].day.month)
+    (1..dates.size - 1).each do |rank|
       # we check if the month of the current element is different from the month of the previous element in the array (the following date, remember we ranked our dates)
       # if it the case, then the current date is the final date of the month
       # as long as we do not have 12 dates representing the last day of the last 12 months, we continue.
       last_day_of_months << dates[rank] if dates[rank].day.month != dates[rank - 1].day.month && last_day_of_months.size < 12
     end
     # then we send an array of dates
+    last_day_of_months.sort.each do |date|
+      puts date.day
+    end
+
     last_day_of_months.sort
   end
 

@@ -204,7 +204,6 @@ class FundsController < ApplicationController
       data_array = asset_data.find_by(calendar: date)
       # we increment our price with the monthly return
       price = (1 + data_array.return_monthly_value / 100) * price unless data_array.nil?
-      puts price
       # we store the data in the array
       final_data_array << { date: date.day, data: price } unless data_array.nil?
     end
@@ -217,5 +216,4 @@ class FundsController < ApplicationController
   def set_fund_data(fund, date)
     DailyDatum.find_by(fund: fund, calendar: date)
   end
-
 end
