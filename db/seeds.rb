@@ -49,7 +49,8 @@ def write_benchmark_historical_data(files, csv_options)
   files.each do |file|
     CSV.foreach(file, csv_options) do |row|
 
-      codigo = row['Ativo'][0,3]
+      code = row['Ativo'][0,3]
+      issuance_date = row["Data de emissão"]
       puts codigo
 
       benchmark = BenchMark.find_by(codigo_economatica: codigo)
