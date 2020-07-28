@@ -14,36 +14,22 @@ require 'stringio'
 # Calendar.delete_all
 
 
-
-users = User.all
-
-users.each do |user|
-  user.admin = false
-  user.approved = false
-  user.save
-end
-
-modo = User.find_by(email: "nicolas.eymenier@edhec.com")
-modo.admin = true
-modo.approved = true
-modo.save
-
 csv_options = { col_sep:  ";", quote_char: '"', headers: :first_row }
 
-  def get_date(date)
-      year = date[0,4].to_i
-      puts year
-       month = date[5,7].to_i
-      puts month
-      day = date[8,10].to_i
-      puts day
-      date_format_YMD = Date.new(year, month, day)
+def get_date(date)
+  year = date[0,4].to_i
+  puts year
+   month = date[5,7].to_i
+  puts month
+  day = date[8,10].to_i
+  puts day
+  date_format_YMD = Date.new(year, month, day)
 
-      date_calendar = Calendar.find_by(day: date_format_YMD)
-      date_calendar = Calendar.create(day: date_format_YMD) if date_calendar.nil?
+  date_calendar = Calendar.find_by(day: date_format_YMD)
+  date_calendar = Calendar.create(day: date_format_YMD) if date_calendar.nil?
 
-      date_calendar
-  end
+  date_calendar
+end
 
 def write_benchmark_historical_data(files, csv_options)
   files.each do |file|
@@ -236,16 +222,20 @@ if Fund.all.empty?
   puts "created #{beton}"
   allocaction = Fund.create(name: "Ca Indosuez Alloc Action Fc FIA", short_name: "Allocaction", codigo_economatica: "372986", bench_mark: ibov_bench, area_name: fof_area.name, gestor: ca_gestor, anbima_class: acao_anbima, photo_url: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{allocaction}"
-  # private_pi = Fund.create(name: "Ca Indosuez Private Pi Fc de FI Mult", short_name: "Pi", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: fof_area.name, gestor: ca_gestor, anbima_class: multi_anbima, photo_url: "https://images.unsplash.com/photo-1453733190371-0a9bedd82893?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
-  # puts "created #{private_pi}"
+  private_pi = Fund.create(name: "Ca Indosuez Private Pi Fc de FI Mult", short_name: "Pi", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: fof_area.name, gestor: ca_gestor, anbima_class: multi_anbima, photo_url: "https://images.unsplash.com/photo-1453733190371-0a9bedd82893?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  puts "created #{private_pi}"
+  gvitesse = Fund.create(name: "Ca Indosuez Grand Vitesse", short_name: "GVitesse", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1562548174-587e61fda0b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  puts "created #{gvitesse}"
 
   path_vitesse  = 'db/csv_repos/data vitesse.csv'
   path_agilite  = 'db/csv_repos/data agilite.csv'
   path_beton  = 'db/csv_repos/data beton.csv'
   path_infrafic  = 'db/csv_repos/data infrafic.csv'
   path_action  = 'db/csv_repos/data allocaction.csv'
+  path_pi  = 'db/csv_repos/data privatepi.csv'
+  path_gvitesse  = 'db/csv_repos/data gvitesse.csv'
 
-  paths_array = [path_vitesse, path_agilite, path_beton, path_infrafic, path_action]
+  paths_array = [path_vitesse, path_agilite, path_beton, path_infrafic, path_action, path_pi]
 
   write_funds_historical_data(paths_array, csv_options)
 
@@ -255,6 +245,29 @@ if Fund.all.empty?
 end
 
 
+
+  private_pi = Fund.create(name: "Ca Indosuez Private Pi Fc de FI Mult", short_name: "Pi", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: fof_area.name, gestor: ca_gestor, anbima_class: multi_anbima, photo_url: "https://images.unsplash.com/photo-1453733190371-0a9bedd82893?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  puts "created #{private_pi}"
+  gvitesse = Fund.create(name: "Ca Indosuez Grand Vitesse", short_name: "GVitesse", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1562548174-587e61fda0b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  puts "created #{gvitesse}"
+
+  path_pi  = 'db/csv_repos/data privatepi.csv'
+  path_gvitesse  = 'db/csv_repos/data gvitesse.csv'
+
+  paths_array = [path_pi, path_gvitesse]
+  write_funds_historical_data(paths_array, csv_options)
+
+  path_fundos  = 'db/csv_repos/Indosuez data.csv'
+  create_competitors(path_fundos, csv_options)
+
+  # créer une seule et même table avec toutes ces données et envoyer les données
+  urlCDI = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/j9ScUlOFDYYsEOihvscfgPe8qHolC%2FqwVKR5cDK3HBkiPMrVtIT7uj3uP7JKxcZ0Xc5BU%2FJ7gwMns0rbucgaWGYy2RMtS9xEQtSqvF5wM4C8mGbog2dZW4bydAuisQo%2BKTS0TJ%2Fyfg7C6JScf7qZK2SbS0IBJsB1hcbYce%2BHBtTsNag9Wy%2F3FBUUXPUqWIDTPq1bDk6g2qDsDXnAPiqdmtGan6qGke3pNcJ0jaHR%2BSObNqcfoMtcD3%2FFEBSaopLLc87nCZGTeBVT1ifg5MPO1Dsa4yXNJSL%2BIEsgWsS69ywtXf7P34A5hm1VmzQRzb3N2XXbIXwQgYujka7NS%2BWUHg%3D%3D'
+  urlIbov = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/rGm9Zy17%2BNapl9t81EXK6TrtRuA0IkEAvcW7YVoajp7%2BjYODvTiszYO54mdy9mllCKf2IY%2Fje1vu7oQokV5%2F5Yc1U3%2FrYTfBZrSfzP2%2FRPp7%2BC5yVsFCidYaNp5n3BXM8aBX%2FCaMJ%2BaPg9LVDgndX0zxGgnuSHShapZAb4PTpLzYnte7cVru61DehhBpG2qEh%2F9moARwWa%2FjeiPSjBqbbZVzIo4CbS2uG7s5YEUeCq%2F9i4cCry0TaE3uTZKacX2ULRF5nyy11jWLSe28mZ58g%2BzXnrZ9dKWLcO2RWgQMHuDSas1aJYul8hQXaxA%2FYGaZk5SI15szsLj6s2gvARp5wA%3D%3D'
+  urlIMAB = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/dX3h0i5dYjVRhjpXiuGcU3zRacYT1fTzLoEJCm241swQhX3GustOxINqs5%2B4i5Yhw3A1LvRQZEYP%2B5pAYRC0IjHmAz%2BDWnI60N6LLuxg6EysNz5hFXxg2OZoN5dYNyXYGucCWWCodzL6ihrMvkKDR%2F7xYBtw0jZoYHlgo5w6EWx6%2B97theuoAt0wnxjSAuquM7dbpseGgQhNUcPA43F%2BXaMCsLN16TLgky%2FN8DrU%2BOhX4pTzmCjH0NrkCSXXmBh4ayDgFcTmn0yuxSRJ26QmB1X7NpVMy7RiNd%2BbU0xUSrL4fWXJMlKDIKF7DlyXVC0qQBNHRQG0R5B%2BdkIsZXIA5g%3D%3D'
+  urldesfazado = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/k3U7mKyQEEgfo6ApFfAnLyoeOWi9rf%2FIk8Ni3QiotobOY%2BXUKwgofTn3IWnWWMukk%2BSLXD%2FbnjKR1AQ2coqQCzeGWesbIN0vryAisHXeNvd1R26%2BcjD%2FzQgLdAjzyptQVscFb1Fn%2BQFg7DLtPyTopH1%2FWqexIS3%2BQo7zIfvWVDEqGI0tJJpDOlIJ0%2B48wHPcnKxrjk6pKJP6DiK9nBcGTmzpRHUxkYkfrcSGomUed9CVdeRmig%2BLHnAKRPdkcwNYyReWTEIIOPmoprOteNH4%2BTi41MIxOdrhUkikED90knaI1C1PRxF02pl%2FkVVC4S1jKizddAGqjoq1oraUCum%2BdQ%3D%3D'
+  urls = [urlCDI, urlIbov, urlIMAB, urldesfazado]
+
+  write_daily_data_fund(urls)
 #client = Algolia::Client.new(application_id: ENV['ALGOLIASEARCH_APPLICATION_ID'], api_key: ENV['ALGOLIASEARCH_ADMIN_API_KEY'])
 # index = client.init_index('dev_Fund')
 
@@ -325,7 +338,7 @@ end
 # end
 
 
-def write_daily_data_fund
+def write_daily_data_fund(urls)
 
   urlCDI = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/j9ScUlOFDYYsEOihvscfgPe8qHolC%2FqwVKR5cDK3HBkiPMrVtIT7uj3uP7JKxcZ0Xc5BU%2FJ7gwMns0rbucgaWGYy2RMtS9xEQtSqvF5wM4C8mGbog2dZW4bydAuisQo%2BKTS0TJ%2Fyfg7C6JScf7qZK2SbS0IBJsB1hcbYce%2BHBtTsNag9Wy%2F3FBUUXPUqWIDTPq1bDk6g2qDsDXnAPiqdmtGan6qGke3pNcJ0jaHR%2BSObNqcfoMtcD3%2FFEBSaopLLc87nCZGTeBVT1ifg5MPO1Dsa4yXNJSL%2BIEsgWsS69ywtXf7P34A5hm1VmzQRzb3N2XXbIXwQgYujka7NS%2BWUHg%3D%3D'
   urlIbov = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/rGm9Zy17%2BNapl9t81EXK6TrtRuA0IkEAvcW7YVoajp7%2BjYODvTiszYO54mdy9mllCKf2IY%2Fje1vu7oQokV5%2F5Yc1U3%2FrYTfBZrSfzP2%2FRPp7%2BC5yVsFCidYaNp5n3BXM8aBX%2FCaMJ%2BaPg9LVDgndX0zxGgnuSHShapZAb4PTpLzYnte7cVru61DehhBpG2qEh%2F9moARwWa%2FjeiPSjBqbbZVzIo4CbS2uG7s5YEUeCq%2F9i4cCry0TaE3uTZKacX2ULRF5nyy11jWLSe28mZ58g%2BzXnrZ9dKWLcO2RWgQMHuDSas1aJYul8hQXaxA%2FYGaZk5SI15szsLj6s2gvARp5wA%3D%3D'
@@ -392,7 +405,7 @@ end
 
 
 def write_daily_data_bench
-
+  # Change the url
   url = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/HUVTbYqYz0Ncb18HDZP4lsWchqywXj3Rq5qGUc%2F6i2GGO16xePr9ZrHNc3PosAHGLFoIhPAzJL%2BIcC7RptMTd1BZAef%2B2OLzJqZ9%2FOtENuGB1LZS19z1fJ%2BI8gw8kgDqszyBBM%2FwlxCvVKh2WjhpNyB2Lwiyd%2BgG72EGhKZsLIY8xFOP5KvrmYfsdU0Ee3mGlRr9KnFSkaWzG%2BzYEs6tQwijifx6mUFDpQelTC%2F6mzxG3bq1QazG7CHDMe%2FTOc6xHuaP8Nhbu2vy59xRlH%2Fi%2FC5eLtRsKP%2Fsnlm2a%2BkuMhAmvi2LbtCjX5HQYrhe70agGxq1xHSxIVVzQqyERX4T%2BQ%3D%3D'
   download = open(url)
 
@@ -422,18 +435,18 @@ def write_daily_data_bench
 end
 
 
-# write_daily_data_bench
+write_daily_data_bench
 
-# dates = ["2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
-#              "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
+dates = ["2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
+             "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
 
-# path_array = 'db/csv_repos/Monthly Net Captation.csv'
+path_array = 'db/csv_repos/Monthly Net Captation.csv'
 
-# write_monthly_application(path_array, csv_options, dates)
+write_monthly_application(path_array, csv_options, dates)
 
-# path_array = 'db/csv_repos/Monthly Return.csv'
+path_array = 'db/csv_repos/Monthly Return.csv'
 
-# write_monthly_return(path_array, csv_options, dates)
+write_monthly_return(path_array, csv_options, dates)
 
 
 
