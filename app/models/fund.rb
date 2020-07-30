@@ -1,16 +1,5 @@
 class Fund < ApplicationRecord
 
-  # include AlgoliaSearch
-
-  # algoliasearch do
-  #   attributes :name, :photo_url, :gestor, :area_name
-  #   # Select the attributes you want to search in
-  #   searchableAttributes ['name', 'gestor']
-
-  #   # Set up some attributes to filter results on
-  #   # attributesForFaceting "area_name"
-  # end
-
   validates :codigo_economatica, presence: true
   validates :name, presence: true
   belongs_to :gestor
