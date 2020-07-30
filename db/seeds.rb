@@ -2,16 +2,16 @@ require "date"
 require "csv"
 require "open-uri"
 require 'stringio'
-# require 'algoliasearch'
 
-# DailyDatum.delete_all
+
+DailyDatum.delete_all
 # Fund.delete_all
-# DataBenchmark.delete_all
+DataBenchmark.delete_all
 # BenchMark.delete_all
 # Gestor.delete_all
 # Area.delete_all
 # AnbimaClass.delete_all
-# Calendar.delete_all
+Calendar.delete_all
 
 
 csv_options = { col_sep:  ";", quote_char: '"', headers: :first_row }
@@ -214,30 +214,51 @@ if Fund.all.empty?
 
   vitesse = Fund.create(name: "Ca Indosuez Vitesse FI RF Cred Priv", short_name: "Vitesse", codigo_economatica: "284211", area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, bench_mark: cdi_bench, photo_url: "https://images.unsplash.com/photo-1509099652299-30938b0aeb63?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{vitesse}"
+
   agilite = Fund.create(name: "Ca Indosuez Agilite FI RF Cred Priv", short_name: "Agilite", codigo_economatica: "412171", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1520787054628-794a6d7a822d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{agilite}"
+
   infrafic = Fund.create(name: "Ca Indosuez Debent Inc Cred Priv Fc Mult", short_name: "Infrafic", codigo_economatica: "405469", bench_mark: ima_bench,area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1515674744565-0d7112cd179a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{infrafic}"
+
   beton = Fund.create(name: "Ca Indosuez Beton FICFI Mult", short_name: "Beton", codigo_economatica: "125970", area_name: fof_area.name, bench_mark: cdi_bench, gestor: ca_gestor, anbima_class: multi_anbima, photo_url: "https://images.unsplash.com/photo-1566937169390-7be4c63b8a0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{beton}"
+
   allocaction = Fund.create(name: "Ca Indosuez Alloc Action Fc FIA", short_name: "Allocaction", codigo_economatica: "372986", bench_mark: ibov_bench, area_name: fof_area.name, gestor: ca_gestor, anbima_class: acao_anbima, photo_url: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{allocaction}"
+
   private_pi = Fund.create(name: "Ca Indosuez Private Pi Fc de FI Mult", short_name: "Pi", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: fof_area.name, gestor: ca_gestor, anbima_class: multi_anbima, photo_url: "https://images.unsplash.com/photo-1453733190371-0a9bedd82893?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{private_pi}"
+
   gvitesse = Fund.create(name: "Ca Indosuez Grand Vitesse", short_name: "GVitesse", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1562548174-587e61fda0b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{gvitesse}"
 
-  path_vitesse  = 'db/csv_repos/data vitesse.csv'
-  path_agilite  = 'db/csv_repos/data agilite.csv'
-  path_beton  = 'db/csv_repos/data beton.csv'
-  path_infrafic  = 'db/csv_repos/data infrafic.csv'
-  path_action  = 'db/csv_repos/data allocaction.csv'
-  path_pi  = 'db/csv_repos/data privatepi.csv'
-  path_gvitesse  = 'db/csv_repos/data gvitesse.csv'
+  # need to update code economatica
+  di60 = Fund.create(name: "Ca Indosuez DI Master", short_name: "DI60", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1533928298208-27ff66555d8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  puts "created #{di60}"
 
-  paths_array = [path_vitesse, path_agilite, path_beton, path_infrafic, path_action, path_pi]
+  # need to update code economatica
+  souverain = Fund.create(name: "Ca Indosuez Souverain", short_name: "Souverain", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1505461296292-7d67beed10a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  puts "created #{souverain}"
 
-  write_funds_historical_data(paths_array, csv_options)
+  # need to update code economatica
+  souverain_irfm = Fund.create(name: "Ca Indosuez Souverain IRFM", short_name: "Souverain IRFM", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1578925518470-4def7a0f08bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  puts "created #{souverain_irfm}"
+# need to update code economatica & photo
+  emerging_mast = Fund.create(name: "Ca Indosuez Emerging", short_name: "Emerging Mast", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1578925518470-4def7a0f08bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  puts "created #{emerging_mast}"
+
+  # path_vitesse  = 'db/csv_repos/data vitesse.csv'
+  # path_agilite  = 'db/csv_repos/data agilite.csv'
+  # path_beton  = 'db/csv_repos/data beton.csv'
+  # path_infrafic  = 'db/csv_repos/data infrafic.csv'
+  # path_action  = 'db/csv_repos/data allocaction.csv'
+  # path_pi  = 'db/csv_repos/data privatepi.csv'
+  # path_gvitesse  = 'db/csv_repos/data gvitesse.csv'
+
+  # paths_array = [path_vitesse, path_agilite, path_beton, path_infrafic, path_action, path_pi]
+
+  # write_funds_historical_data(paths_array, csv_options)
 
   path_fundos  = 'db/csv_repos/Indosuez data.csv'
 
@@ -268,25 +289,6 @@ end
   urls = [urlCDI, urlIbov, urlIMAB, urldesfazado]
 
   write_daily_data_fund(urls)
-#client = Algolia::Client.new(application_id: ENV['ALGOLIASEARCH_APPLICATION_ID'], api_key: ENV['ALGOLIASEARCH_ADMIN_API_KEY'])
-# index = client.init_index('dev_Fund')
-
-
-# funds =Fund.all
-# funds_array = []
-# funds.each do |fund|
-#   image = fund.photo_url
-#   image = "https://images.unsplash.com/photo-1532444458054-01a7dd3e9fca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60" if image.nil?
-#   funds_hash = {name: fund.best_name, id: fund.id, photo_url: image, gestor: fund.gestor }
-#   funds_array << funds_hash
-# end
-# index.add_objects(funds_array)
-
-
-
-
-
-
 
 # url = 'https://api.data.economatica.com/1/oficial/datafeed/download/1/SSYsXqRVyg4eZ0RTZb4TMAcAy2pTDfCr74SDBWqQYZGtCESTa3bm5QPwlEmFd%2FO81EPj2TYYCFAZ4kSj7RybSv1Ekk85NE4ymAwKSPLUQyNsO81DKGmt9UTauUCWAQkpRsGo%2FthHCMP0gf78bpn41sFHvmaKvspZT2VpfumUf72fGgkwoNya9lkwzSAqMp7EXc4pcpyA5b07z0X0NMb2VmMbdmuauqMmihAAbInkw3NW5ONp9pOVlpjdVj%2F6TSu4BIyUhClY3xeL0qTzAHoETfRYLYgqFf215v%2BV03pJB86KhyKcjjL3pZyN2MObDMRHiOYm5zpKzqrd0gxzdMZQEA%3D%3D'
 # download = open(url)
@@ -437,7 +439,7 @@ end
 
 write_daily_data_bench
 
-dates = ["2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
+dates = ["2020-07-31", "2020-06-30", "2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
              "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
 
 path_array = 'db/csv_repos/Monthly Net Captation.csv'
