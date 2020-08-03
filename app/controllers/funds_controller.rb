@@ -16,11 +16,6 @@ class FundsController < ApplicationController
     # We get the history of daily data for the fund we are interested in
     range_data = DailyDatum.where(fund_id: @fund.id)
 
-    # This function will get the history of AUM. The one the history of share price
-    @history_aum = get_historical_data_for_charts(range_data, "aum")
-    @history_share = get_historical_data_for_charts(range_data, "share_price")
-    @history_volatility = get_historical_data_for_charts(range_data, "volatility")
-
     # this function will get the competitors of the fund for which we have a data on that day
     @competitors = get_competitors(@fund, @date)
 
@@ -44,9 +39,12 @@ class FundsController < ApplicationController
 
     # for charts that requires end of the month data, we send as parameter the dates of the last 12 months and
     # ... and the historical data for the fund
-    # We get the monthly captation
-    @chart_monthly_captation = get_monthly_captation(range_data, end_of_months_dates)
-
+    # This function will get the history of AUM. The one the history of share price
+    @history_aum = get_end_of_month_data_for_charts(range_data, "aum", end_of_months_dates)
+    @history_share = get_end_of_month_data_for_charts(range_data, "share_price", end_of_months_dates)
+    @history_volatility = get_end_of_month_data_for_charts(range_data, "volatility", end_of_months_dates)
+    # We get the monthly captation using the end of month dates
+    @chart_monthly_captation = get_end_of_month_data_for_charts(range_data, "monthly_captation", end_of_months_dates)
     # We get the monthly returns vs the benchmark
     @chart_returns_vs_benchmark = get_returns_vs_benchmark(range_data, @fund, @benchmark, end_of_months_dates)
 
@@ -63,18 +61,21 @@ class FundsController < ApplicationController
     @area.nil? ? @funds = @funds.all : @funds = @funds.where(area_name: params[:area_name])
   end
 
-  def get_historical_data_for_charts(datas, data_type)
-    # for all the daily data, we get the date and the AUM/share_price/volatility value for the fund.
+  def get_end_of_month_data_for_charts(datas, data_type, dates_12_months)
+    # for end of month dates, we get the date and the AUM/share_price/volatility value for the fund.
     # Doing so we have our historical serie of data for the AUM
     historical_array = []
-    datas.each do |data|
+    dates_12_months.each do |date|
+      data_of_the_day = datas.find_by(calendar: date)
       case data_type
-        when"aum" then
-          historical_array << [data.calendar.day, data.aum / 1_000_000_000] unless data.aum.nil?
+        when "aum" then
+          historical_array << [data_of_the_day.calendar.day, data_of_the_day.aum / 1_000_000_000] unless data_of_the_day.aum.nil?
         when "share_price" then
-          historical_array << [data.calendar.day, data.share_price] unless data.share_price.nil?
+          historical_array << [data_of_the_day.calendar.day, data_of_the_day.share_price] unless data_of_the_day.share_price.nil?
         when "volatility" then
-          historical_array << [data.calendar.day, data.volatility] unless data.volatility.nil?
+          historical_array << [data_of_the_day.calendar.day, data_of_the_day.volatility] unless data_of_the_day.volatility.nil?
+        when "monthly_captation" then
+          historical_array << [data_of_the_day.day.strftime("%Y-%m"), data_of_the_day.application_monthly_net_value / 1_000_000] unless data_of_the_day.nil?
       end
     end
     historical_array
@@ -127,16 +128,6 @@ class FundsController < ApplicationController
   def get_risk_return(fund, date)
     fund_data = set_fund_data(fund, date)
     { name: fund.best_name, data: { fund_data.volatility.round(2) => fund_data.return_annual_value.round(2) } } unless fund_data.nil?
-  end
-
-  def get_monthly_captation(datas, dates)
-    # for all the end of the month date we will get the monthly captation
-    historical_array = []
-    dates.each do |date|
-      data = datas.find_by(calendar: date)
-      historical_array << [date.day.strftime("%Y-%m"), data.application_monthly_net_value / 1_000_000] unless data.nil?
-    end
-    historical_array
   end
 
   def get_returns_vs_benchmark(datas, fund, benchmark, dates)
