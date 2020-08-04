@@ -6,6 +6,7 @@ class FundsController < ApplicationController
     @fund = Fund.find(params[:id])
     authorize @fund
     @benchmark = @fund.bench_mark
+
     # we get the last date
     @date = get_last_date(@fund)
 
