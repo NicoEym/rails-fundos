@@ -248,6 +248,9 @@ if Fund.all.empty?
   emerging_mast = Fund.create(name: "Ca Indosuez Emerging", short_name: "Emerging Mast", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1578925518470-4def7a0f08bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{emerging_mast}"
 
+  avant_garde = Fund.create(name: "Ca In Avant Garde Feed1 Fc Mult Credpriv", short_name: "Avant Garde", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1546188994-07c34f6e5e1b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  puts "created #{avant_garde}"
+
   # path_vitesse  = 'db/csv_repos/data vitesse.csv'
   # path_agilite  = 'db/csv_repos/data agilite.csv'
   # path_beton  = 'db/csv_repos/data beton.csv'
