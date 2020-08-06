@@ -34,21 +34,21 @@ class ApplicationController < ActionController::Base
   def get_last_date(fund)
     # the goal is the find the most recent date for which the fund has data
     # we choose the last five days in the data base
-    today = Date.today
-    last_dates = []
-    (1..10).each do |number_of_day|
-      previous_day = today - number_of_day
-      existing_date = Calendar.find_by(day: previous_day)
-      last_dates << existing_date unless existing_date.nil?
-    end
-
+    # today = Date.today
+    # # last_dates = []
+    # (1..25).each do |number_of_day|
+    #   previous_day = today - number_of_day
+    #   existing_date = Calendar.find_by(day: previous_day)
+    #   return existing_date unless existing_date.nil?
+    # end
+    Calendar.first
     # for each date we check if the fund has data
-    last_dates.each do |last_date|
-      puts last_date.day
-      data = DailyDatum.find_by(fund_id: fund, calendar_id: last_date.id)
-      # when the number of DailyDatum for that date == the number of funds then we return the date
-      return last_date if !data.nil?
-    end
+    # last_dates.each do |last_date|
+    #   puts last_date.day
+    #   data = DailyDatum.find_by(fund_id: fund, calendar_id: last_date.id)
+    #   # when the number of DailyDatum for that date == the number of funds then we return the date
+    #   return last_date if !data.nil?
+    # end
   end
 
   def get_all_daily_data(funds, date)

@@ -5,15 +5,17 @@ require 'stringio'
 
 
 DailyDatum.delete_all
-# Fund.delete_all
+Fund.delete_all
 DataBenchmark.delete_all
-# BenchMark.delete_all
-# Gestor.delete_all
-# Area.delete_all
-# AnbimaClass.delete_all
+BenchMark.delete_all
+Gestor.delete_all
+Area.delete_all
+AnbimaClass.delete_all
 Calendar.delete_all
 
 
+dates = ["2020-07-31", "2020-06-30", "2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
+             "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
 csv_options = { col_sep:  ";", quote_char: '"', headers: :first_row }
 
 def get_date(date)
@@ -31,62 +33,62 @@ def get_date(date)
   date_calendar
 end
 
-def write_benchmark_historical_data(files, csv_options)
-  files.each do |file|
-    CSV.foreach(file, csv_options) do |row|
+# def write_benchmark_historical_data(files, csv_options)
+#   files.each do |file|
+#     CSV.foreach(file, csv_options) do |row|
 
-      code = row['Ativo'][0,3]
-      issuance_date = row["Data de emissão"]
-      puts codigo
+#       code = row['Ativo'][0,3]
+#       issuance_date = row["Data de emissão"]
+#       puts codigo
 
-      benchmark = BenchMark.find_by(codigo_economatica: codigo)
-      puts benchmark
+#       benchmark = BenchMark.find_by(codigo_economatica: codigo)
+#       puts benchmark
 
-      date = get_date(row['Data'])
-      puts date.day
+#       date = get_date(row['Data'])
+#       puts date.day
 
-      data = DataBenchmark.find_by(bench_mark_id: benchmark.id, calendar_id: date)
+#       data = DataBenchmark.find_by(bench_mark_id: benchmark.id, calendar_id: date)
 
-      if data.nil?
-        data = DataBenchmark.create(daily_value: row['Value'], return_daily_value: row['Daily Return'], return_monthly_value: row['Monthly Return'], volatility: row['Vol EWMA 97%'], bench_mark_id: benchmark.id, calendar: date)
-        puts data.daily_value
-      else
-        data.update(daily_value: row['Value'], return_daily_value: row['Daily Return'], return_monthly_value: row['Monthly Return'], volatility: row['Vol EWMA 97%'])
-      end
+#       if data.nil?
+#         data = DataBenchmark.create(daily_value: row['Value'], return_daily_value: row['Daily Return'], return_monthly_value: row['Monthly Return'], volatility: row['Vol EWMA 97%'], bench_mark_id: benchmark.id, calendar: date)
+#         puts data.daily_value
+#       else
+#         data.update(daily_value: row['Value'], return_daily_value: row['Daily Return'], return_monthly_value: row['Monthly Return'], volatility: row['Vol EWMA 97%'])
+#       end
 
-    end
-  end
-end
-
-
-def write_funds_historical_data(files, csv_options)
-  files.each do |file|
-    CSV.foreach(file, csv_options) do |row|
-
-      codigo = row['Ativo'][0,6].to_i
-      puts codigo
-      fund = Fund.find_by(codigo_economatica: codigo)
-
-      date = get_date(row['Data'])
-
-      puts date.day
-      data = DailyDatum.find_by(fund: fund, calendar_id: date)
+#     end
+#   end
+# end
 
 
-      if data.nil?
-        data = DailyDatum.create(share_price: row['Cota'], aum: row['PL'], application_daily_net_value: row['Capt Liq'],
-                                 return_daily_value: row['Daily Return'],return_monthly_value: row['Monthly Return'],
-                                 volatility: row['Vol EWMA 97%'], fund: fund, calendar: date)
-        puts data.share_price
-      else
-        data.update(share_price: row['Cota'], aum: row['PL'], application_daily_net_value: row['Capt Liq'],
-                                 return_daily_value: row['Daily Return'],return_monthly_value: row['Monthly Return'],
-                                 volatility: row['Vol EWMA 97%'],fund: fund, calendar: date)
-      end
+# def write_funds_historical_data(files, csv_options)
+#   files.each do |file|
+#     CSV.foreach(file, csv_options) do |row|
 
-    end
-  end
-end
+#       codigo = row['Ativo'][0,6].to_i
+#       puts codigo
+#       fund = Fund.find_by(codigo_economatica: codigo)
+
+#       date = get_date(row['Data'])
+
+#       puts date.day
+#       data = DailyDatum.find_by(fund: fund, calendar_id: date)
+
+
+#       if data.nil?
+#         data = DailyDatum.create(share_price: row['Cota'], aum: row['PL'], application_daily_net_value: row['Capt Liq'],
+#                                  return_daily_value: row['Daily Return'],return_monthly_value: row['Monthly Return'],
+#                                  volatility: row['Vol EWMA 97%'], fund: fund, calendar: date)
+#         puts data.share_price
+#       else
+#         data.update(share_price: row['Cota'], aum: row['PL'], application_daily_net_value: row['Capt Liq'],
+#                                  return_daily_value: row['Daily Return'],return_monthly_value: row['Monthly Return'],
+#                                  volatility: row['Vol EWMA 97%'],fund: fund, calendar: date)
+#       end
+
+#     end
+#   end
+# end
 
 
 def create_competitors (path, csv_options)
@@ -126,38 +128,12 @@ end
 
 
 
-def write_monthly_application(path, options, dates)
+def write_historic_monthly_data(path, options, dates, data_type)
 
   CSV.foreach(path, options) do |row|
-    codigo = row['Ativo'][0,6].to_i
-    puts codigo
-    fund = Fund.find_by(codigo_economatica: codigo)
-
-    dates.each do |date|
-
-      date_calendar = get_date(date)
-
-      puts date_calendar.day
-
-      datas = DailyDatum.find_by(fund: fund, calendar: date_calendar)
-
-      if datas.nil?
-        DailyDatum.create(application_monthly_net_value: row[date], fund: fund, calendar: date_calendar)
-      else
-        datas.update(application_monthly_net_value: row[date])
-      end
-    end
-  end
-end
-
-
-
-def write_monthly_return(path, options, dates)
-
-  CSV.foreach(path, options) do |row|
-    codigo = row['Ativo'][0,6].to_i
-    puts codigo
-    fund = Fund.find_by(codigo_economatica: codigo)
+     fund_name = row['Nome']
+    puts fund_name
+    fund = Fund.find_by(name: fund_name)
 
     dates.each do |date|
       date_calendar = get_date(date)
@@ -166,30 +142,45 @@ def write_monthly_return(path, options, dates)
 
       datas = DailyDatum.find_by(fund: fund, calendar: date_calendar)
 
-      if datas.nil?
-        DailyDatum.create(return_monthly_value: row[date], fund: fund, calendar: date_calendar)
-      else
-        datas.update(return_monthly_value: row[date])
+      case data_type
+        when "NetApplication"
+          datas.nil? ? DailyDatum.create(application_monthly_net_value: row[date], fund: fund, calendar: date_calendar) : datas.update(application_monthly_net_value: row[date])
+        when "Returns"
+          datas.nil? ? DailyDatum.create(return_monthly_value: row[date], fund: fund, calendar: date_calendar) : datas.update(return_monthly_value: row[date])
+        when "AUM"
+          datas.nil? ? DailyDatum.create(aum: row[date], fund: fund, calendar: date_calendar) : datas.update(aum: row[date])
+        when "Vol"
+          datas.nil? ? DailyDatum.create(volatility: row[date], fund: fund, calendar: date_calendar) : datas.update(volatility: row[date])
+        when "SharePrice"
+          datas.nil? ? DailyDatum.create(share_price: row[date], fund: fund, calendar: date_calendar) : datas.update(share_price: row[date])
       end
     end
   end
 end
-
 
 
 if BenchMark.all.empty?
 
   cdi_bench = BenchMark.create(name:"CDI", codigo_economatica: "CDI" )
-  ibov_bench = BenchMark.create(name:"Ibovespa", codigo_economatica: "IBO" )
-  ima_bench = BenchMark.create(name:"IMA B5", codigo_economatica: "IMA" )
+  ibov_bench = BenchMark.create(name:"Ibovespa", codigo_economatica: "Ibovespa" )
+  ima_bench = BenchMark.create(name:"IMA-B5", codigo_economatica: "Ima-B" )
 
-  path_ibovespa  = 'db/csv_repos/data ibovespa.csv'
-  path_CDI  = 'db/csv_repos/data CDI.csv'
-  path_IMAB5  = 'db/csv_repos/data IMA B5.csv'
+  path_history_Bench  = 'db/csv_repos/Monthly ReturnBench.csv'
 
-  paths_bench_array = [path_CDI, path_ibovespa, path_IMAB5]
+  CSV.foreach(path_history_Bench, csv_options) do |row|
+    bench_name = row['Nome']
+    puts bench_name
+    bench_mark = BenchMark.find_by(codigo_economatica: bench_name)
 
-  write_benchmark_historical_data(paths_bench_array, csv_options)
+    dates.each do |date|
+      date_calendar = get_date(date)
+
+      datas = DataBenchmark.find_by(bench_mark: bench_mark, calendar: date_calendar)
+
+      datas.nil? ? DataBenchmark.create(return_monthly_value: row[date], bench_mark: bench_mark, calendar: date_calendar) : datas.update(return_monthly_value: row[date])
+
+    end
+  end
 end
 
 
@@ -230,23 +221,23 @@ if Fund.all.empty?
   private_pi = Fund.create(name: "Ca Indosuez Private Pi Fc de FI Mult", short_name: "Pi", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: fof_area.name, gestor: ca_gestor, anbima_class: multi_anbima, photo_url: "https://images.unsplash.com/photo-1453733190371-0a9bedd82893?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{private_pi}"
 
-  gvitesse = Fund.create(name: "Ca Indosuez Grand Vitesse", short_name: "GVitesse", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1562548174-587e61fda0b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  gvitesse = Fund.create(name: "Ca Indosuez Grand Vitesse Firf Cred Priv", short_name: "GVitesse", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1562548174-587e61fda0b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{gvitesse}"
 
   # need to update code economatica
-  di60 = Fund.create(name: "Ca Indosuez DI Master", short_name: "DI60", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1533928298208-27ff66555d8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  di60 = Fund.create(name: "Ca Indosuez DI Master FI RF Ref DI LP", short_name: "DI60", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1533928298208-27ff66555d8d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{di60}"
 
   # need to update code economatica
-  souverain = Fund.create(name: "Ca Indosuez Souverain", short_name: "Souverain", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1505461296292-7d67beed10a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
-  puts "created #{souverain}"
+  # souverain = Fund.create(name: "Ca Indosuez Souverain", short_name: "Souverain", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1505461296292-7d67beed10a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  # puts "created #{souverain}"
 
   # need to update code economatica
-  souverain_irfm = Fund.create(name: "Ca Indosuez Souverain IRFM", short_name: "Souverain IRFM", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1578925518470-4def7a0f08bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
-  puts "created #{souverain_irfm}"
+  # souverain_irfm = Fund.create(name: "Ca Indosuez Souverain IRFM", short_name: "Souverain IRFM", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1578925518470-4def7a0f08bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  # puts "created #{souverain_irfm}"
 # need to update code economatica & photo
-  emerging_mast = Fund.create(name: "Ca Indosuez Emerging", short_name: "Emerging Mast", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1578925518470-4def7a0f08bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
-  puts "created #{emerging_mast}"
+  # emerging_mast = Fund.create(name: "Ca Indosuez Emerging", short_name: "Emerging Mast", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1578925518470-4def7a0f08bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
+  # puts "created #{emerging_mast}"
 
   avant_garde = Fund.create(name: "Ca In Avant Garde Feed1 Fc Mult Credpriv", short_name: "Avant Garde", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1546188994-07c34f6e5e1b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{avant_garde}"
@@ -275,8 +266,8 @@ end
 def write_monthly_data_fund(path_array, csv_options)
   CSV.foreach(path_array, csv_options) do |row|
 
-    codigo = row['Ativo'][0,6].to_i
-    fund = Fund.find_by(codigo_economatica: codigo)
+    fund_name = row['Nome']
+    fund = Fund.find_by(name: fund_name)
     puts fund
 
     date = get_date(row['Date'])
@@ -313,9 +304,7 @@ end
 
 def write_monthly_data_bench(path_array, csv_options)
   CSV.foreach(path_array, csv_options) do |row|
-    csv.each do |row|
-
-      codigo = row['Ativo'][0,3]
+      codigo = row['Nome']
       puts codigo
 
       benchmark = BenchMark.find_by(codigo_economatica: codigo)
@@ -332,37 +321,45 @@ def write_monthly_data_bench(path_array, csv_options)
       else
         data.update(daily_value: row['Cota'], return_daily_value: row['Daily return'], return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'], return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'], volatility: row['Vol EWMA 97%'])
       end
-
   end
 end
 
 
-write_monthly_data_bench
+# write_monthly_data_bench
 
-dates = ["2020-07-31", "2020-06-30", "2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
-             "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
 
 path_array = 'db/csv_repos/Monthly Net Captation.csv'
 
-write_monthly_application(path_array, csv_options, dates)
+write_historic_monthly_data(path_array, csv_options, dates,"NetApplication")
 
 path_array = 'db/csv_repos/Monthly Return.csv'
 
-write_monthly_return(path_array, csv_options, dates)
+write_historic_monthly_data(path_array, csv_options, dates,"Returns")
 
+path_array = 'db/csv_repos/Monthly AUM.csv'
 
-path_array = 'db/csv_repos/Monthly Data CDI Funds.csv'
+write_historic_monthly_data(path_array, csv_options, dates,"AUM")
+
+path_array = 'db/csv_repos/Monthly Vol.csv'
+
+write_historic_monthly_data(path_array, csv_options, dates,"Vol")
+
+path_array = 'db/csv_repos/Monthly Price.csv'
+
+write_historic_monthly_data(path_array, csv_options, dates,"SharePrice")
+
+path_array = 'db/csv_repos/Indosuez data CDI Funds.csv'
 
 write_monthly_data_fund(path_array, csv_options)
 
-path_array = 'db/csv_repos/Monthly Data IMAB5 Funds.csv'
+path_array = 'db/csv_repos/Indosuez data Ibov Funds.csv'
 
 write_monthly_data_fund(path_array, csv_options)
 
-path_array = 'db/csv_repos/Monthly Data Ibovespa Funds.csv'
+path_array = 'db/csv_repos/Indosuez data IMAB Funds.csv'
 
 write_monthly_data_fund(path_array, csv_options)
 
-path_array = 'db/csv_repos/Monthly Data BenchMark.csv'
+path_array = 'db/csv_repos/Indosuez data Bench.csv'
 
 write_monthly_data_bench(path_array, csv_options)
