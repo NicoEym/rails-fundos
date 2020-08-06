@@ -1,0 +1,6 @@
+Nome;Classe;Tipo de Ativo;"Ativo
+Cancelado";Gestor;Monthly Net Captation;Quarterly Net Captation;Yearly Net Captation;Monthly return;Spread Bench monthly return;Quarterly return;Spread Bench quarterly return;Yearly return;Spread Bench annual return;PL;Cota;Vol EWMA 97%;Sharpe ratio;Tracking error;VaR;Date
+Bnpp Fdo Inc de Inv Infra Deb Inc RF;;Fundo;ativo;BNP Paribas Asset;14 926 959;11 171 657;-13 605 641;2,51;-5,75;5,92;-21,91;5,31;4,23;509 791;141,9375546;6,07;3,15;31,68;0,40;2020-07-31
+Ca Indosuez Debent Inc Cred Priv Fc Mult;;Fundo;ativo;Ca Indosuez Wealth (Brazil) S.A. Dtvm;-24 827 319;-113 827 984;-315 224 573;4,07;-4,20;8,93;-18,90;7,76;6,68;1 404 935;18,364497;10,09;3,37;29,58;0,66;2020-07-31
+Daycoval Deb. Inc Cred Priv FI Mult;;Fundo;ativo;Daycoval Asset Management Adm Rec Ltda;770 234;-3 995 231;-92 542 894;1,54;-6,72;3,65;-24,18;3,50;2,42;94 587;1,31799689;3,33;3,08;33,30;0,22;2020-07-31
+Xp Debent Incent Cred Priv Fc FI Mult;;Fundo;ativo;Xp Vista Asset Management Ltda;-6 673 867;-46 404 383;177 495 646;2,00;-6,26;5,35;-22,49;5,42;4,34;720 425;1,96045717;5,02;3,01;32,23;0,31;2020-07-31

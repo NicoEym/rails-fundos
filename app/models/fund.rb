@@ -1,6 +1,5 @@
 class Fund < ApplicationRecord
 
-  validates :codigo_economatica, presence: true
   validates :name, presence: true
   belongs_to :gestor
   has_one :area

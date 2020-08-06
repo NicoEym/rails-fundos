@@ -76,7 +76,7 @@ class FundsController < ApplicationController
         when "volatility" then
           historical_array << [data_of_the_day.calendar.day, data_of_the_day.volatility] unless data_of_the_day.volatility.nil?
         when "monthly_captation" then
-          historical_array << [data_of_the_day.day.strftime("%Y-%m"), data_of_the_day.application_monthly_net_value / 1_000_000] unless data_of_the_day.nil?
+          historical_array << [data_of_the_day.calendar.day, data_of_the_day.application_monthly_net_value / 1_000_000] unless data_of_the_day.application_monthly_net_value.nil?
       end
     end
     historical_array

@@ -14,52 +14,48 @@
          <tr class="text-center black font-white">
           <td colspan="1">Cota</td>
           <td colspan="1">PL</td>
-          <td colspan="1">Retorno diário</td>
+
           <td colspan="1">Volatilidade EWMA 94%</td>
           <td colspan="1">Sharpe ratio</td>
           <td colspan="1">Tracking error</td>
         </tr>
 
-        <tr>
+        <tr class="text-center" >
           <td><%= data["share_price"].round(4)%></td>
           <td><%= number_with_delimiter(data["aum"].round(0), :delimiter => ',')%></td>
-          <td><%= sprintf("%+.2f", data["return_daily_value"].round(2))%>%</td>
+
           <td><%= sprintf("%+.2f", data["volatility"].round(2))%>%</td>
           <td><%= sprintf("%+.2f", data["sharpe_ratio"].round(2))%></td>
           <td><%= sprintf("%+.2f", data["tracking_error"].round(2))%>%</td>
         </tr>
 
         <tr class="text-center black font-white">
-          <td colspan="1">Dado</td>
-          <td colspan="1">Diario</td>
-          <td colspan="1">Semanal</td>
+          <td colspan="2">Dado</td>
+
           <td colspan="1">Mensal</td>
           <td colspan="1">Trimestral</td>
           <td colspan="1">Annual</td>
         </tr>
 
-        <tr>
-          <td>Retorno</td>
-          <td><%= sprintf("%+.2f", data["return_daily_value"].round(2))%>%</td>
-          <td><%= sprintf("%+.2f", data["return_weekly_value"].round(2))%>%</td>
+        <tr class="text-center">
+          <td colspan="2">Retorno</td>
+
           <td><%= sprintf("%+.2f", data["return_monthly_value"].round(2))%>%</td>
           <td><%= sprintf("%+.2f", data["return_quarterly_value"].round(2))%>%</td>
           <td><%= sprintf("%+.2f", data["return_annual_value"].round(2))%>%</td>
         </tr>
 
-        <tr>
-          <td>Ret/Bench</td>
-          <td><%= sprintf("%+.2f", data["return_over_benchmark_daily_value"].round(2))%>%</td>
-          <td><%= sprintf("%+.2f", data["return_over_benchmark_weekly_value"].round(2))%>%</td>
+        <tr class="text-center">
+          <td colspan="2">Ret/Bench</td>
+
           <td><%= sprintf("%+.2f", data["return_over_benchmark_monthly_value"].round(2))%>%</td>
           <td><%= sprintf("%+.2f", data["return_over_benchmark_quarterly_value"].round(2))%>%</td>
           <td><%= sprintf("%+.2f", data["return_over_benchmark_annual_value"].round(2))%>%</td>
         </tr>
 
-         <tr>
-          <td>Capt Liq</td>
-          <td> - </td>
-          <td><%= number_with_delimiter(data["application_weekly_net_value"].round(0), :delimiter => ',') %></td>
+         <tr class="text-center">
+          <td colspan="2">Capt Liq</td>
+
           <td><%= number_with_delimiter(data["application_monthly_net_value"].round(0), :delimiter => ',') %></td>
           <td><%= number_with_delimiter(data["application_quarterly_net_value"].round(0), :delimiter => ',') %></td>
           <td><%= number_with_delimiter(data["application_annual_net_value"].round(0), :delimiter => ',') %></td>
