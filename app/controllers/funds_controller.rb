@@ -67,10 +67,12 @@ class FundsController < ApplicationController
     # Doing so we have our historical serie of data for the AUM
     historical_array = []
     dates_12_months.each do |date|
+      puts date.day
       data_of_the_day = datas.find_by(calendar: date)
       case data_type
         when "aum" then
           historical_array << [data_of_the_day.calendar.day, data_of_the_day.aum / 1_000_000_000] unless data_of_the_day.aum.nil?
+          puts data_of_the_day.calendar.day
         when "share_price" then
           historical_array << [data_of_the_day.calendar.day, data_of_the_day.share_price] unless data_of_the_day.share_price.nil?
         when "volatility" then
