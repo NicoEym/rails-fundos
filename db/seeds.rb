@@ -20,11 +20,11 @@ csv_options = { col_sep:  ";", quote_char: '"', headers: :first_row }
 
 def get_date(date)
   year = date[0,4].to_i
-  puts year
+
    month = date[5,7].to_i
-  puts month
+
   day = date[8,10].to_i
-  puts day
+
   date_format_YMD = Date.new(year, month, day)
 
   date_calendar = Calendar.find_by(day: date_format_YMD)
@@ -144,15 +144,15 @@ def write_historic_monthly_data(path, options, dates, data_type)
 
       case data_type
         when "NetApplication"
-          datas.nil? ? DailyDatum.create(application_monthly_net_value: row[date], fund: fund, calendar: date_calendar) : datas.update(application_monthly_net_value: row[date])
+          datas.nil? ? DailyDatum.create(application_monthly_net_value: row[date].gsub!(/[[:space:]]/, '').to_i, fund: fund, calendar: date_calendar) : datas.update(application_monthly_net_value: row[date].gsub!(/[[:space:]]/, '').to_i)
         when "Returns"
-          datas.nil? ? DailyDatum.create(return_monthly_value: row[date], fund: fund, calendar: date_calendar) : datas.update(return_monthly_value: row[date])
+          datas.nil? ? DailyDatum.create(return_monthly_value: row[date].gsub!(',','.').to_f, fund: fund, calendar: date_calendar) : datas.update(return_monthly_value: row[date].gsub!(',','.').to_f)
         when "AUM"
-          datas.nil? ? DailyDatum.create(aum: row[date], fund: fund, calendar: date_calendar) : datas.update(aum: row[date])
+          datas.nil? ? DailyDatum.create(aum: row[date].gsub!(/[[:space:]]/, '').to_i, fund: fund, calendar: date_calendar) : datas.update(aum: row[date].gsub!(/[[:space:]]/, '').to_i)
         when "Vol"
-          datas.nil? ? DailyDatum.create(volatility: row[date], fund: fund, calendar: date_calendar) : datas.update(volatility: row[date])
+          datas.nil? ? DailyDatum.create(volatility: row[date].gsub!(',','.').to_f, fund: fund, calendar: date_calendar) : datas.update(volatility: row[date].gsub!(',','.').to_f)
         when "SharePrice"
-          datas.nil? ? DailyDatum.create(share_price: row[date], fund: fund, calendar: date_calendar) : datas.update(share_price: row[date])
+          datas.nil? ? DailyDatum.create(share_price: row[date].gsub!(',','.').to_f, fund: fund, calendar: date_calendar) : datas.update(share_price: row[date].gsub!(',','.').to_f)
       end
     end
   end
@@ -177,7 +177,7 @@ if BenchMark.all.empty?
 
       datas = DataBenchmark.find_by(bench_mark: bench_mark, calendar: date_calendar)
 
-      datas.nil? ? DataBenchmark.create(return_monthly_value: row[date], bench_mark: bench_mark, calendar: date_calendar) : datas.update(return_monthly_value: row[date])
+      datas.nil? ? DataBenchmark.create(return_monthly_value: row[date].gsub!(',','.').to_f, bench_mark: bench_mark, calendar: date_calendar) : datas.update(return_monthly_value: row[date].gsub!(',','.').to_f)
 
     end
   end
@@ -277,25 +277,25 @@ def write_monthly_data_fund(path_array, csv_options)
 
     if datas.nil?
       puts "nil"
-      DailyDatum.create(aum: row['PL'], share_price:row['Cota'], return_monthly_value: row['Monthly return'],
-                        return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'],
-                        return_over_benchmark_monthly_value: row['Spread Bench monthly return'], return_over_benchmark_quarterly_value: row['Spread Bench quarterly return'],
-                        return_over_benchmark_annual_value: row['Spread Bench annual return'], volatility: row['Vol EWMA 97%'],
-                        sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'],
-                        application_monthly_net_value: row['Monthly Net Captation'],
-                        application_quarterly_net_value: row['Quarterly Net Captation'],
-                        application_annual_net_value: row['Yearly Net Captation'],fund: fund, calendar: date)
+      DailyDatum.create(aum: row['PL'].gsub!(/[[:space:]]/, '').to_i, share_price:row['Cota'].gsub!(',','.').to_f, return_monthly_value: row['Monthly return'].gsub!(',','.').to_f,
+                        return_quarterly_value: row['Quarterly return'].gsub!(',','.').to_f, return_annual_value: row['Yearly return'].gsub!(',','.').to_f,
+                        return_over_benchmark_monthly_value: row['Spread Bench monthly return'].gsub!(',','.').to_f, return_over_benchmark_quarterly_value: row['Spread Bench quarterly return'].gsub!(',','.').to_f,
+                        return_over_benchmark_annual_value: row['Spread Bench annual return'].gsub!(',','.').to_f, volatility: row['Vol EWMA 97%'].gsub!(',','.').to_f,
+                        sharpe_ratio: row["Sharpe ratio"].gsub!(',','.').to_f, tracking_error: row['Tracking error'].gsub!(',','.').to_f,
+                        application_monthly_net_value: row['Monthly Net Captation'].gsub!(/[[:space:]]/, '').to_i,
+                        application_quarterly_net_value: row['Quarterly Net Captation'].gsub!(/[[:space:]]/, '').to_i,
+                        application_annual_net_value: row['Yearly Net Captation'].gsub!(/[[:space:]]/, '').to_i,fund: fund, calendar: date)
     else
       puts datas.fund.name
       puts datas.calendar.day
-      datas.update(aum: row['PL'], share_price:row['Cota'], return_monthly_value: row['Monthly return'],
-                        return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'],
-                        return_over_benchmark_monthly_value: row['Spread Bench monthly return'], return_over_benchmark_quarterly_value: row['Spread Bench quarterly return'],
-                        return_over_benchmark_annual_value: row['Spread Bench annual return'], volatility: row['Vol EWMA 97%'],
-                        sharpe_ratio: row["Sharpe ratio"], tracking_error: row['Tracking error'],
-                        application_monthly_net_value: row['Monthly Net Captation'],
-                        application_quarterly_net_value: row['Quarterly Net Captation'],
-                        application_annual_net_value: row['Yearly Net Captation'],fund: fund, calendar: date)
+      datas.update(aum: row['PL'].gsub!(/[[:space:]]/, '').to_i, share_price:row['Cota'].gsub!(',','.').to_f, return_monthly_value: row['Monthly return'].gsub!(',','.').to_f,
+                        return_quarterly_value: row['Quarterly return'].gsub!(',','.').to_f, return_annual_value: row['Yearly return'].gsub!(',','.').to_f,
+                        return_over_benchmark_monthly_value: row['Spread Bench monthly return'].gsub!(',','.').to_f, return_over_benchmark_quarterly_value: row['Spread Bench quarterly return'].gsub!(',','.').to_f,
+                        return_over_benchmark_annual_value: row['Spread Bench annual return'].gsub!(',','.').to_f, volatility: row['Vol EWMA 97%'].gsub!(',','.').to_f,
+                        sharpe_ratio: row["Sharpe ratio"].gsub!(',','.').to_f, tracking_error: row['Tracking error'].gsub!(',','.').to_f,
+                        application_monthly_net_value: row['Monthly Net Captation'].gsub!(/[[:space:]]/, '').to_i,
+                        application_quarterly_net_value: row['Quarterly Net Captation'].gsub!(/[[:space:]]/, '').to_i,
+                        application_annual_net_value: row['Yearly Net Captation'].gsub!(/[[:space:]]/, '').to_i,fund: fund, calendar: date)
     end
   end
 end
@@ -316,10 +316,10 @@ def write_monthly_data_bench(path_array, csv_options)
       data = DataBenchmark.find_by(bench_mark_id: benchmark.id, calendar_id: date)
 
       if data.nil?
-        data = DataBenchmark.create(daily_value: row['Cota'], return_daily_value: row['Daily return'], return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'], return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'], volatility: row['Vol EWMA 97%'], bench_mark_id: benchmark.id, calendar: date)
+        data = DataBenchmark.create(daily_value: row['Cota'].gsub!(',','.').to_f, return_monthly_value: row['Monthly return'].gsub!(',','.').to_f, return_quarterly_value: row['Quarterly return'].gsub!(',','.').to_f, return_annual_value: row['Yearly return'].gsub!(',','.').to_f, volatility: row['Vol EWMA 97%'].gsub!(',','.').to_f, bench_mark_id: benchmark.id, calendar: date)
         puts data.daily_value
       else
-        data.update(daily_value: row['Cota'], return_daily_value: row['Daily return'], return_weekly_value: row['Weekly return'], return_monthly_value: row['Monthly return'], return_quarterly_value: row['Quarterly return'], return_annual_value: row['Yearly return'], volatility: row['Vol EWMA 97%'])
+        data.update(daily_value: row['Cota'].gsub!(',','.').to_f, return_monthly_value: row['Monthly return'].gsub!(',','.').to_f, return_quarterly_value: row['Quarterly return'].gsub!(',','.').to_f, return_annual_value: row['Yearly return'].gsub!(',','.').to_f, volatility: row['Vol EWMA 97%'].gsub!(',','.').to_f)
       end
   end
 end
