@@ -1,4 +1,4 @@
-
+<br>
 <div class="container grey padding1 border-radius05 shadow-boxing marginb">
 
   <h3 class="text-center"><%=@fund.best_name%></h3>
@@ -63,10 +63,8 @@
     <div class="padding1 my-row border-radius05 shadow-boxing">
       <% unless @chart_returns_vs_benchmark.nil? %>
         <div class="chart-container">
-
          <%= column_chart @chart_returns_vs_benchmark, colors: ["#CFB07B", "#1E2025"], title: "Retorno vs Benchmark", ytitle: "Retorno mensal (%)"%>
-
-      </div>
+        </div>
       <% end %>
 
       <% unless @chart_returns_vs_competitors.nil? %>
