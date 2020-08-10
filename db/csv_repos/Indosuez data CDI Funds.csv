@@ -1,18 +1,44 @@
-Nome;Classe;Pais Sede;Tipo de Ativo;Gestor;Monthly Net Captation;Quarterly Net Captation;Yearly Net Captation;Monthly return;Spread Bench monthly return;Quarterly return;Spread Bench quarterly return;Yearly return;Spread Bench annual return;PL;Cota;Vol EWMA 97%;Sharpe ratio;Tracking error;VaR;Date
-Af Invest FI RF Cred Priv Geraes;;BR;Fundo;Af Invest Administracao de Recursos;-114 372 842;-493 102 290;-2 140 097 177;0,56;0,37;0,77;0,13;-0,06;-4,27;1 422 523 908;3,0259065;1,23;-0,63;34,94;0,09;2020-07-31
-BNP Paribas Targus Fc FI RF Cred Priv;;BR;Fundo;BNP Paribas Asset;-16 755 043;-118 611 797;-760 694 724;0,55;0,35;1,30;0,66;2,69;-1,52;512 963 471;458,3363232;0,64;2,69;35,26;0,05;2020-07-31
-Ca In Avant Garde Feed1 Fc Mult Credpriv;;BR;Fundo;Ca Indosuez Wealth (Brazil) S.A. Dtvm;-1 700 000;-9 503 395;-21 956 189;0,51;0,31;1,21;0,57;4,60;0,39;60 971 489;11,9709223;0,30;6,52;35,13;0,02;2020-07-31
-Ca Indos DI Premiere Fc FI RF Ref DI LP;;BR;Fundo;Ca Indosuez Wealth (Brazil) S.A. Dtvm;63 828;-1 583 279;-6 053 124;0,35;0,15;1,03;0,38;-0,37;-4,59;5 156 409;129,88386;0,93;-1,16;35,26;0,07;2020-07-31
-Ca Indosuez Agilite FI RF Cred Priv;;BR;Fundo;Ca Indosuez Wealth (Brazil) S.A. Dtvm;-20 371 445;-129 614 038;-1 279 915 083;0,81;0,62;1,95;1,31;-1,93;-6,15;481 619 880;13,8574681;1,77;0,79;34,82;0,15;2020-07-31
-Ca Indosuez Beton FICFI Mult;;BR;Fundo;Ca Indosuez Wealth (Brazil) S.A. Dtvm;242 698;-310 995;92 565 130;3,43;3,24;9,61;8,96;6,47;2,26;195 798 978;75,901823;8,83;3,39;27,04;0,60;2020-07-31
-Ca Indosuez DI Master FI RF Ref DI LP;;BR;Fundo;Ca Indosuez Wealth (Brazil) S.A. Dtvm;-10 862 446;-59 108 098;-906 768 568;0,41;0,22;1,25;0,61;0,38;-3,84;473 768 753;142,140091;0,90;-0,25;35,27;0,07;2020-07-31
-Ca Indosuez Grand Vitesse Firf Cred Priv;;BR;Fundo;Ca Indosuez Wealth (Brazil) S.A. Dtvm;-2 914 169;-37 666 490;-187 530 898;1,07;0,88;2,29;1,65;-1,46;-5,68;197 521 709;10,5113048;1,66;1,87;34,91;0,15;2020-07-31
-Ca Indosuez Private Pi Fc de FI Mult;;BR;Fundo;Ca Indosuez Wealth (Brazil) S.A. Dtvm;265 718;150 562;2 848 258;4,30;4,11;9,62;8,97;10,90;6,69;7 745 628;11,55937186;8,67;4,47;37,61;0,72;2020-07-31
-Ca Indosuez Vitesse FI RF Cred Priv;;BR;Fundo;Ca Indosuez Wealth (Brazil) S.A. Dtvm;-85 395 470;-291 156 220;-2 202 619 046;1,48;1,29;2,62;1,98;-1,74;-5,96;1 179 758 298;22,195798;1,89;2,91;34,84;0,18;2020-07-31
-Daycoval Classic Firf Cred. Priv.;;BR;Fundo;Daycoval Asset Management Adm Rec Ltda;386 220;-41 145 724;-631 077 688;0,72;0,53;1,56;0,92;2,18;-2,04;810 613 305;2,88364791;0,89;2,40;34,91;0,08;2020-07-31
-Devant Magna FI RF Cred Priv LP;;BR;Fundo;Devant Asset Investimentos Ltda;-141 344;-1 948 359;180 667;1,29;1,10;2,44;1,80;-0,38;-4,59;9 208 528;1,04160006;2,33;2,03;35,53;0,16;2020-07-31
-Gama Top FICFI RF Cred Priv LP;;BR;Fundo;Gama Investimentos Ltda;-10 473 063;-40 376 468;61 524 555;1,93;1,73;4,31;3,67;-0,52;-4,73;244 772 963;1,08447057;2,77;3,34;35,22;0,22;2020-07-31
-Itau Selecao Multifundos Plus Mult Fc;;BR;Fundo;Itau Dtvm;-58 267 101;-277 336 946;324 867 114;2,64;2,45;7,04;6,39;4,60;0,38;4 908 530 805;22,356426;7,97;2,59;27,96;0,57;2020-07-31
-Opportunity Allocation Fc FI Mult;;BR;Fundo;Opp Gestora de Recursos Ltda;-706 171;-4 467 942;-35 350 542;4,11;3,92;10,30;9,65;7,89;3,68;62 015 167;6,41666313;12,53;2,93;23,67;0,83;2020-07-31
-Santander Alocacao Mult Fc FI;;BR;Fundo;Santander Brasil Gestao de Recursos Ltda;-28 671 442;-140 965 322;-311 176 017;2,56;2,36;6,46;5,82;5,24;1,03;2 806 159 125;364,2658227;6,27;3,04;29,39;0,49;2020-07-31
-Xp Investor FI RF Cred Priv LP;;BR;Fundo;Xp Vista Asset Management Ltda;-42 791 190;-147 763 430;-1 183 059 059;0,89;0,70;2,08;1,43;0,84;-3,37;864 119 399;2,67924832;1,42;2,20;35,02;0,11;2020-07-31
+Nome;Gestor;Monthly Net Captation;Quarterly Net Captation;Yearly Net Captation;Monthly return;Spread Bench monthly return;Quarterly return;Spread Bench quarterly return;Yearly return;Spread Bench annual return;PL;Cota;Vol EWMA 97%;Sharpe ratio;Tracking error;VaR;Date
+Af Invest FI RF Cred Priv Geraes;Af Invest Administracao de Recursos;-114 372 842;-493 102 290;-2 140 097 177;0,56;0,37;0,77;0,13;-0,06;-4,27;1 420 424 340;3,0259065;1,23;-0,63;34,94;0,09;2020-07-31
+ARX Denali Fc FI RF Cred Priv;ARX Investimentos Ltda;82 207 797;-26 983 488;-17 913 457;0,74;0,54;1,89;1,24;2,09;-2,13;1 314 532 983;1,09079297;1,06;2,70;35,14;0,08;2020-07-31
+Az Quest Luce Fc FI RF Cred Priv LP;Az Quest Investimentos;88 362 564;-174 978 524;-3 764 187 021;1,57;1,38;3,25;2,61;-0,31;-4,52;2 311 169 907;1,41724521;2,11;3,81;35,09;0,16;2020-07-31
+BNP Paribas Targus Fc FI RF Cred Priv;BNP Paribas Asset;-16 755 043;-118 611 797;-760 694 724;0,55;0,35;1,30;0,66;2,69;-1,52;516 606 447;458,3363232;0,64;2,69;35,26;0,05;2020-07-31
+Bnpp Rubi Fc FI RF Cred Priv;BNP Paribas Asset;-51 953 234;-129 401 102;-1 403 688 240;0,82;0,62;1,64;1,00;1,25;-2,96;878 357 074;163,4032891;1,25;1,99;34,77;0,11;2020-07-31
+Brad H FI RF Cred Priv LP Perf Instituc;Bram Bradesco Asset Management SA Dtvm;-26 720 171;-347 987 190;-2 534 281 103;0,53;0,33;1,50;0,86;2,81;-1,40;1 984 543 925;2,8201012;0,70;2,88;34,95;0,06;2020-07-31
+Bradesco H FI RF Ref DI LP;Bram Bradesco Asset Management SA Dtvm;-5 806 376;-5 418 383;-145 340 595;0,18;-0,02;0,60;-0,05;3,98;-0,24;526 735 578;30,4434225;0,09;-24,18;35,14;0,01;2020-07-31
+Bp Cred Corp II Fc FI RF Cred Priv LP;Brasil Plural Gestao de Recursos Ltda;-12 313 272;-170 378 553;-383 098 440;1,17;0,97;2,46;1,81;-1,54;-5,75;216 358 366;1,82722607;1,71;2,30;35,17;0,14;2020-07-31
+Btgp Access Balanceado FICFI Mult;BTG Pactual Wm Gestao de Recursos Ltda;4 089 072;8 278 702;126 194 736;3,32;3,13;8,35;7,70;4,89;0,67;240 983 634;5,8999216;8,23;3,03;27,54;0,64;2020-07-31
+BTG Pact Cre Cor I FICFI RF Cred Priv;BTG Pactual;-99 404 909;-209 470 705;-1 467 604 065;1,53;1,34;2,08;1,44;-1,49;-5,70;704 309 211;2,1891189;1,61;2,34;35,02;0,16;2020-07-31
+BTG Pactual Yield DI FI Ref Cred Priv;BTG Pactual;6 664 464;-175 345 249;-3 308 739 492;0,29;0,10;0,99;0,35;-1,54;-5,76;1 341 375 533;31,0096893;1,45;-1,87;35,27;0,10;2020-07-31
+Ca In Avant Garde Feed1 Fc Mult Credpriv;Ca Indosuez Wealth (Brazil) S.A. Dtvm;-1 700 000;-9 503 395;-21 956 189;0,51;0,31;1,21;0,57;4,60;0,39;60 990 181;11,9709223;0,30;6,52;35,13;0,02;2020-07-31
+Ca Indosuez Agilite FI RF Cred Priv;Ca Indosuez Wealth (Brazil) S.A. Dtvm;-20 371 445;-129 614 038;-1 279 915 083;0,81;0,62;1,95;1,31;-1,93;-6,15;480 712 410;13,8574681;1,77;0,79;34,82;0,15;2020-07-31
+Ca Indosuez Beton FICFI Mult;Ca Indosuez Wealth (Brazil) S.A. Dtvm;242 698;-310 995;92 565 130;3,43;3,24;9,61;8,96;6,47;2,26;197 523 271;75,901823;8,83;3,39;27,04;0,60;2020-07-31
+Ca Indosuez DI Master FI RF Ref DI LP;Ca Indosuez Wealth (Brazil) S.A. Dtvm;-10 862 446;-59 108 098;-906 768 568;0,41;0,22;1,25;0,61;0,38;-3,84;477 936 780;142,140091;0,90;-0,25;35,27;0,07;2020-07-31
+Ca Indosuez Grand Vitesse Firf Cred Priv;Ca Indosuez Wealth (Brazil) S.A. Dtvm;-2 914 169;-37 666 490;-187 530 898;1,07;0,88;2,29;1,65;-1,46;-5,68;197 640 029;10,5113048;1,66;1,87;34,91;0,16;2020-07-31
+Ca Indosuez Private Pi Fc de FI Mult;Ca Indosuez Wealth (Brazil) S.A. Dtvm;265 718;150 562;2 848 258;4,30;4,11;9,62;8,97;10,90;6,69;7 768 825;11,55937186;8,67;4,47;37,61;0,71;2020-07-31
+Ca Indosuez Vitesse FI RF Cred Priv;Ca Indosuez Wealth (Brazil) S.A. Dtvm;-85 395 466;-291 156 216;-2 202 619 042;1,48;1,29;2,62;1,98;-1,74;-5,96;1 171 940 042;22,195798;1,89;2,91;34,84;0,18;2020-07-31
+Caixa FIC Premium RF Ref DI LP;Caixa;-19 404 305;-1 000 896 846;-2 977 043 728;0,27;0,07;0,84;0,20;3,57;-0,64;9 097 113 228;2,638912;0,29;1,18;35,11;0,02;2020-07-31
+CSHG Top 30 Fc FI Mult;Credit Suisse Hedging Griffo Wm S.A.;-26 158 343;-59 162 283;-220 359 574;2,54;2,35;5,92;5,27;4,08;-0,13;1 719 225 493;6,5948101;7,42;2,38;28,36;0,54;2020-07-31
+Daycoval Classic Firf Cred. Priv.;Daycoval Asset Management Adm Rec Ltda;386 220;-41 145 724;-631 077 688;0,72;0,53;1,56;0,92;2,18;-2,04;810 621 595;2,88364791;0,89;2,40;34,91;0,08;2020-07-31
+Devant Magna FI RF Cred Priv LP;Devant Asset Investimentos Ltda;-141 344;-1 948 359;180 667;1,29;1,10;2,44;1,80;-0,38;-4,59;9 170 633;1,04160006;2,33;2,03;35,53;0,15;2020-07-31
+G5 Allocation FICFI Mult;G5 Administradora de Recursos Ltda;12 275 178;22 176 532;62 879 708;1,93;1,73;4,33;3,69;9,09;4,87;164 215 480;8,3222545;3,85;3,89;32,10;0,31;2020-07-31
+Gama Top FICFI RF Cred Priv LP;Gama Investimentos Ltda;-10 473 063;-40 376 468;61 524 555;1,93;1,73;4,31;3,67;-0,52;-4,73;244 627 600;1,08447057;2,77;3,34;35,22;0,21;2020-07-31
+Itau Fof Orion Mult Cred Priv Ie FICFI;Itau Dtvm;6 836 231;-34 691 686;267 374 758;3,35;3,16;7,08;6,44;2,28;-1,93;2 922 488 248;17,349952;7,84;3,17;28,97;0,59;2020-07-31
+Itau Mult Hedge Fund 30 Mult FICFI;Itau Dtvm;-36 808 847;-109 530 189;737 545 622;2,43;2,23;6,20;5,56;4,21;-0,01;6 841 957 393;47,503281;7,73;2,35;28,20;0,58;2020-07-31
+Itau Selecao Multifundos Mult Fc FI;Itau Dtvm;381 273 625;494 530 214;1 005 978 230;1,41;1,21;3,78;3,13;7,99;3,78;8 243 871 629;37,102782;3,12;3,59;32,62;0,22;2020-07-31
+Itau Selecao Multifundos Plus Mult Fc;Itau Dtvm;-58 267 101;-277 336 946;324 867 114;2,64;2,45;7,04;6,39;4,60;0,38;4 964 176 355;22,356426;7,97;2,59;27,96;0,61;2020-07-31
+Itau RF LP Cred Priv Diferenciado FI;Itau Unibanco SA;-318 719 230;-1 609 253 987;-11 948 730 052;0,32;0,13;1,11;0,47;3,45;-0,76;12 314 582 734;25,23339;0,73;1,13;35,26;0,05;2020-07-31
+Jgp Corporate FICFI RF Cred Priv LP;Jgp Gestao de Credito Ltda;-2 335 868;-41 969 471;-93 480 213;1,67;1,47;2,86;2,22;0,48;-3,73;235 575 057;168,78173825;2,12;3,80;35,08;0,15;2020-07-31
+Opportunity Allocation Fc FI Mult;Opp Gestora de Recursos Ltda;-706 171;-4 467 942;-35 350 542;4,11;3,92;10,30;9,65;7,89;3,68;63 120 393;6,41666313;12,53;2,93;23,67;0,87;2020-07-31
+Ouro Preto FICFI Mult Cred Priv;Ouro Preto Investimentos;-9 590 272;-42 690 228;-48 379 075;0,40;0,20;1,12;0,47;5,92;1,70;115 279 484;2,57844588;0,07;54,00;35,14;0,00;2020-07-31
+Safra Exec Fc FI RF;Safra Asset Management Ltda;33 878 480;128 567 395;-980 538 367;0,40;0,20;1,10;0,46;4,73;0,52;6 623 968 246;7864,934872;0,98;1,83;34,59;0,06;2020-07-31
+Cart Sam Private Pi Mult Cred Priv FI;Santander Brasil Gestao de Recursos Ltda;-214 570;-346 802;-214 265;2,41;2,22;6,45;5,80;1,87;-2,35;1 346 431;104,0272776;7,48;2,19;28,95;0,62;2020-07-31
+Santander Alocacao Mult Fc FI;Santander Brasil Gestao de Recursos Ltda;-28 671 442;-140 965 322;-311 176 017;2,56;2,36;6,46;5,82;5,24;1,03;2 826 148 584;364,2658227;6,27;3,04;29,39;0,50;2020-07-31
+Santander Fc FI Institucional RF Ref DI;Santander Brasil Gestao de Recursos Ltda;-172 598 960;-1 156 654 748;-2 939 216 526;0,27;0,07;0,52;-0,12;3,27;-0,94;1 696 123 976;185,1960445;0,38;-1,18;35,16;0,03;2020-07-31
+Santander FI Master RF Cred Priv LP;Santander Brasil Gestao de Recursos Ltda;-49 455 873;-303 572 660;-1 753 887 758;0,49;0,30;0,81;0,17;2,69;-1,52;2 045 778 303;24,0389292;0,79;0,55;35,10;0,06;2020-07-31
+Solis Cap Ant Cred Priv FICFI Mult LP;Solis Investimentos;-2 860 367;-69 617 784;-791 289 847;0,33;0,14;0,95;0,30;5,41;1,20;38 937 785;2,3980339;0,10;20,78;35,14;0,00;2020-07-31
+Sparta Top FICFI RF Cred Priv LP;Sparta;-25 790 542;-150 109 761;-1 748 850 161;1,26;1,07;2,73;2,09;0,90;-3,32;1 288 837 981;2,16230856;1,46;4,28;35,21;0,12;2020-07-31
+Valora Guardian Fc FI Mult Cred Priv;Valora Gestao de Investimentos Ltda;-8 825 910;-26 410 731;-76 087 672;0,34;0,14;1,07;0,43;5,31;1,10;128 256 751;3,0506884;0,31;5,10;35,15;0,02;2020-07-31
+Vitreo Fof M F Fc de FI Mult Cred Priv;Vitreo Gestao de Recursos Ltda;13 124 038;16 301 233;174 842 512;3,65;3,46;8,91;8,27;10,92;6,70;684 812 373;1,14796846;7,81;4,14;28,28;0,64;2020-07-31
+Xp Investor FI RF Cred Priv LP;Xp Vista Asset Management Ltda;-42 791 190;-147 763 430;-1 183 059 059;0,89;0,70;2,08;1,43;0,84;-3,37;861 452 086;2,67924832;1,42;2,20;35,02;0,11;2020-07-31
+Xp Top Cred Priv RF FI LP;Xp Vista Asset Management Ltda;-44 941 703;-174 622 894;-1 028 290 222;1,14;0,94;1,93;1,28;1,27;-2,95;819 030 337;11747,116395;1,29;3,23;35,10;0,12;2020-07-31

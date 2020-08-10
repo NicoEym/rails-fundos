@@ -104,10 +104,10 @@ def create_competitors (path, csv_options)
     anbima_class = AnbimaClass.create(name: row['Classe Anbima']) if anbima_class.nil?
     puts anbima_class.name
 
-    codigo = row['Ativo'][0,6].to_i
-    fund = Fund.find_by(codigo_economatica: codigo)
+    fund_name = row['Nome']
+    puts fund_name
+    fund = Fund.find_by(name: fund_name)
 
-    puts codigo
     photo_array = [ "https://images.unsplash.com/photo-1435575653489-b0873ec954e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
                     "https://images.unsplash.com/photo-1509018877337-3af7dd307ea9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
                       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
@@ -116,7 +116,7 @@ def create_competitors (path, csv_options)
 
     benchmark = BenchMark.find_by(name: row['Benchmark'])
     if fund.nil?
-      fund = Fund.create(codigo_economatica: codigo, name: row['Nome'],
+      fund = Fund.create(name: row['Nome'],
                         area_name: comp_area.name, anbima_class: anbima_class,
                         bench_mark: benchmark, gestor: gestor, competitor_group: row['Competitor group'],
                         photo_url: photo_array.sample)
