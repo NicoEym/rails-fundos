@@ -1,15 +1,58 @@
-Ativo;Nome;Gestor;Classe Anbima;Competitor group;Benchmark
-216658<BraNa>;Af Invest FI RF Cred Priv Geraes;Af Invest Administracao de Recursos;Renda Fixa;Agilite;CDI
-478210<BraNa>;BNP Paribas Premium Equities Fc FIA;BNP Paribas Asset;Ações;Allocaction;Ibovespa
-143529<BraNa>;BNP Paribas Targus Fc FI RF Cred Priv;BNP Paribas Asset;Renda Fixa;Agilite;CDI
-432016<BraNa>;Bnpp Fdo Inc de Inv Infra Deb Inc RF;BNP Paribas Asset;Renda Fixa;Infrafic;IMA B5
-259624<BraNa>;Daycoval Classic Firf Cred. Priv.;Daycoval Asset Management Adm Rec Ltda;Renda Fixa;Agilite;CDI
-431923<BraNa>;Daycoval Deb. Inc Cred Priv FI Mult;Daycoval Asset Management Adm Rec Ltda;Multimercados;Infrafic;IMA B5
-495182<BraNa>;Devant Magna FI RF Cred Priv LP;Devant Asset Investimentos Ltda;Renda Fixa;Vitesse;CDI
-471704<BraNa>;Gama Top FICFI RF Cred Priv LP;Gama Investimentos Ltda;Renda Fixa;Vitesse;CDI
-325007<BraNa>;Itau Selecao Multifundos Plus Mult Fc;Itau Dtvm;Multimercados;Beton;CDI
-130818<BraNa>;Opportunity Allocation Fc FI Mult;Opp Gestora de Recursos Ltda;Multimercados;Beton;CDI
-359051<BraNa>;Santander Acoes Fundo de Fundos Lb FI;Santander Brasil Gestao de Recursos Ltda;Ações;Allocaction;Ibovespa
-423912<BraNa>;Xpa Acoes Fc de FIA;Xp Advisory Gestao de Recursos;Ações;Allocaction;Ibovespa
-389870<BraNa>;Xp Debent Incent Cred Priv Fc FI Mult;Xp Vista Asset Management Ltda;Multimercados;Infrafic;IMA B5
-236853<BraNa>;Xp Investor FI RF Cred Priv LP;Xp Vista Asset Management Ltda;Renda Fixa;Vitesse;CDI
+Nome;Gestor;Classe Anbima;Competitor group;Benchmark
+Af Invest FI RF Cred Priv Geraes;Af Invest Administracao de Recursos;Renda Fixa;Agilite;CDI
+ARX Denali Fc FI RF Cred Priv;ARX Investimentos Ltda;Renda Fixa;Agilite;CDI
+Az Quest Luce Fc FI RF Cred Priv LP;Az Quest Investimentos;Renda Fixa;Agilite;CDI
+BNP Paribas Targus Fc FI RF Cred Priv;BNP Paribas Asset;Renda Fixa;Vitesse;CDI
+Bnpp Rubi Fc FI RF Cred Priv;BNP Paribas Asset;Renda Fixa;Vitesse;CDI
+Brad H FI RF Cred Priv LP Perf Instituc;Bram Bradesco Asset Management SA Dtvm;Renda Fixa;Agilite;CDI
+Bradesco H FI RF Ref DI LP;Bram Bradesco Asset Management SA Dtvm;Renda Fixa;DI60;CDI
+Bp Cred Corp II Fc FI RF Cred Priv LP;Brasil Plural Gestao de Recursos Ltda;Renda Fixa;Vitesse;CDI
+Btgp Access Balanceado FICFI Mult;BTG Pactual Wm Gestao de Recursos Ltda;Renda Fixa;Beton;CDI
+BTG Pact Cre Cor I FICFI RF Cred Priv;BTG Pactual;Renda Fixa;Vitesse;CDI
+BTG Pactual Yield DI FI Ref Cred Priv;BTG Pactual;Renda Fixa;DI60;CDI
+Caixa FIC Premium RF Ref DI LP;Caixa;Renda Fixa;DI60;CDI
+CSHG Top 30 Fc FI Mult;Credit Suisse Hedging Griffo Wm S.A.;Multimercados;Beton;CDI
+Daycoval Classic Firf Cred. Priv.;Daycoval Asset Management Adm Rec Ltda;Renda Fixa;Agilite;CDI
+Devant Magna FI RF Cred Priv LP;Devant Asset Investimentos Ltda;Renda Fixa;Vitesse;CDI
+G5 Allocation FICFI Mult;G5 Administradora de Recursos Ltda;Multimercados;Beton;CDI
+Gama Top FICFI RF Cred Priv LP;Gama Investimentos Ltda;Renda Fixa;Vitesse;CDI
+Itau Fof Orion Mult Cred Priv Ie FICFI;Itau Dtvm;Multimercados;Beton;CDI
+Itau Mult Hedge Fund 30 Mult FICFI;Itau Dtvm;Renda Fixa;Beton;CDI
+Itau Selecao Multifundos Mult Fc FI;Itau Dtvm;Renda Fixa;Beton;CDI
+Itau Selecao Multifundos Plus Mult Fc;Itau Dtvm;Renda Fixa;Beton;CDI
+Itau Private RF Ref DI Exclusive FICFI;Itau Unibanco SA;Renda Fixa;DI60;CDI
+Itau RF LP Cred Priv Diferenciado FI;Itau Unibanco SA;Renda Fixa;Agilite;CDI
+Jgp Corporate FICFI RF Cred Priv LP;Jgp Gestao de Credito Ltda;Renda Fixa;Vitesse;CDI
+Opportunity Allocation Fc FI Mult;Opp Gestora de Recursos Ltda;Multimercados;Beton;CDI
+Ouro Preto FICFI Mult Cred Priv;Ouro Preto Investimentos;Multimercados;Avant Garde;CDI
+Safra Exec Fc FI RF;Safra Asset Management Ltda;Renda Fixa;Agilite;CDI
+Cart Sam Private Pi Mult Cred Priv FI;Santander Brasil Gestao de Recursos Ltda;Multimercados;Pi;CDI
+Santander Alocacao Mult Fc FI;Santander Brasil Gestao de Recursos Ltda;Renda Fixa;Beton;CDI
+Santander Fc FI Institucional RF Ref DI;Santander Brasil Gestao de Recursos Ltda;Renda Fixa;DI60;CDI
+Santander FI Master RF Cred Priv LP;Santander Brasil Gestao de Recursos Ltda;Renda Fixa;Agilite;CDI
+Solis Cap Ant Cred Priv FICFI Mult LP;Solis Investimentos;Renda Fixa;Avant Garde;CDI
+Sparta Top FICFI RF Cred Priv LP;Sparta;Renda Fixa;Vitesse;CDI
+Valora Guardian Fc FI Mult Cred Priv;Valora Gestao de Investimentos Ltda;Renda Fixa;Avant Garde;CDI
+Vitreo Fof M F Fc de FI Mult Cred Priv;Vitreo Gestao de Recursos Ltda;Multimercados;Beton;CDI
+Xp Investor FI RF Cred Priv LP;Xp Vista Asset Management Ltda;Renda Fixa;Vitesse;CDI
+Xp Top Cred Priv RF FI LP;Xp Vista Asset Management Ltda;Renda Fixa;Vitesse;CDI
+ARX Elbrus Fundo Inc Inv Infra RF;ARX Investimentos Ltda;Renda Fixa;Infrafic;IMA-B5
+Az Quest Debentures Incentivadas FICFI Mult Cred P;Az Quest Investimentos;Multimercados;Infrafic;IMA-B5
+Bnpp Fdo Inc de Inv Infra Deb Inc RF;BNP Paribas Asset;Renda Fixa;Infrafic;IMA-B5
+Ca Indosuez Debent Inc Cred Priv Fc Mult;Ca Indosuez Wealth (Brazil) S.A. Dtvm;Multimercados;Infrafic;IMA-B5
+Daycoval Deb. Inc Cred Priv FI Mult;Daycoval Asset Management Adm Rec Ltda;Multimercados;Infrafic;IMA-B5
+Iridium Pioneer Fundo Inc Inv Infra RF;Iridium Gestao de Recursos Ltda;Renda Fixa;Infrafic;IMA-B5
+Alocacao Fundo Incent de Invest Infra RF;Reliance Asset;Renda Fixa;Infrafic;IMA-B5
+Sparta Deb Inc Fc F Inc Inv Infr RF;Sparta;Renda Fixa;Infrafic;IMA-B5
+Xp Debent Incent Cred Priv Fc FI Mult;Xp Vista Asset Management Ltda;Multimercados;Infrafic;IMA-B5
+BNP Paribas Premium Equities Fc FIA;BNP Paribas Asset;Ações;Allocaction;Ibovespa
+Brad Fc de FIA Portfolio Long Only;Bram Bradesco Asset Management SA Dtvm;Ações;Allocaction;Ibovespa
+Btgp Acce Multigestor Acoes FIC FIA;BTG Pactual Wm Gestao de Recursos Ltda;Ações;Allocaction;Ibovespa
+Ca Indosuez Alloc Action Fc FIA;Ca Indosuez Wealth (Brazil) S.A. Dtvm;Ações;Allocaction;Ibovespa
+Itau Acoes Fof Multigestor X FI;Itau Dtvm;Ações;Allocaction;Ibovespa
+Itau Unibanco Superacao FICFI Acoes Ie;Itau Dtvm;Ações;Allocaction;Ibovespa
+Opportunity Allocation Fc FI Mult;Opp Gestora de Recursos Ltda;Ações;Allocaction;Ibovespa
+Santander Acoes Fundo de Fundos Lb FI;Santander Brasil Gestao de Recursos Ltda;Ações;Allocaction;Ibovespa
+Santander Pb Valor Acoes Fc FI;Santander Brasil Gestao de Recursos Ltda;Ações;Allocaction;Ibovespa
+Xpa Acoes Fc de FIA;Xp Advisory Gestao de Recursos;Ações;Allocaction;Ibovespa
+Selection Acoes Fc FIA;Xp Vista Asset Management Ltda;Ações;Allocaction;Ibovespa

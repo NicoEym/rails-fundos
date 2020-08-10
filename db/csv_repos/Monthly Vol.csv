@@ -1,9 +1,22 @@
 Nome;Classe;Pais Sede;Tipo de Ativo;"Ativo
 Cancelado";Gestor;2020-05-29;2020-07-31;2020-06-30;2020-04-30;2020-03-31;2020-02-28;2020-01-31;2019-12-31;2019-11-29;2019-10-31;2019-09-30;2019-08-30;2019-07-31;2019-06-28
 Af Invest FI RF Cred Priv Geraes;;BR;Fundo;ativo;Af Invest Administracao de Recursos;2,07;0,93;1,30;3,66;2,33;0,05;0,06;0,11;0,17;0,14;0,09;0,10;0,13;0,07
+ARX Denali Fc FI RF Cred Priv;;BR;Fundo;ativo;ARX Investimentos Ltda;1,48;0,85;1,18;2,53;1,69;0,07;0,07;0,11;0,17;0,20;0,12;0,21;0,05;0,07
+ARX Elbrus Fundo Inc Inv Infra RF;;BR;Fundo;ativo;ARX Investimentos Ltda;6,60;2,89;4,19;10,41;13,36;1,83;1,50;2,15;2,34;2,53;2,54;2,45;1,88;2,50
+Az Quest Debentures Incentivadas FICFI Mult Cred P;;BR;Fundo;ativo;Az Quest Investimentos;6,72;3,39;4,33;10,38;12,05;2,00;1,76;2,48;2,71;2,87;2,79;2,72;2,00;2,47
+Az Quest Luce Fc FI RF Cred Priv LP;;BR;Fundo;ativo;Az Quest Investimentos;2,97;1,67;2,10;5,10;6,30;0,10;0,14;0,17;0,27;0,24;0,07;0,11;0,07;0,03
 BNP Paribas Premium Equities Fc FIA;;BR;Fundo;ativo;BNP Paribas Asset;43,74;22,71;31,46;64,54;98,61;31,69;18,56;10,43;13,28;13,36;14,25;22,47;13,17;15,88
 BNP Paribas Targus Fc FI RF Cred Priv;;BR;Fundo;ativo;BNP Paribas Asset;0,95;0,51;0,62;1,60;1,76;0,07;0,07;0,12;0,13;0,13;0,07;0,05;0,04;0,04
 Bnpp Fdo Inc de Inv Infra Deb Inc RF;;BR;Fundo;ativo;BNP Paribas Asset;8,79;3,87;5,74;13,99;17,48;2,67;2,27;3,05;2,78;2,50;2,56;2,81;1,78;2,44
+Bnpp Rubi Fc FI RF Cred Priv;;BR;Fundo;ativo;BNP Paribas Asset;1,78;1,08;1,34;2,81;2,72;0,22;0,15;0,21;0,21;0,21;0,11;0,12;0,09;0,10
+Brad Fc de FIA Portfolio Long Only;;BR;Fundo;ativo;Bram Bradesco Asset Management SA Dtvm;47,86;22,50;32,88;70,35;106,57;31,75;17,94;10,30;12,90;12,56;13,07;20,84;12,46;15,43
+Brad H FI RF Cred Priv LP Perf Instituc;;BR;Fundo;ativo;Bram Bradesco Asset Management SA Dtvm;1,12;0,55;0,74;1,78;1,55;0,10;0,08;0,13;0,15;0,15;0,03;0,03;0,01;0,02
+Bradesco H FI RF Ref DI LP;;BR;Fundo;ativo;Bram Bradesco Asset Management SA Dtvm;0,05;0,05;0,06;0,04;0,04;0,05;0,04;0,05;0,04;0,03;0,03;0,02;0,01;0,00
+Bp Cred Corp II Fc FI RF Cred Priv LP;;BR;Fundo;ativo;Brasil Plural Gestao de Recursos Ltda;2,30;1,46;1,79;3,93;5,61;0,10;0,12;0,17;0,27;0,30;0,15;0,17;0,08;0,09
+Btgp Acce Multigestor Acoes FIC FIA;;BR;Fundo;ativo;BTG Pactual Wm Gestao de Recursos Ltda;44,96;21,84;30,24;66,40;100,23;29,99;15,93;9,31;12,11;11,68;12,43;17,87;11,31;13,30
+Btgp Access Balanceado FICFI Mult;;BR;Fundo;ativo;BTG Pactual Wm Gestao de Recursos Ltda;9,82;6,53;7,94;14,29;22,34;7,55;4,16;2,47;2,90;2,69;2,68;3,76;2,37;2,98
+BTG Pact Cre Cor I FICFI RF Cred Priv;;BR;Fundo;ativo;BTG Pactual;2,09;1,59;1,54;3,69;3,34;0,15;0,18;0,27;0,30;0,29;0,09;0,09;0,09;0,09
+BTG Pactual Yield DI FI Ref Cred Priv;;BR;Fundo;ativo;BTG Pactual;2,54;0,99;1,51;4,55;2,72;0,07;0,10;0,13;0,19;0,21;0,04;0,03;0,02;0,02
 Ca In Avant Garde Feed1 Fc Mult Credpriv;;BR;Fundo;ativo;Ca Indosuez Wealth (Brazil) S.A. Dtvm;0,52;0,23;0,34;0,64;0,59;0,07;0,05;0,08;0,13;0,15;0,29;0,55;0,04;0,06
 Ca Indosuez Agilite FI RF Cred Priv;;BR;Fundo;ativo;Ca Indosuez Wealth (Brazil) S.A. Dtvm;2,72;1,53;1,93;4,35;3,29;0,20;0,12;0,20;0,31;0,36;0,06;0,08;0,09;0,08
 Ca Indosuez Alloc Action Fc FIA;;BR;Fundo;ativo;Ca Indosuez Wealth (Brazil) S.A. Dtvm;42,19;18,89;28,91;60,34;90,51;27,96;15,07;8,74;11,34;11,25;11,81;18,57;11,41;13,13
@@ -13,14 +26,42 @@ Ca Indosuez DI Master FI RF Ref DI LP;;BR;Fundo;ativo;Ca Indosuez Wealth (Brazil
 Ca Indosuez Grand Vitesse Firf Cred Priv;;BR;Fundo;ativo;Ca Indosuez Wealth (Brazil) S.A. Dtvm;2,21;1,56;1,62;3,44;4,26;0,17;0,18;0,28;0,25;0,32;0,09;0,09;0,11;0,08
 Ca Indosuez Private Pi Fc de FI Mult;;BR;Fundo;ativo;Ca Indosuez Wealth (Brazil) S.A. Dtvm;10,56;7,29;9,76;14,06;19,38;6,73;3,70;2,89;3,64;2,70;3,25;4,49;3,58;2,73
 Ca Indosuez Vitesse FI RF Cred Priv;;BR;Fundo;ativo;Ca Indosuez Wealth (Brazil) S.A. Dtvm;2,46;1,83;1,99;4,02;4,40;0,18;0,16;0,21;0,29;0,33;0,07;0,10;0,07;0,07
+Caixa FIC Premium RF Ref DI LP;;BR;Fundo;ativo;Caixa;0,48;0,16;0,27;0,83;0,35;0,04;0,04;0,07;0,11;0,05;0,03;0,02;0,02;0,04
+CSHG Top 30 Fc FI Mult;;BR;Fundo;ativo;Credit Suisse Hedging Griffo Wm S.A.;8,70;5,37;6,51;14,20;22,33;8,39;4,08;2,23;2,82;2,80;2,93;4,28;2,91;3,08
 Daycoval Classic Firf Cred. Priv.;;BR;Fundo;ativo;Daycoval Asset Management Adm Rec Ltda;1,28;0,77;0,94;2,10;1,94;0,09;0,08;0,12;0,18;0,16;0,05;0,05;0,04;0,06
 Daycoval Deb. Inc Cred Priv FI Mult;;BR;Fundo;ativo;Daycoval Asset Management Adm Rec Ltda;4,90;2,13;3,17;7,89;9,22;1,26;1,18;1,64;1,72;1,34;1,26;1,35;1,10;1,51
 Devant Magna FI RF Cred Priv LP;;BR;Fundo;ativo;Devant Asset Investimentos Ltda;3,42;1,60;2,25;6,15;4,59;0,22;0,32;0,41;0,38;0,43;0,28;0,47;0,30;0,19
+G5 Allocation FICFI Mult;;BR;Fundo;ativo;G5 Administradora de Recursos Ltda;4,21;3,00;3,32;6,85;10,79;4,84;2,89;2,32;2,24;2,35;2,13;3,18;2,49;2,93
 Gama Top FICFI RF Cred Priv LP;;BR;Fundo;ativo;Gama Investimentos Ltda;3,48;2,21;3,13;5,95;4,69;0,17;0,24;0,31;0,37;0,45;0,22;0,25;0,07;0,07
+Icatu Vanguarda Cred Priv FI RF LP;;BR;Fundo;ativo;Icatu Vanguarda Gestao de Recursos;0,89;0,47;0,59;1,51;1,68;0,13;0,18;0,23;0,12;0,13;0,07;0,08;0,05;0,04
+Iridium Pioneer Fundo Inc Inv Infra RF;;BR;Fundo;ativo;Iridium Gestao de Recursos Ltda;1,53;0,87;1,15;2,45;2,89;0,55;0,73;0,86;1,09;1,10;0,67;0,65;0,51;0,49
+Itau Acoes Fof Multigestor X FI;;BR;Fundo;ativo;Itau Dtvm;45,70;22,25;30,34;68,30;101,91;31,48;17,98;9,93;12,21;12,31;12,37;19,30;12,15;14,39
+Itau Fof Orion Mult Cred Priv Ie FICFI;;BR;Fundo;ativo;Itau Dtvm;8,70;5,74;7,06;14,12;24,56;7,82;3,94;3,24;3,74;3,31;3,58;5,59;3,18;4,55
+Itau Mult Hedge Fund 30 Mult FICFI;;BR;Fundo;ativo;Itau Dtvm;9,05;5,52;6,62;14,31;23,97;7,99;4,41;2,58;2,88;2,91;2,87;4,16;3,01;3,20
+Itau Selecao Multifundos Mult Fc FI;;BR;Fundo;ativo;Itau Dtvm;3,82;2,19;2,60;5,91;9,70;4,10;2,18;1,90;2,00;2,18;1,71;2,34;1,86;2,05
 Itau Selecao Multifundos Plus Mult Fc;;BR;Fundo;ativo;Itau Dtvm;9,47;5,75;6,96;14,77;23,79;8,89;4,99;2,65;3,11;2,90;2,97;4,32;3,17;3,50
+Itau Unibanco Superacao FICFI Acoes Ie;;BR;Fundo;ativo;Itau Dtvm;46,02;22,08;31,13;67,97;101,69;29,65;16,21;9,38;11,44;11,41;12,18;17,72;10,78;12,93
+Itau Institucional RF Ref DI FI;;BR;Fundo;ativo;Itau Unibanco SA;0,34;0,13;0,20;0,54;0,23;0,07;0,06;0,11;0,07;0,04;0,04;0,02;0,00;0,00
+Itau RF LP Cred Priv Diferenciado FI;;BR;Fundo;ativo;Itau Unibanco SA;1,17;0,53;0,69;1,95;1,45;0,08;0,08;0,16;0,11;0,06;0,04;0,03;0,01;0,01
+Berkeley FI Mult Cred Priv Ie;;BR;Fundo;ativo;Jera Capital Gestao de Recursos;6,32;3,36;4,25;10,25;14,11;3,90;2,47;2,43;1,24;1,16;1,38;1,99;1,31;1,78
+Jgp Corporate FICFI RF Cred Priv LP;;BR;Fundo;ativo;Jgp Gestao de Credito Ltda;3,00;1,59;2,07;5,39;4,70;0,19;0,22;0,33;0,37;0,40;0,16;0,23;0,23;0,27
 Opportunity Allocation Fc FI Mult;;BR;Fundo;ativo;Opp Gestora de Recursos Ltda;15,67;8,45;10,74;25,16;39,60;12,88;6,29;3,38;3,89;4,28;3,99;6,00;3,88;4,38
+Ouro Preto FICFI Mult Cred Priv;;BR;Fundo;ativo;Ouro Preto Investimentos;0,05;0,03;0,05;0,03;0,04;0,04;0,05;0,06;0,06;0,05;0,05;0,04;0,00;0,00
+Alocacao Fundo Incent de Invest Infra RF;;BR;Fundo;ativo;Reliance Asset;10,35;4,33;6,45;16,62;20,78;2,97;2,71;3,84;3,51;3,30;3,27;3,76;2,63;3,66
+Safra Exec Fc FI RF;;BR;Fundo;ativo;Safra Asset Management Ltda;1,40;0,54;0,80;2,36;3,27;0,56;0,41;0,55;0,59;0,55;0,55;0,65;0,36;0,45
+Cart Sam Private Pi Mult Cred Priv FI;;BR;Fundo;ativo;Santander Brasil Gestao de Recursos Ltda;8,82;5,89;6,56;13,62;21,20;8,38;4,67;2,85;3,64;3,81;3,33;4,89;2,77;2,26
 Santander Acoes Fundo de Fundos Lb FI;;BR;Fundo;ativo;Santander Brasil Gestao de Recursos Ltda;32,88;17,94;23,01;48,99;72,86;24,51;12,92;7,63;9,57;9,86;10,48;15,91;8,86;10,24
 Santander Alocacao Mult Fc FI;;BR;Fundo;ativo;Santander Brasil Gestao de Recursos Ltda;7,11;4,99;5,76;10,99;17,02;6,93;3,64;1,99;2,32;2,38;2,40;3,42;2,03;2,10
-Xpa Acoes Fc de FIA;;BR;Fundo;ativo;Xp Advisory Gestao de Recursos;41,79;20,61;29,08;61,83;91,57;28,97;17,00;9,81;11,74;12,48;12,33;19,06;11,18;12,93
+Santander Fc FI Institucional RF Ref DI;;BR;Fundo;ativo;Santander Brasil Gestao de Recursos Ltda;0,37;0,31;0,58;0,64;0,53;0,03;0,04;0,07;0,13;0,10;0,03;0,02;0,01;0,01
+Santander FI Master RF Cred Priv LP;;BR;Fundo;ativo;Santander Brasil Gestao de Recursos Ltda;0,77;0,66;1,17;1,31;1,28;0,07;0,06;0,12;0,23;0,15;0,10;0,10;0,04;0,06
+Santander Pb Valor Acoes Fc FI;;BR;Fundo;ativo;Santander Brasil Gestao de Recursos Ltda;44,46;21,78;30,39;64,41;93,42;27,31;16,78;9,40;11,92;12,58;12,80;20,17;11,56;14,47
+Solis Cap Ant Cred Priv FICFI Mult LP;;BR;Fundo;ativo;Solis Investimentos;0,11;0,05;0,09;0,18;0,04;0,04;0,04;0,05;0,05;0,02;0,04;0,03;0,02;0,01
+Sparta Deb Inc Fc F Inc Inv Infr RF;;BR;Fundo;ativo;Sparta;1,30;0,73;0,94;1,82;2,58;0,61;0,85;1,11;1,25;0,84;0,54;0,63;0,64;0,61
+Sparta Top FICFI RF Cred Priv LP;;BR;Fundo;ativo;Sparta;2,05;1,17;1,43;3,53;4,28;0,13;0,16;0,20;0,26;0,30;0,11;0,12;0,14;0,09
+Valora Guardian Fc FI Mult Cred Priv;;BR;Fundo;ativo;Valora Gestao de Investimentos Ltda;0,54;0,16;0,29;1,01;0,25;0,04;0,04;0,05;0,06;0,06;0,05;0,04;0,05;0,09
+Vitreo Fof M F Fc de FI Mult Cred Priv;;BR;Fundo;ativo;Vitreo Gestao de Recursos Ltda;8,77;6,29;7,66;13,20;20,45;7,70;4,38;2,82;3,04;3,05;2,81;4,24;2,56;3,09
+Xpa Acoes Fc de FIA;;BR;Fundo;ativo;Xp Advisory Gestao de Recursos;41,79;20,91;29,08;61,83;91,57;28,97;17,00;9,81;11,74;12,48;12,33;19,06;11,18;12,93
+Selection Acoes Fc FIA;;BR;Fundo;ativo;Xp Vista Asset Management Ltda;45,46;22,57;31,30;68,61;104,25;29,13;18,43;10,87;13,72;12,91;13,73;21,08;12,19;13,91
 Xp Debent Incent Cred Priv Fc FI Mult;;BR;Fundo;ativo;Xp Vista Asset Management Ltda;7,37;3,05;4,63;11,91;14,74;2,15;1,85;2,41;2,43;2,35;2,46;2,82;1,94;2,72
 Xp Investor FI RF Cred Priv LP;;BR;Fundo;ativo;Xp Vista Asset Management Ltda;2,08;1,12;1,50;3,61;2,87;0,09;0,11;0,20;0,19;0,15;0,04;0,05;0,03;0,04
+Xp Top Cred Priv RF FI LP;;BR;Fundo;ativo;Xp Vista Asset Management Ltda;1,80;1,15;1,51;2,88;2,61;0,11;0,11;0,19;0,20;0,12;0,08;0,10;0,06;0,06
