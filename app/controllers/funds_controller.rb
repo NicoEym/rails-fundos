@@ -80,14 +80,21 @@ class FundsController < ApplicationController
           historical_array << [data_of_the_day.calendar.day, data_of_the_day.application_monthly_net_value / 1_000_000] unless data_of_the_day.application_monthly_net_value.nil?
       end
     end
-    historical_array.sort_by()
+    historical_array
   end
 
   def get_competitors(fund, date)
     competitors = []
-    # if we do not have a short name, the fund is not from Indosuez, then we display only the indosuez fund as a competitor.
-    # if we have a shortname, the fund is from Indosuez and then we display all the fund that belongs to this group
-    fund.short_name.nil? ? competitors = Fund.where(short_name: fund.competitor_group) : competitors = Fund.where(competitor_group: fund.short_name)
+    # if the fund is GVitesse, we take the same competitors as for Vitesse
+    # if the gestor is not Indosuez, then we display only the indosuez fund as a competitor.
+    # if the fund is from Indosuez and then we display everyfunds funds that belongs to this group
+
+    if fund.short_name == "GVitesse"
+      fund.gestor.name != "Ca Indosuez Wealth (Brazil) S.A. Dtvm" ? competitors = Fund.where(short_name: "Vitesse") : competitors = Fund.where(competitor_group: "Vitesse")
+    else
+      fund.gestor.name != "Ca Indosuez Wealth (Brazil) S.A. Dtvm" ? competitors = Fund.where(short_name: fund.competitor_group) : competitors = Fund.where(competitor_group: fund.short_name)
+    end
+
     # then we will exclude the competitors that does not have data for the specific date
     filtered_competitors = []
     competitors.each do |competitor|
@@ -108,7 +115,7 @@ class FundsController < ApplicationController
         end
         # then we include the monthly data of the fund
         historical_array << get_monthly_return(fund, date)
-
+        historical_array = historical_array.sort_by{|x,y|y}.reverse
 
       when "quarterly_return"
         # we loop on each competitor to include their monthly return on the array
@@ -117,7 +124,7 @@ class FundsController < ApplicationController
         end
         # then we include the monthly data of the fund
         historical_array << get_quarterly_return(fund, date)
-
+        historical_array = historical_array.sort_by{|x,y|y}.reverse
       when "risk/return"
         # we loop on each competitor to include their couple risk/return on the array
         competitors.each do |competitor|
