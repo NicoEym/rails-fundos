@@ -79,6 +79,12 @@
         </div>
       <% end %>
 
+       <% unless @chart_annual_returns_vs_competitors.nil? %>
+        <div class="chart-container">
+        <%= column_chart @chart_annual_returns_vs_competitors, colors: ["#CFB07B"], thousands: ",", title: "Retorno Anual", ytitle: "%", label: "Value"%>
+        </div>
+      <% end %>
+
       <% unless @chart_incremental_returns.nil? %>
         <div class="chart-container">
        <% if @fund.bench_mark.name == "Ibovespa" %>
@@ -111,7 +117,25 @@
       <div class="padding1 my-row border-radius05 shadow-boxing">
      <% unless @chart_monthly_captation.nil? %>
         <div class="chart-container liquidez">
-         <%= column_chart @chart_monthly_captation, colors: ["#CFB07B"], title: "Captação mensal", ytitle: "$R Mi"%>
+         <%= column_chart @chart_monthly_captation, colors: ["#CFB07B"], title: "Captação mensal do Fundo", ytitle: "$R Mi"%>
+        </div>
+      <% end %>
+
+      <% unless @chart_monthly_net_application_vs_competitors.nil? %>
+        <div class="chart-container">
+        <%= column_chart @chart_monthly_net_application_vs_competitors, colors: ["#CFB07B"], thousands: ",", title: "Net Applicação Mensal / PL M-1", ytitle: "%", label: "Value"%>
+        </div>
+    <% end %>
+
+    <% unless @chart_quarterly_net_application_vs_competitors.nil? %>
+        <div class="chart-container">
+        <%= column_chart @chart_quarterly_net_application_vs_competitors, colors: ["#CFB07B"], thousands: ",", title: "Net Applicação Trimestral / PL M-3", ytitle: "%", label: "Value"%>
+        </div>
+    <% end %>
+
+      <% unless @chart_annual_net_application_vs_competitors.nil? %>
+        <div class="chart-container">
+        <%= column_chart @chart_annual_net_application_vs_competitors, colors: ["#CFB07B"], thousands: ",", title: "Net Applicação Anual / PL Y-1", ytitle: "%", label: "Value"%>
         </div>
       <% end %>
     </div>

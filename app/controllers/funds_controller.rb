@@ -31,11 +31,15 @@ class FundsController < ApplicationController
     @competitors_datas_hash = get_all_daily_data(@competitors, @date)
 
     # then we use the function to get the returns of the competitors
-    @chart_monthly_returns_vs_competitors = get_returns_data(@competitors, @fund, @date, "monthly_return")
-    @chart_quarterly_returns_vs_competitors = get_returns_data(@competitors, @fund, @date, "quarterly_return")
+    @chart_monthly_returns_vs_competitors = get_periodic_data(@competitors, @fund, @date, "monthly_return")
+    @chart_quarterly_returns_vs_competitors = get_periodic_data(@competitors, @fund, @date, "quarterly_return")
+    @chart_annual_returns_vs_competitors = get_periodic_data(@competitors, @fund, @date, "annual_return")
     # then we use the function to get the risk/return relation of the competitors and the fund
-    @chart_risk_returns = get_returns_data(@competitors, @fund, @date, "risk/return")
+    @chart_risk_returns = get_periodic_data(@competitors, @fund, @date, "risk/return")
 
+    @chart_monthly_net_application_vs_competitors = get_periodic_data(@competitors, @fund, @date, "monthly_application")
+    @chart_quarterly_net_application_vs_competitors = get_periodic_data(@competitors, @fund, @date, "quarterly_application")
+    @chart_annual_net_application_vs_competitors = get_periodic_data(@competitors, @fund, @date, "annual_application")
     # we call a function in the application controller to get the last day of the last 12 months
     end_of_months_dates = get_final_days_of_month
 
@@ -62,6 +66,8 @@ class FundsController < ApplicationController
     # ... we show only the funds that match the area
     @area.nil? ? @funds = @funds.all : @funds = @funds.where(area_name: params[:area_name])
   end
+
+  private
 
   def get_end_of_month_data_for_charts(datas, data_type, dates_12_months)
     # for end of month dates, we get the date and the AUM/share_price/volatility value for the fund.
@@ -103,7 +109,7 @@ class FundsController < ApplicationController
     filtered_competitors
   end
 
-  def get_returns_data(competitors, fund, date, data_type)
+  def get_periodic_data(competitors, fund, date, data_type)
     historical_array = []
     # depending on the type of return specified we will send either the monthly return, either...
     # ... either the couple risk/return
@@ -125,6 +131,43 @@ class FundsController < ApplicationController
         # then we include the monthly data of the fund
         historical_array << get_quarterly_return(fund, date)
         historical_array = historical_array.sort_by{|x,y|y}.reverse
+
+       when "annual_return"
+        # we loop on each competitor to include their monthly return on the array
+        competitors.each do |competitor|
+          historical_array << get_annual_return(competitor, date)
+        end
+        # then we include the monthly data of the fund
+        historical_array << get_annual_return(fund, date)
+        historical_array = historical_array.sort_by{|x,y|y}.reverse
+
+      when "monthly_application"
+        # we loop on each competitor to include their monthly return on the array
+        competitors.each do |competitor|
+          historical_array << get_monthly_application(competitor, date)
+        end
+        # then we include the monthly data of the fund
+        historical_array << get_monthly_application(fund, date)
+        historical_array = historical_array.sort_by{|x,y|y}
+
+      when "quarterly_application"
+        # we loop on each competitor to include their monthly return on the array
+        competitors.each do |competitor|
+          historical_array << get_quarterly_application(competitor, date)
+        end
+        # then we include the monthly data of the fund
+        historical_array << get_quarterly_application(fund, date)
+        historical_array = historical_array.sort_by{|x,y|y}
+
+      when "annual_application"
+        # we loop on each competitor to include their monthly return on the array
+        competitors.each do |competitor|
+          historical_array << get_annual_application(competitor, date)
+        end
+        # then we include the monthly data of the fund
+        historical_array << get_annual_application(fund, date)
+        historical_array = historical_array.sort_by{|x,y|y}
+
       when "risk/return"
         # we loop on each competitor to include their couple risk/return on the array
         competitors.each do |competitor|
@@ -147,6 +190,35 @@ class FundsController < ApplicationController
     [fund.best_name, fund_data.return_quarterly_value.round(2)] unless fund_data.nil?
   end
 
+  def get_annual_return(fund, date)
+    fund_data = set_fund_data(fund, date)
+    [fund.best_name, fund_data.return_annual_value.round(2)] unless fund_data.nil?
+  end
+
+  def get_monthly_application(fund, date)
+    fund_data_of_current_date = set_fund_data(fund, date)
+    sample_of_dates = Calendar.order('day desc').limit(4)
+    date_one_month_before = sample_of_dates[1]
+    fund_data_of_one_month_before = set_fund_data(fund, date_one_month_before)
+    [fund.best_name, (fund_data_of_current_date.application_monthly_net_value / fund_data_of_one_month_before.aum)* 100] unless fund_data_of_current_date.nil?
+  end
+
+  def get_quarterly_application(fund, date)
+    fund_data_of_current_date = set_fund_data(fund, date)
+    sample_of_dates = Calendar.order('day desc').limit(4)
+    date_one_quarter_before = sample_of_dates[3]
+    fund_data_of_one_quarter_before = set_fund_data(fund, date_one_quarter_before)
+    [fund.best_name, (fund_data_of_current_date.application_quarterly_net_value / fund_data_of_one_quarter_before.aum)* 100] unless fund_data_of_current_date.nil?
+  end
+
+  def get_annual_application(fund, date)
+    fund_data_of_current_date = set_fund_data(fund, date)
+    sample_of_dates = Calendar.order('day desc').limit(12)
+    date_one_year_before = sample_of_dates[11]
+    puts date_one_year_before.day
+    fund_data_of_one_year_before = set_fund_data(fund, date_one_year_before)
+    [fund.best_name, (fund_data_of_current_date.application_annual_net_value / fund_data_of_one_year_before.aum)* 100] unless fund_data_of_current_date.nil?
+  end
   # quick method to get the risk/return of a fund in a hash ready for the chart
   def get_risk_return(fund, date)
     fund_data = set_fund_data(fund, date)
@@ -225,7 +297,7 @@ class FundsController < ApplicationController
     final_data_array
   end
 
-  private
+
 
   def set_fund_data(fund, date)
     DailyDatum.find_by(fund: fund, calendar: date)
