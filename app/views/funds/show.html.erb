@@ -67,11 +67,17 @@
         </div>
       <% end %>
 
-      <% unless @chart_returns_vs_competitors.nil? %>
+      <% unless @chart_monthly_returns_vs_competitors.nil? %>
         <div class="chart-container">
-        <%= column_chart @chart_returns_vs_competitors, colors: ["#CFB07B"], thousands: ",", title: "Retorno mensal", ytitle: "%", label: "Value"%>
+        <%= column_chart @chart_monthly_returns_vs_competitors, colors: ["#CFB07B"], thousands: ",", title: "Retorno mensal", ytitle: "%", label: "Value"%>
         </div>
       <% end %>
+
+      <% unless @chart_quarterly_returns_vs_competitors.nil? %>
+        <div class="chart-container">
+        <%= column_chart @chart_quarterly_returns_vs_competitors, colors: ["#CFB07B"], thousands: ",", title: "Retorno trimestral", ytitle: "%", label: "Value"%>
+        </div>
+    <% end %>
 
       <% unless @chart_incremental_returns.nil? %>
         <div class="chart-container">

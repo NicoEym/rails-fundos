@@ -31,7 +31,8 @@ class FundsController < ApplicationController
     @competitors_datas_hash = get_all_daily_data(@competitors, @date)
 
     # then we use the function to get the returns of the competitors
-    @chart_returns_vs_competitors = get_returns_data(@competitors, @fund, @date, "monthly_return")
+    @chart_monthly_returns_vs_competitors = get_returns_data(@competitors, @fund, @date, "monthly_return")
+    @chart_quarterly_returns_vs_competitors = get_returns_data(@competitors, @fund, @date, "quarterly_return")
     # then we use the function to get the risk/return relation of the competitors and the fund
     @chart_risk_returns = get_returns_data(@competitors, @fund, @date, "risk/return")
 
@@ -67,12 +68,10 @@ class FundsController < ApplicationController
     # Doing so we have our historical serie of data for the AUM
     historical_array = []
     dates_12_months.each do |date|
-      puts "before select #{date.day}"
       data_of_the_day = datas.find_by(calendar: date)
       case data_type
         when "aum" then
           historical_array << [data_of_the_day.calendar.day, data_of_the_day.aum / 1_000_000_000] unless data_of_the_day.aum.nil?
-          puts "after select #{data_of_the_day.calendar.day}"
         when "share_price" then
           historical_array << [data_of_the_day.calendar.day, data_of_the_day.share_price] unless data_of_the_day.share_price.nil?
         when "volatility" then
@@ -110,6 +109,15 @@ class FundsController < ApplicationController
         # then we include the monthly data of the fund
         historical_array << get_monthly_return(fund, date)
 
+
+      when "quarterly_return"
+        # we loop on each competitor to include their monthly return on the array
+        competitors.each do |competitor|
+          historical_array << get_quarterly_return(competitor, date)
+        end
+        # then we include the monthly data of the fund
+        historical_array << get_quarterly_return(fund, date)
+
       when "risk/return"
         # we loop on each competitor to include their couple risk/return on the array
         competitors.each do |competitor|
@@ -125,6 +133,11 @@ class FundsController < ApplicationController
   def get_monthly_return(fund, date)
     fund_data = set_fund_data(fund, date)
     [fund.best_name, fund_data.return_monthly_value.round(2)] unless fund_data.nil?
+  end
+
+  def get_quarterly_return(fund, date)
+    fund_data = set_fund_data(fund, date)
+    [fund.best_name, fund_data.return_quarterly_value.round(2)] unless fund_data.nil?
   end
 
   # quick method to get the risk/return of a fund in a hash ready for the chart
