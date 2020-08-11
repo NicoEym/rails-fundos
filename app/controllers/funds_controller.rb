@@ -213,9 +213,8 @@ class FundsController < ApplicationController
 
   def get_annual_application(fund, date)
     fund_data_of_current_date = set_fund_data(fund, date)
-    sample_of_dates = Calendar.order('day desc').limit(12)
-    date_one_year_before = sample_of_dates[11]
-    puts date_one_year_before.day
+    sample_of_dates = Calendar.order('day desc').limit(13)
+    date_one_year_before = sample_of_dates[12]
     fund_data_of_one_year_before = set_fund_data(fund, date_one_year_before)
     [fund.best_name, (fund_data_of_current_date.application_annual_net_value / fund_data_of_one_year_before.aum)* 100] unless fund_data_of_current_date.nil?
   end

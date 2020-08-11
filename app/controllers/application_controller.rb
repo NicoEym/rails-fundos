@@ -93,10 +93,6 @@ class ApplicationController < ActionController::Base
       # as long as we do not have 12 dates representing the last day of the last 12 months, we continue.
       last_day_of_months << dates[rank] if dates[rank].day.month != dates[rank - 1].day.month && last_day_of_months.size < 18
     end
-    # then we send an array of dates
-    last_day_of_months.each do |date|
-      puts date.day
-    end
 
     last_day_of_months
   end
