@@ -132,7 +132,7 @@ class FundsController < ApplicationController
         historical_array << get_quarterly_return(fund, date)
         historical_array = historical_array.sort_by{|x,y|y}.reverse
 
-       when "annual_return"
+      when "annual_return"
         # we loop on each competitor to include their monthly return on the array
         competitors.each do |competitor|
           historical_array << get_annual_return(competitor, date)
