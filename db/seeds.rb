@@ -4,18 +4,18 @@ require "open-uri"
 require 'stringio'
 
 
-DailyDatum.delete_all
-Fund.delete_all
-DataBenchmark.delete_all
-BenchMark.delete_all
-Gestor.delete_all
-Area.delete_all
-AnbimaClass.delete_all
-Calendar.delete_all
+# DailyDatum.delete_all
+# Fund.delete_all
+# DataBenchmark.delete_all
+# BenchMark.delete_all
+# Gestor.delete_all
+# Area.delete_all
+# AnbimaClass.delete_all
+# Calendar.delete_all
 
 
-dates = ["2020-07-31", "2020-06-30", "2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
-             "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
+# dates = ["2020-07-31", "2020-06-30", "2020-05-29", "2020-04-30", "2020-03-31", "2020-02-28", "2020-01-31", "2019-12-31", "2019-11-29" , "2019-10-31",
+#              "2019-09-30" , "2019-07-31", "2019-06-28", "2019-08-30"]
 csv_options = { col_sep:  ";", quote_char: '"', headers: :first_row }
 
 def get_date(date)
@@ -242,17 +242,6 @@ if Fund.all.empty?
   avant_garde = Fund.create(name: "Ca In Avant Garde Feed1 Fc Mult Credpriv", short_name: "Avant Garde", codigo_economatica: "496881", bench_mark: cdi_bench, area_name: cp_area.name, gestor: ca_gestor, anbima_class: rf_anbima, photo_url: "https://images.unsplash.com/photo-1546188994-07c34f6e5e1b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60")
   puts "created #{avant_garde}"
 
-  # path_vitesse  = 'db/csv_repos/data vitesse.csv'
-  # path_agilite  = 'db/csv_repos/data agilite.csv'
-  # path_beton  = 'db/csv_repos/data beton.csv'
-  # path_infrafic  = 'db/csv_repos/data infrafic.csv'
-  # path_action  = 'db/csv_repos/data allocaction.csv'
-  # path_pi  = 'db/csv_repos/data privatepi.csv'
-  # path_gvitesse  = 'db/csv_repos/data gvitesse.csv'
-
-  # paths_array = [path_vitesse, path_agilite, path_beton, path_infrafic, path_action, path_pi]
-
-  # write_funds_historical_data(paths_array, csv_options)
 
   path_fundos  = 'db/csv_repos/Indosuez data.csv'
 
@@ -325,28 +314,25 @@ def write_monthly_data_bench(path_array, csv_options)
 end
 
 
-# write_monthly_data_bench
+# path_array = 'db/csv_repos/Monthly Net Captation.csv'
 
+# write_historic_monthly_data(path_array, csv_options, dates,"NetApplication")
 
-path_array = 'db/csv_repos/Monthly Net Captation.csv'
+# path_array = 'db/csv_repos/Monthly Return.csv'
 
-write_historic_monthly_data(path_array, csv_options, dates,"NetApplication")
+# write_historic_monthly_data(path_array, csv_options, dates,"Returns")
 
-path_array = 'db/csv_repos/Monthly Return.csv'
+# path_array = 'db/csv_repos/Monthly AUM.csv'
 
-write_historic_monthly_data(path_array, csv_options, dates,"Returns")
+# write_historic_monthly_data(path_array, csv_options, dates,"AUM")
 
-path_array = 'db/csv_repos/Monthly AUM.csv'
+# path_array = 'db/csv_repos/Monthly Vol.csv'
 
-write_historic_monthly_data(path_array, csv_options, dates,"AUM")
+# write_historic_monthly_data(path_array, csv_options, dates,"Vol")
 
-path_array = 'db/csv_repos/Monthly Vol.csv'
+# path_array = 'db/csv_repos/Monthly Price.csv'
 
-write_historic_monthly_data(path_array, csv_options, dates,"Vol")
-
-path_array = 'db/csv_repos/Monthly Price.csv'
-
-write_historic_monthly_data(path_array, csv_options, dates,"SharePrice")
+# write_historic_monthly_data(path_array, csv_options, dates,"SharePrice")
 
 path_array = 'db/csv_repos/Indosuez data CDI Funds.csv'
 
