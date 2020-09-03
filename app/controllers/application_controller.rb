@@ -41,7 +41,9 @@ class ApplicationController < ActionController::Base
     #   existing_date = Calendar.find_by(day: previous_day)
     #   return existing_date unless existing_date.nil?
     # end
-    Calendar.first
+    Calendar.all.order('day desc').first
+
+
     # for each date we check if the fund has data
     # last_dates.each do |last_date|
     #   puts last_date.day

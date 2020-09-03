@@ -1,4 +1,4 @@
-Nome;Monthly return;Quarterly return;Yearly return;Weekly return;Daily return;Cota;Vol EWMA 97%
-CDI;0,16;0,57;3,86;0,04;0,01;6065,26422;0,09
-Ibovespa;-3,44;13,69;-1,75;-2,86;-2,72;99369,15;29,75
-Ima-B;0,43;2,55;9,24;0,08;0,02;6754,490046;3,05
+Nome;Monthly return;Quarterly return;Yearly return;Weekly return;Daily return;Cota;Vol EWMA 97%;Date
+CDI;0,16;0,57;3,86;0,04;0,01;6065,26422;0,09;2020-08-31
+Ibovespa;-3,44;13,69;-1,75;-2,86;-2,72;99369,15;29,75;2020-08-31
+Ima-B;0,43;2,55;9,24;0,08;0,02;6754,490046;3,05;2020-08-31
