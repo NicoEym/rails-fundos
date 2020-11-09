@@ -87,16 +87,18 @@ class ApplicationController < ActionController::Base
     # we create an array
     last_day_of_months = []
     # we get all the date rank from the most recent to the oldest in an array
-    dates = Calendar.order('day asc')
+    dates = Calendar.order('day desc')
     # for the second date in the array to the last one (we exclude the first date to avoid comparing the first and the last date in the formula below dates[rank].day.month != dates[rank - 1].day.month)
     (0..dates.size - 1).each do |rank|
       # we check if the month of the current element is different from the month of the previous element in the array (the following date, remember we ranked our dates)
       # if it the case, then the current date is the final date of the month
       # as long as we do not have 12 dates representing the last day of the last 12 months, we continue.
-      last_day_of_months << dates[rank] if dates[rank].day.month != dates[rank - 1].day.month && last_day_of_months.size < 18
+      last_day_of_months << dates[rank] if dates[rank].day.month != dates[rank - 1].day.month && last_day_of_months.size < 13
     end
 
-    last_day_of_months
+    # for some reasons, the charts are displayed starting from the most recent dateto the oldest
+    # to fix this we add .reverse()
+    last_day_of_months.reverse()
   end
 
   private
