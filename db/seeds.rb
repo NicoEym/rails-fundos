@@ -257,7 +257,7 @@ def write_monthly_data_fund(path_array, csv_options)
 
     fund_name = row['Nome']
     fund = Fund.find_by(name: fund_name)
-    puts fund
+    puts fund.name
 
     date = get_date(row['Date'])
     puts date.day
