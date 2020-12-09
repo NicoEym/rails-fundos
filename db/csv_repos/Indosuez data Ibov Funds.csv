@@ -1,4 +1,4 @@
-Nome;Gestor;Monthly Net Captation;Quarterly Net Captation;Yearly Net Captation;Monthly return;Spread Bench monthly return;Quarterly return;Spread Bench quarterly return;Yearly return;Spread Bench annual return;PL;Cota;Vol EWMA 97%;Sharpe ratio;Tracking error;VaR;Date 
+Nome;Gestor;Monthly Net Captation;Quarterly Net Captation;Yearly Net Captation;Monthly return;Spread Bench monthly return;Quarterly return;Spread Bench quarterly return;Yearly return;Spread Bench annual return;PL;Cota;Vol EWMA 97%;Sharpe ratio;Tracking error;VaR;Date
 BNP Paribas Premium Equities Fc FIA;BNP Paribas Asset;-5 871 115;-6 915 470;179 552 889;11,08;-4,83;3,96;-5,63;0,32;-0,29;322 335 589;132,9507683;21,84;1,91;9,29;2,01;2020-11-30
 Brad Fc de FIA Portfolio Long Only;Bram Bradesco Asset Management SA Dtvm;5 988 905;-16 462 017;98 958 766;12,83;-3,07;6,68;-2,91;3,86;3,25;711 849 690;2,4340658;22,20;2,59;8,40;2,05;2020-11-30
 Btgp Acce Multigestor Acoes FIC FIA;BTG Pactual Wm Gestao de Recursos Ltda;1 485 117;-2 590 658;68 286 408;11,32;-4,58;7,00;-2,59;13,40;12,79;240 722 597;2,0187195;20,61;2,78;12,31;1,90;2020-11-30
