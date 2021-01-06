@@ -1,12 +1,12 @@
 Nome;Gestor;Monthly Net Captation;Quarterly Net Captation;Yearly Net Captation;Monthly return;Spread Bench monthly return;Quarterly return;Spread Bench quarterly return;Yearly return;Spread Bench annual return;PL;Cota;Vol EWMA 97%;Sharpe ratio;Tracking error;VaR;Date
-BNP Paribas Premium Equities Fc FIA;BNP Paribas Asset;-5 871 115;-6 915 470;179 552 889;11,08;-4,83;3,96;-5,63;0,32;-0,29;322 335 589;132,9507683;21,84;1,91;9,29;2,01;2020-11-30
-Brad Fc de FIA Portfolio Long Only;Bram Bradesco Asset Management SA Dtvm;5 988 905;-16 462 017;98 958 766;12,83;-3,07;6,68;-2,91;3,86;3,25;711 849 690;2,4340658;22,20;2,59;8,40;2,05;2020-11-30
-Btgp Acce Multigestor Acoes FIC FIA;BTG Pactual Wm Gestao de Recursos Ltda;1 485 117;-2 590 658;68 286 408;11,32;-4,58;7,00;-2,59;13,40;12,79;240 722 597;2,0187195;20,61;2,78;12,31;1,90;2020-11-30
-Ca Indosuez Alloc Action Fc FIA;Ca Indosuez Wealth (Brazil) S.A. Dtvm;-4 021 115;-9 110 776;26 161 125;11,52;-4,38;5,02;-4,57;9,18;8,57;79 835 031;23,065444;19,18;2,43;9,36;1,81;2020-11-30
-Itau Acoes Fof Multigestor X FI;Itau Dtvm;2 987 745;31 117 958;1 223 179 149;11,93;-3,97;8,06;-1,53;13,58;12,97;3 377 502 914;37,604948;21,17;3,05;11,15;1,93;2020-11-30
-Itau Unibanco Superacao FICFI Acoes Ie;Itau Dtvm;0;0;0;10,84;-5,06;4,82;-4,77;1,54;0,93;33 381 399;419,386043;20,43;2,09;9,51;1,84;2020-11-30
-Opportunity Allocation Fc FI Mult;Opp Gestora de Recursos Ltda;1 646 789;3 455 643;-10 545 234;4,84;-11,07;3,16;-6,43;8,67;8,06;68 876 222;6,66892088;8,42;2,68;18,26;0,78;2020-11-30
-Santander Acoes Fundo de Fundos Lb FI;Santander Brasil Gestao de Recursos Ltda;-4 858 300;-16 581 760;140 183 887;9,41;-6,49;3,80;-5,79;6,27;5,66;675 668 464;26,1066632;17,37;2,32;12,82;1,65;2020-11-30
-Santander Pb Valor Acoes Fc FI;Santander Brasil Gestao de Recursos Ltda;102 948;3 274 492;5 397 094;12,05;-3,85;5,13;-4,46;0,99;0,38;56 570 883;41,940404;21,49;2,20;7,97;2,01;2020-11-30
-Xpa Acoes Fc de FIA;Xp Advisory Gestao de Recursos;0;0;-1 388 148;11,22;-4,68;5,78;-3,80;3,44;2,83;4 791 463;177,3184917;19,86;2,43;10,95;1,85;2020-11-30
-Selection Acoes Fc FIA;Xp Vista Asset Management Ltda;1 979 815;3 771 780;38 778 546;13,07;-2,83;6,74;-2,85;8,32;7,71;58 522 173;1,28489799;21,90;2,77;7,69;2,01;2020-11-30
+BNP Paribas Premium Equities Fc FIA;BNP Paribas Asset;733 955;-6 001 161;82 450 117;7,84;-1,46;17,98;-7,82;-0,12;-3,03;347 879 739;143,3706202;17,94;1,91;9,29;2,01;2020-12-31
+Brad Fc de FIA Portfolio Long Only;Bram Bradesco Asset Management SA Dtvm;-26 002 450;-32 520 214;20 579 226;6,92;-2,38;19,18;-6,62;2,41;-0,51;734 042 310;2,6023993647;18,01;2,59;8,40;2,05;2020-12-31
+Btgp Acce Multigestor Acoes FIC FIA;BTG Pactual Wm Gestao de Recursos Ltda;7 849 601;9 453 676;53 902 500;6,15;-3,14;17,55;-8,26;11,75;8,84;263 598 262;2,1429603;16,54;2,78;12,31;1,90;2020-12-31
+Ca Indosuez Alloc Action Fc FIA;Ca Indosuez Wealth (Brazil) S.A. Dtvm;-3 475 356;-11 704 391;13 286 135;5,88;-3,42;15,86;-9,94;7,30;4,39;80 977 422;24,420881;15,43;2,43;9,36;1,81;2020-12-31
+Itau Acoes Fof Multigestor X FI;Itau Dtvm;-12 285 576;-395 157;1 015 779 230;7,22;-2,08;20,25;-5,56;12,32;9,41;3 607 313 206;40,320271;17,21;3,05;11,15;1,93;2020-12-31
+Itau Unibanco Superacao Fc Acoes Ie;Itau Dtvm;0;0;0;6,57;-2,73;16,43;-9,38;-0,37;-3,28;35 574 518;446,939218;16,36;2,09;9,51;1,84;2020-12-31
+Opportunity Allocation Fc FI Mult;Opp Gestora de Recursos Ltda;-19 701 042;-17 927 025;-18 923 001;3,46;-5,84;8,57;-17,24;8,99;6,08;51 240 621;6,89978258;6,87;2,68;18,26;0,78;2020-12-31
+Santander Acoes Fundo de Fundos Lb FI;Santander Brasil Gestao de Recursos Ltda;-14 197 027;-20 451 040;92 052 354;6,20;-3,09;14,58;-11,23;5,57;2,66;703 137 119;27,7260286;13,88;2,32;12,82;1,65;2020-12-31
+Santander Pb Valor Acoes Fc FI;Santander Brasil Gestao de Recursos Ltda;674 252;2 051 821;2 129 554;7,45;-1,84;18,47;-7,33;-0,17;-3,08;61 574 413;45,0660033;17,48;2,20;7,97;2,01;2020-12-31
+Xpa Acoes Fc de FIA;Xp Advisory Gestao de Recursos;0;0;-1 388 148;6,87;-2,43;17,13;-8,67;2,82;-0,10;5 120 564;189,4976094;16,08;2,43;10,95;1,85;2020-12-31
+Selection Acoes Fc FIA;Xp Vista Asset Management Ltda;3 781 442;6 564 929;38 737 226;7,04;-2,25;19,82;-5,98;7,06;4,14;66 517 162;1,37539813;17,73;2,77;7,69;2,01;2020-12-31
