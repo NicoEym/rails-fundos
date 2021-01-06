@@ -1,10 +1,10 @@
-Nome;Gestor;Monthly Net Captation;Quarterly Net Captation;Yearly Net Captation;Monthly return;Spread Bench monthly return;Quarterly return;Spread Bench quarterly return;Yearly return;Spread Bench annual return;PL;Cota;Vol EWMA 97%;Sharpe ratio;Tracking error;VaR;Date
-ARX Elbrus Fundo Inc Inv Infra RF;ARX Investimentos Ltda;24 106 159;28 988 427;18 783 565;1,98;-13,92;2,37;-7,21;8,83;8,22;234 308 789;1,25501565;3,14;4,12;23,57;0,27;2020-11-30
-Az Quest Debentures Incentivadas FICFI Mult Cred P;Az Quest Investimentos;-547 163;-2 379 137;3 018 013;1,88;-14,03;2,41;-7,18;5,06;4,45;62 299 378;1,48312011;3,56;3,47;23,39;0,31;2020-11-30
-Bnpp Fdo Inc de Inv Infra Deb Inc RF;BNP Paribas Asset;-4 970 946;-38 382 392;-88 117 142;1,46;-14,44;1,65;-7,94;6,68;6,07;489 756 407;144,2192884;3,32;2,76;23,44;0,27;2020-11-30
-Ca Indosuez Debent Inc Cred Priv Fc Mult;Ca Indosuez Wealth (Brazil) S.A. Dtvm;-130 313 289;-195 568 656;-869 549 439;1,63;-14,27;1,41;-8,18;7,14;6,53;1 195 293 595;18,434481;4,54;2,08;23,07;0,30;2020-11-30
-Daycoval Deb. Inc Cred Priv FI Mult;Daycoval Asset Management Adm Rec Ltda;-100 939;-1 958 524;-66 394 223;1,30;-14,60;1,97;-7,61;6,12;5,52;94 419 303;1,34726488;2,10;4,30;24,13;0,18;2020-11-30
-Iridium Pioneer Fundo Inc Inv Infra RF;Iridium Gestao de Recursos Ltda;-10 866 354;-33 386 315;-418 697 455;0,18;-15,72;0,96;-8,62;0,41;-0,20;135 577 868;1,14285195;0,85;2,51;25,26;0,07;2020-11-30
-Alocacao Fundo Incent de Invest Infra RF;Reliance Asset;-2 287 488;-3 355 915;-10 530 780;1,82;-14,08;1,91;-7,67;6,95;6,34;195 050 662;1,7988184478;4,18;2,78;23,09;0,36;2020-11-30
-Sparta Deb Inc Fc F Inc Inv Infr RF;Sparta;3 978 613;-15 989 824;-144 280 430;0,20;-15,71;1,21;-8,37;3,77;3,16;247 718 773;1,21623109;0,76;4,09;25,27;0,07;2020-11-30
-Xp Debent Incent Cred Priv Fc FI Mult;Xp Vista Asset Management Ltda;-1 327 916;-4 420 473;-58 682 137;1,51;-14,40;1,91;-7,68;6,44;5,83;726 416 581;1,99746154;3,17;3,07;23,53;0,27;2020-11-30
+Nome;Monthly Net Captation;Quarterly Net Captation;Yearly Net Captation;Monthly return;Spread Bench monthly return;Quarterly return;Spread Bench quarterly return;Yearly return;Spread Bench annual return;PL;Cota;Vol EWMA 97%;Sharpe ratio;Tracking error;VaR;Date
+ARX Elbrus Fundo Inc Inv Infra RF;42 423 717;64 753 120;65 874 432;2,37;-6,93;5,10;-20,71;9,82;6,91;282 740 418;1,28477904;3,12;6,28;20,55;0,28;2020-12-31
+Az Quest Debentures Incentivadas FICFI Mult Cred P;538 076;-1 813 365;2 487 988;2,37;-6,93;5,35;-20,46;6,25;3,34;64 318 528;1,5182335;3,04;6,23;20,18;0,25;2020-12-31
+Bnpp Fdo Inc de Inv Infra Deb Inc RF;3 633 031;-7 258 078;-60 694 039;2,59;-6,70;4,72;-21,09;7,95;5,04;506 243 860;147,9605424;2,99;6,29;20,26;0,25;2020-12-31
+Ca Indosuez Debent Inc Cred Priv Fc Mult;-53 194 146;-232 083 704;-783 230 453;1,97;-7,33;4,11;-21,69;6,88;3,96;1 165 127 779;18,797017;3,42;4,42;19,97;0,19;2020-12-31
+Daycoval Deb. Inc Cred Priv FI Mult;2 342 256;1 368 922;-28 806 763;2,01;-7,29;4,13;-21,68;7,18;4,26;98 674 315;1,37434249;1,86;8,12;20,64;0,15;2020-12-31
+Iridium Pioneer Fundo Inc Inv Infra RF;-2 723 985;-24 492 368;-335 465 711;0,44;-8,86;1,38;-24,42;0,26;-2,65;133 438 077;1,14787655;1,47;1,95;21,63;0,16;2020-12-31
+Alocacao Fundo Incent de Invest Infra RF;-1 588 361;-3 875 849;-10 865 482;3,75;-5,55;6,47;-19,33;9,12;6,21;200 308 511;1,8662062808;3,86;7,20;19,93;0,34;2020-12-31
+Sparta Deb Inc Fc F Inc Inv Infr RF;-7 843 795;-13 769 966;-88 538 330;0,52;-8,78;1,48;-24,33;3,61;0,69;241 142 366;1,22254399;1,06;3,55;21,56;0,11;2020-12-31
+Xp Debent Incent Cred Priv Fc FI Mult;62 824 547;53 421 811;-229 736;2,62;-6,68;4,95;-20,86;7,69;4,77;808 891 771;2,04979522;2,87;6,62;20,14;0,24;2020-12-31
